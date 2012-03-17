@@ -1,0 +1,93 @@
+@import url("reset.css");
+@import url("global-forms.css");
+
+#container a {
+ color: #C74350;
+ font-size: 1.429em;
+ margin-bottom: .25em;
+ padding: 0 3px;
+}
+#container {
+	background: #EAE1E1;
+	margin-bottom: 2em;
+	margin: auto;
+	padding: auto;
+	overflow: hidden;
+	width: 1024px;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+#container form{
+	margin: 0 0 0 20px;
+}
+#login a {
+ color: #C74350;
+ font-size: 1.429em;
+ margin-bottom: .25em;
+ padding: 0 3px;
+}
+#login{
+	margin-bottom: 2em;
+	overflow: hidden;
+	display:inline;
+	float:left;
+	padding: 20px 20px;
+	width: 256px;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+#register a {
+ color: #C74350;
+ font-size: 1.429em;
+ margin-bottom: .25em;
+ padding: 0 3px;
+}
+#register{
+	margin-bottom: 2em;
+	overflow: hidden;
+	display:table-cell;
+	position:relative;
+	left:100px;
+	padding: 20px 20px;
+	width: 512px;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+fieldset{
+	width: 512px;
+	border:none;
+	color:#fff;
+	font-size:1.2em;
+	background-color:#000;
+}
+fieldset legend{
+	background-color: #C74451;
+	padding:0 64px 0 2px;
+}
+fieldset>ol{
+	list-style: none;
+	padding: 0;
+	margin: 0 0 0 30px;
+}
+fieldset>ol>li{
+	margin: 0 0 9px 0;
+	padding: 0;
+}
+fieldset input{
+	display:block;
+	width: 200px;
+	border:1px solid #ddd;
+}
+fieldset input[type="submit"]{
+	width: 64px;
+	padding: 0;
+	background-color: #bbb;
+}
+input,fieldset,legend{
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}	

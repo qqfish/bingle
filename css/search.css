@@ -1,0 +1,114 @@
+@import url("reset.css");
+@import url("global-forms.css");
+
+
+
+/* main section*/
+
+#container a {
+ color: #C74350;
+ font-size: 1.429em;
+ margin-bottom: .25em;
+ padding: 0 3px;
+}
+#container {
+	background: #fff;
+	margin-bottom: 2em;
+	overflow: hidden;
+	padding: 20px 20px;
+	width: 1024px;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+
+/* search result table*/
+
+
+#search-list-context  thead tr{
+	background: #000;
+	font-size: 1.143em;
+	color: #fff;
+	height: 40px;
+	line-height: 30px;
+	margin: 0 auto 2em auto;
+	text-align: left;
+}
+
+#search-list-context  tfoot tr{
+	background: #000;
+	font-size: 1.143em;
+	color: #fff;
+	height: 40px;
+	line-height: 30px;
+	margin: 0 auto 2em auto;
+	text-align: right;
+}
+
+#search-list-context th:first-child {
+    -moz-border-radius: 20px 0 0 0;
+    -webkit-border-radius: 20px 0 0 0;
+    border-radius: 20px 0 0 0;
+}
+#search-list-context th:last-child{
+	-moz-border-radius: 0 20px 0 0;
+    -webkit-border-radius: 0 20px 0 0;
+    border-radius: 0 20px 0 0;
+}
+
+#search-list-context tfoot tr td:first-child {
+	text-align: left;
+    -moz-border-radius: 0 0 0 20px;
+    -webkit-border-radius: 0 0 0 20px;
+    border-radius: 0 0 0 20px;
+}
+#search-list-context tfoot tr td:last-child{
+	-moz-border-radius: 0 0 20px 0;
+    -webkit-border-radius: 0 0 20px 0;
+    border-radius: 0 0 20px 0;
+}
+
+#search-list-context tbody tr {border-bottom: 0px solid #eee;}
+
+#search-list-context .pageNav span,#search-list-context .pageNav a:link,#search-list-context .pageNav a:visited{
+	background: #fff;
+	font-size: 0.8em;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #C74350;
+	color: #000305;
+}
+
+#search-list-context .pageNav span:hover,#search-list-context .pageNav a:hover,#search-list-context .pageNav a:active{
+	background: #C64350;
+	color: #fff;
+}
+#search-list-context .pageNav .disabled, #search-list-context .pageNav .current, #search-list-context .pageNav .gap{
+	background:none;
+	color: #CCCCFF;
+	border-width: 0px;
+}
+
+
+#search-list-context {list-style: none; margin: 0;}
+#search-list-context .search-result {padding-left: 200px; position: relative;}
+#search-list-context .search-result:hover {
+	background: #C64350;
+	color: #fff;
+}
+#search-list-context .search-result:hover a:link, #search-list-context .search-result:hover a:visited {
+	color: #F6CF74;
+	text-shadow: 1px 1px 1px #333;
+}
+
+
+
+
+	
+
+ 
+
+
+ 
+ 
+ 

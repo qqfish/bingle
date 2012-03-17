@@ -1,0 +1,72 @@
+@import url("reset.css");
+@import url("global-forms.css");
+
+#container a {
+ color: #C74350;
+ font-size: 1.429em;
+ margin-bottom: .25em;
+ padding: 0 3px;
+}
+#container {
+	background: #fff;
+	margin-bottom:2em;
+	overflow: hidden;
+	width: 1024px;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+#container >header{
+	color:#fff;
+	background-color:#000;
+}
+#container >nav{
+	color:#fff;
+	background-color:#000;
+	text-align:right;
+	height: 40px;
+	line-height: 30px;
+	text-align: right;
+}
+article {
+	border-bottom: 1px dotted #8D8D8D;
+	margin: 0 0 1.4286em 0;
+	padding: 0 0 1.2857em 0;
+}
+.group::after {
+	clear: both;
+	content: " ";
+	display: block;
+	font-size: 0;
+	height: 0;
+	visibility: hidden;
+}
+article>ul>li {
+	float: left;
+	list-style: none;
+}
+#container ul li.posttitle {
+	margin-top: 0;
+	margin-left:64px;
+	width: 512px;
+}
+
+
+#container .pageNav span,#container .pageNav a:link,#container .pageNav a:visited{
+	background: #fff;
+	font-size: 0.8em;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #C74350;
+	color: #000305;
+}
+
+#container .pageNav span:hover,#container .pageNav a:hover,#container .pageNav a:active{
+	background: #C64350;
+	color: #fff;
+}
+#container .pageNav .disabled, #container .pageNav .current, #container .pageNav .gap{
+	background:none;
+	color: #CCCCFF;
+	border-width: 0px;
+}

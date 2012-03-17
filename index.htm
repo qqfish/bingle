@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	<meta charset="gkb" />
+	<title>Smashing HTML5!</title>
+
+	<link rel="stylesheet" href="css/main.css" type="text/css" />
+
+	<!--[if IE]>
+	 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<!--[if lte IE 7]>
+	 <script src="js/IE8.js" type="text/javascript"></script><![endif]-->
+
+	<!--[if lt IE 7]>
+	 <link rel="stylesheet" type="text/css" media="all" href="css/ie6.css"/><![endif]-->
+	</head>
+
+	<body id="index" class="home">
+		<header id="banner" class="body">
+			<h1><a href="#">病了么</a></h1>
+						
+			<nav>
+				<ul>
+					<li><a href="#">病友</a></li>
+					<li><a href="#">病症</a></li>
+					<li><a href="#">交流区</a></li>
+				</ul>
+				<form action="#" id="search" method="get">
+					<input type="search" id="search_word" placeholder="Search this site">
+					<input type="submit" value="查找病友" class="search-btn" name="subBtn">
+					<input type="submit" value="查找病症" class="search-btn" name="subBtn">
+				</form>
+			</nav>
+		</header>
+		<section id="container" class="body">
+			<section id="login" class="body">
+				<fieldset>
+				<legend>登陆：</legend>
+					<form>
+						<label>用户名：<input type="text" /></label>
+						</br>
+						<label>密码：<input type="text" /></label>
+						</br>
+						<label><input type="submit" value="登陆" /></label>
+					</form>
+				</fieldset>
+			</section>
+			
+			<section id="register" class="body">
+				<form>
+					<fieldset>
+					<legend>注册：</legend>
+						<ol>
+						<li>
+							<label>用户名:<input type="text" placeholder="first character must be letter"/></label>
+						</li>
+						<li>
+							<label>密码:<input type="text" placeholder="at least 6 character"/></label>
+						</li>
+						<li>
+							<label>确认密码:<input type="text" placeholder="type your password"/></label>
+						</li>
+						<li>
+							<label>邮件地址:<input type="email" placeholder="user@example.com"/></label>
+						</li>
+						</ol>
+						</br>
+						<input type="submit" value="注册" />
+					</fieldset>
+				</form>
+			</section>
+		</section>
+		
+		<footer id="about" class="body">
+			<p>blablabla</p>
+		</footer>
+		
+	</body>
+</html>
