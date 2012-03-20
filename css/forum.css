@@ -1,37 +1,45 @@
 @import url("reset.css");
 @import url("global-forms.css");
 
-#container a {
- color: #C74350;
- font-size: 1.429em;
- margin-bottom: .25em;
- padding: 0 3px;
+#container a,p {
+	color: #C74350;
+	font-size: 1em;
+	margin-bottom: .25em;
+	padding: 0 3px;
 }
 #container {
-	background: #fff;
 	margin-bottom:2em;
 	overflow: hidden;
 	width: 1024px;
-	border-radius: 10px;
-	-moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
 }
-#container >header{
-	color:#fff;
-	background-color:#000;
+.forumHead{
+	margin-bottom:10px;
+	width:100%;
 }
-#container >nav{
-	color:#fff;
-	background-color:#000;
+.forumTitle,.forumResult{
+	color:#000305;
+	background-color:#fff;
+	margin-bottom: 10px;
+	padding:5px;
+	border-color: #C74350;
+	border-width: 1px;
+	border-style: solid;
+	width:	98%;
+}
+.pageNav{
+	color:#000;
 	text-align:right;
+	float:right;
 	height: 40px;
 	line-height: 30px;
 	text-align: right;
 }
 article {
+	height: 20px;
 	border-bottom: 1px dotted #8D8D8D;
 	margin: 0 0 1.4286em 0;
 	padding: 0 0 1.2857em 0;
+	color:#000305;
 }
 .group::after {
 	clear: both;
@@ -67,6 +75,6 @@ article>ul>li {
 }
 #container .pageNav .disabled, #container .pageNav .current, #container .pageNav .gap{
 	background:none;
-	color: #CCCCFF;
+	color: #000305;
 	border-width: 0px;
 }
