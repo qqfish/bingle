@@ -34,19 +34,27 @@
 		</header>
 		<section id="container" class="body">
 			<section id="login" class="body">
-				<fieldset>
-				<legend>登陆：</legend>
-					<form>
+				<form>
+					<fieldset>
+					<legend>登陆：</legend>
+						<ol>
+						<li>
 						<label>用户名：<input type="text" /></label>
-						</br>
+						</li>
+						<li>
 						<label>密码：<input type="text" /></label>
-						</br>
+						</li>
+						<br>
+						<li>
 						<label><input type="submit" value="登陆" /></label>
+						</li>
+						</ol>
 					</form>
 				</fieldset>
 			</section>
-			
-			<section id="register" class="body">
+			<section id="main">
+			<h1><img src="img/logo.jpg"/></h1>
+				<section id="register" class="body">
 				<form>
 					<fieldset>
 					<legend>注册：</legend>
@@ -63,11 +71,30 @@
 						<li>
 							<label>邮件地址:<input type="email" placeholder="user@example.com"/></label>
 						</li>
-						</ol>
+						<hr>
+						<li>
+							<label>性别:</br>
+								<input type="radio" checked="checked">男
+								<input type="radio">女
+							</label>
+						</li>
+						<li>
+							<label>生日:</br>
+							<select><option>--</option></select>年
+							<select><option>--</option></select>月
+							<select><option>--</option></select>日
+						</li>
 						</br>
-						<input type="submit" value="注册" />
+						<li>
+						<label><input type="submit" value="注册" /></label>
+						</li>
+						</ol>
 					</fieldset>
 				</form>
+				</section>
+				<aside id="feature">
+					<h1>haha</h1>
+				</aside>
 			</section>
 		</section>
 		
