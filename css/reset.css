@@ -79,3 +79,9 @@ aside, nav, article, figure {
 	margin: 0 auto; 
 	width: 100%;
 }
+
+input,fieldset,legend{
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}

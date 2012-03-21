@@ -47,9 +47,6 @@
 	-webkit-box-shadow: 5px 5px 7px #999;
 	-moz-box-shadow: 5px 5px 7px #999;
 }
-#main>h1{
-	text-align:left;
-}
 #register a {
 	 color: #C74350;
 	 font-size: 1.429em;
@@ -62,12 +59,15 @@
 	float:left;
 	padding: 20px 20px;
 	width: 60%;
-	font-size: 2em;
+	font-size: 1.5em;
 }
 #register .inBox{
 	height: 2em;
 	width: 50%;
 	margin: 1px;
+}
+#register ol li{
+	margin:0 0 15px 0;
 }
 .regButton{
 	width: 150px;
@@ -77,6 +77,8 @@
 #feature{
 	overflow: hidden;
 	float:right;
+	position:relative;
+	top:-2em;
 }
 fieldset{
 	width: 512px;
@@ -115,8 +117,16 @@ fieldset input[type="submit"]{
 hr{
 	border-style:dashed;
 }
-input,fieldset,legend{
-	border-radius: 10px;
-	-moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
-}	
+
+aside span{
+	font-weight:bold;
+	color:#C74350;
+}
+aside p{
+	font-family:Fantasy;
+	font-size:1.75em;
+}
+aside ul li{
+	margin:0 0 9px 0;
+	font-size:1.25em;
+}
