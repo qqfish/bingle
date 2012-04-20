@@ -16,4 +16,3 @@ public class FriendList {
 		friend.remove(friendname);
 	}
 	
-}

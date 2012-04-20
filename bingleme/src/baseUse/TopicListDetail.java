@@ -1,15 +1,15 @@
 package baseUse;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TopicListDetail {
-	private int topicListId;
 	private String topicListName;
 	private int topicNum;
 	private List<TopicInfo> topic;
 	
-	public void setTopicListId(int tli){
-		topicListId = tli;
+	public TopicListDetail(){
+		topic = new ArrayList();
 	}
 	public void setTopicListName(String tln){
 		topicListName = tln;
@@ -22,14 +22,14 @@ public class TopicListDetail {
 		topic.add(tmp);
 	}
 	
-	public int getTopicListId(){
-		return topicListId;
-	}
 	public String getTopicListName(){
 		return topicListName;
 	}
 	public int getTopicNum(){
 		return topicNum;
+	}
+	public List<TopicInfo> getTopicInfo(){
+		return topic;
 	}
 	
 	public void deleteTopic(int topicId){
