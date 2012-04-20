@@ -1,5 +1,6 @@
 package baseUse;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -12,6 +13,10 @@ public class TopicDetail {
 	private String firstEditTime;
 	private String lastEditTime;
 	private List<Reply> reply;
+	
+	public TopicDetail(){
+		reply = new ArrayList();
+	}
 	
 	public void setTopicName(String tn){
 		topicName = tn;
@@ -59,6 +64,9 @@ public class TopicDetail {
 	}
 	public String getLastEditTime(){
 		return lastEditTime;
+	}
+	public List<Reply> getReply(){
+		return reply;
 	}
 	
 	public void deleteReply(int ReplyId){

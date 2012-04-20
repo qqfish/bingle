@@ -1,15 +1,20 @@
 package baseUse;
 
+import java.util.List;
+
 public class ForumInfo {
 	private String topicListName;
-	private String[] tagName;
+	private List<String> tagName;
 	
-	public ForumInfo(String tln,String[] tn){
+	public ForumInfo(String tln,List<String> tn){
 		topicListName = tln;
 		tagName = tn;
 	}
-
-	public void setTopicName(String tn){
-		topicListName = tn;
+	
+	public String getTopicListName(){
+		return topicListName;
+	}
+	public List<String> getTagName(){
+		return tagName;
 	}
 }
