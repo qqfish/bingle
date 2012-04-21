@@ -13,9 +13,10 @@ public interface ITagData {
 
 	/**
 	 * @param content
+	 * @throws SQLException 
 	 * @pdOid a52293c0-4a4f-409c-850e-33263afb7bc0
 	 */
-	void updateTagDatabase(TagDataList content);
+	void updateTagDatabase(TagDataList content) throws SQLException;
 
 	/**
 	 * @param tagname

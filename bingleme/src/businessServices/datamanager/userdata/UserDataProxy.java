@@ -12,14 +12,11 @@ public class UserDataProxy implements IUserData {
 
 	private Connection con;
 
-	public UserDataProxy() {
-		try {
-			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-			con = DriverManager
-					.getConnection("jdbc:mysql://localhost/bingleme?user=root&password=123");
-		} catch (SQLException se) {
-			se.printStackTrace();
-		}
+	public UserDataProxy() throws SQLException {
+		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+		con = DriverManager
+				.getConnection("jdbc:mysql://localhost/bingleme?user=root&password=123");
+
 	}
 
 	/**

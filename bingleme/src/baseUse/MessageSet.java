@@ -28,12 +28,12 @@ public class MessageSet {
 	   }
 	   
 	   /** @pdOid ecdfdf15-4bed-49f9-880f-01af244b0a31 */
-	   public Message[] getNewMessage() {
+	   public Set<Message> getNewMessage() {
 	      if(messages.isEmpty()){
 	    	  return null;
 	      }
 	      else{
-	    	  return (Message[]) messages.toArray();
+	    	  return messages;
 	      }
 	   }
 	   

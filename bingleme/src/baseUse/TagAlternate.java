@@ -1,22 +1,16 @@
 package baseUse;
 
 public class TagAlternate {
-	private String tagname;
 	private String alternateName;
 
 	/**
-	 * 该替代名的状态 u for unchanged; c for changed; n for new; d for delete;
+	 * 该替代名的状态 u for unchanged; n for new; d for delete;
 	 */
 	private char status;
 
-	public TagAlternate(String t, String a, char s) {
-		tagname = t;
+	public TagAlternate(String a, char s) {
 		alternateName = a;
 		status = s;
-	}
-
-	public String getTagname() {
-		return tagname;
 	}
 
 	public String getAlternateName() {

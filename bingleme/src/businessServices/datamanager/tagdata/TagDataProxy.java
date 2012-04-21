@@ -17,17 +17,13 @@ public class TagDataProxy implements ITagData {
 
 	private Connection con;
 
-	public TagDataProxy() {
-		try {
-			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-			con = DriverManager
-					.getConnection("jdbc:mysql://localhost/bingleme?user=root&password=123");
-		} catch (SQLException se) {
-			se.printStackTrace();
-		}
+	public TagDataProxy() throws SQLException {
+		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+		con = DriverManager
+				.getConnection("jdbc:mysql://localhost/bingleme?user=root&password=123");
 	}
 
-	@Override
+	
 	public List<String> searchTagName(String keyword, char typename)
 			throws SQLException {
 		List<String> result = new ArrayList<String>();
@@ -41,21 +37,61 @@ public class TagDataProxy implements ITagData {
 	}
 
 	@Override
-	public void updateTagDatabase(TagDataList content) {
-		for(int i = 0; i < content.getTag().size()){
-			if(content.getTag().get(i).getStatus() == 'a'){
-				
-			}
-			else if(content.getTag().get(i).getStatus() == 'd'){
-				
-			}
-			else if(content.getTag().get(i).getStatus() == 'e'){
-				
+	public void updateTagDatabase(TagDataList content) throws SQLException {
+		Statement st = con.createStatement();
+		for (int i = 0; i < content.getTag().size(); i++) {
+			TagData current = content.getTag().get(i);
+			if (current.getStatus() == 'n') {
+				st.executeUpdate("INSERT INTO tag (tagName, tagIntro, tagType) VALUES ('"
+						+ current.getTagname()
+						+ "' , '"
+						+ current.getTagIntro()
+						+ "' , '"
+						+ current.getType()
+						+ "')");
+				for (int j = 0; j < current.getAlterName().size(); j++) {
+					TagAlternate currentAl = current.getAlterName().get(j);
+					st.executeUpdate("INSERT INTO tagAlternate (tagName, tagAlternateName, tagType) VALUES ('"
+							+ current.getTagname()
+							+ "' , '"
+							+ currentAl.getAlternateName()
+							+ "' , '"
+							+ current.getType() + "')");
+				}
+
+			} else if (current.getStatus() == 'd') {
+				st.executeUpdate("DELETE FROM tagAlternate WHERE tagName = '"
+						+ current.getTagname() + "' and tagType = '"
+						+ current.getType() + "'");
+				st.executeUpdate("DELETE FROM tag WHERE tagName = '"
+						+ current.getTagname() + "' and tagType = '"
+						+ current.getType() + "'");
+			} else if (current.getStatus() == 'c') {
+				st.executeUpdate("UPDATE tag SET tagIntro = '"
+						+ current.getTagIntro() + "' WHERE tagName = '"
+						+ current.getTagname() + "' and tagType = '"
+						+ current.getType() + "'");
+				for (int j = 0; j < current.getAlterName().size(); j++) {
+					TagAlternate currentAl = current.getAlterName().get(j);
+					if (currentAl.getStatus() == 'n') {
+						st.executeUpdate("INSERT INTO tagAlternate (tagName, tagAlternateName, tagType) VALUES ('"
+								+ current.getTagname()
+								+ "' , '"
+								+ currentAl.getAlternateName()
+								+ "' , '"
+								+ current.getType() + "')");
+					} else if (currentAl.getStatus() == 'd') {
+						st.executeUpdate("DELETE FROM tagAlternate WHERE tagName = '"
+								+ current.getTagname()
+								+ "' and tagAlternateName = '"
+								+ currentAl.getAlternateName()
+								+ "' and tagType = '" + current.getType() + "'");
+					}
+				}
 			}
 		}
 	}
 
-	@Override
 	public TagData getTagData(String tagname, char typename)
 			throws SQLException {
 		Statement st = con.createStatement();
@@ -66,14 +102,14 @@ public class TagDataProxy implements ITagData {
 				.executeQuery("SELECT tagIntro FROM tag WHERE tagName = '"
 						+ tagname + "' and tagType = '" + typename + "'");
 		List<TagAlternate> ta = new ArrayList<TagAlternate>();
-		while(rs1.next()){
-			ta.add(new TagAlternate(tagname, rs1.getString("tagAlternateName"), 'u'));
+		while (rs1.next()) {
+			ta.add(new TagAlternate(rs1.getString("tagAlternateName"), 'u'));
 		}
-		if(rs2.next()){
-			TagData result = new TagData(tagname , rs2.getString("tagIntro"), ta, 'u');
+		if (rs2.next()) {
+			TagData result = new TagData(tagname, rs2.getString("tagIntro"),
+					ta, 'u');
 			return result;
-		}
-		else{
+		} else {
 			return null;
 		}
 

@@ -22,5 +22,16 @@ public class Message {
 		content = c;
 		time = t;
 	}
+	
+	public String getFrom(){
+		return from;
+	}
+	
+	public Date getTime(){
+		return time;
+	}
+	public String getContent(){
+		return content;
+	}
 
 }

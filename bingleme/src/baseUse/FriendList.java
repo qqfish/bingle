@@ -15,4 +15,5 @@ public class FriendList {
 	public void delete(String friendname){
 		friend.remove(friendname);
 	}
+}
 	

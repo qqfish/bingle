@@ -5,6 +5,17 @@ public class DrugInfo {
 	private String drugname;
 	/** @pdOid 542c9cf2-384c-4c14-86c4-1275bd29ff3b */
 	private int num;
-	/** @pdOid 6ff5b817-fc09-4417-9014-f93639f5ecca */
-	private String drugIntro;
+	
+	public DrugInfo(String dn, int n){
+		drugname = dn;
+		num = n;
+	}
+	
+	public String getDrugname(){
+		return drugname;
+	}
+	
+	public int getNum(){
+		return num;
+	}
 }
