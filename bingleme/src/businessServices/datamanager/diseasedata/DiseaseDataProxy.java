@@ -8,7 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import baseUse.DiseaseData;
 import baseUse.DiseaseDataList;
+import baseUse.DiseaseDataTag;
 import baseUse.DiseaseDetailInfo;
 import baseUse.DiseaseShortInfo;
 import baseUse.DiseaseShortInfoList;
@@ -26,8 +28,52 @@ public class DiseaseDataProxy implements IDiseaseData {
 
 	}
 
-	public void updateDiseaseDatabase(DiseaseDataList content) {
-		// TODO Auto-generated method stub
+	public void updateDiseaseDatabase(DiseaseDataList content)
+			throws SQLException {
+		Statement st = con.createStatement();
+		for (int i = 0; i < content.getDisease().size(); i++) {
+			DiseaseData current = content.getDisease().get(i);
+			if (current.getStatus() == 'n') {
+				st.executeUpdate("INSERT INTO diseaseData (diseaseName, diseaseIntro, editTime) VALUES ('"
+						+ current.getDiseasename()
+						+ "' , '"
+						+ current.getDiseaseIntro()
+						+ "' , '"
+						+ current.getEditTime() + "')");
+				for (int j = 0; j < current.getTag().size(); j++) {
+					st.executeUpdate("INSERT INTO diseaseTag (diseaseName, tagName) VALUES ('"
+							+ current.getDiseasename()
+							+ "' , '"
+							+ current.getTag().get(j).getTagname() + "')");
+				}
+			} else if (current.getStatus() == 'd') {
+				st.executeUpdate("DELETE FROM diseaseTag WHERE diseaseName = '"
+						+ current.getDiseasename() + "'");
+				st.executeUpdate("DELETE FROM diseaseData WHERE diseaseName = '"
+						+ current.getDiseasename() + "'");
+
+			} else if (current.getStatus() == 'c') {
+				st.executeUpdate("UPDATE diseaseData SET diseaseIntro = '"
+						+ current.getDiseaseIntro() + "' , editTime = '"
+						+ current.getEditTime() + "'");
+				for (int j = 0; j < current.getTag().size(); j++) {
+					DiseaseDataTag currentTag = current.getTag().get(j);
+					if (currentTag.getStatus() == 'n') {
+						st.executeUpdate("INSERT INTO diseaseTag (diseaseName, tagName) VALUES ('"
+								+ current.getDiseasename()
+								+ "' , '"
+								+ currentTag.getTagname() + "')");
+					} else if (currentTag.getStatus() == 'd') {
+						st.executeUpdate("DELETE FROM diseaseTag WHERE diseasnName = '"
+								+ current.getDiseasename()
+								+ "' and tagName = '"
+								+ currentTag.getTagname()
+								+ "'");
+					}
+				}
+
+			}
+		}
 
 	}
 
@@ -63,8 +109,9 @@ public class DiseaseDataProxy implements IDiseaseData {
 			DiseaseDetailInfo result = new DiseaseDetailInfo(
 					rs1.getString("diseaseName"),
 					rs1.getString("diseaseIntro"), rs1.getDate("editTime"));
-			while(rs2.next()){
-				result.addDrug(new DrugInfo(rs2.getString("tagName"), rs2.getInt("num")));
+			while (rs2.next()) {
+				result.addDrug(new DrugInfo(rs2.getString("tagName"), rs2
+						.getInt("num")));
 			}
 			return result;
 		} else {

@@ -5,9 +5,10 @@ import java.sql.SQLException;
 public interface IDiseaseData {
 	/**
 	 * @param content
+	 * @throws SQLException 
 	 * @pdOid b1f9c619-a4b6-4c5a-a0b5-b128ed343474
 	 */
-	void updateDiseaseDatabase(DiseaseDataList content);
+	void updateDiseaseDatabase(DiseaseDataList content) throws SQLException;
 
 	/**
 	 * @param keyword
