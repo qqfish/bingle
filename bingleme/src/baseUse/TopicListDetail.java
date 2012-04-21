@@ -9,7 +9,7 @@ public class TopicListDetail {
 	private List<TopicInfo> topic;
 	
 	public TopicListDetail(){
-		topic = new ArrayList();
+		topic = new ArrayList<TopicInfo>();
 	}
 	public void setTopicListName(String tln){
 		topicListName = tln;

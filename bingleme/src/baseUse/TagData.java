@@ -9,21 +9,22 @@ public class TagData {
 	private String tagIntro;
 	/** @pdOid e263afbc-2f15-4c5c-ab1b-7233856b9932 */
 	/**
-	 * 标签种类，包括t for normal tag; d for drug;
+	 * n for normal tag; d for drug;
 	 */
 	private char type;
 	private List<TagAlternate> alterName;
 
 	/**
-	 * 该标签的状态 u for unchanged; c for changed; n for new; d for delete;
+	 * u for unchanged; c for changed; n for new; d for delete;
 	 */
 	private char status;
 
-	public TagData(String tn, String ti, List<TagAlternate> a, char s) {
+	public TagData(String tn, String ti, List<TagAlternate> a, char s, char t) {
 		tagname = tn;
 		tagIntro = ti;
 		alterName = a;
 		status = s;
+		type = t;
 	}
 
 	public String getTagname() {

@@ -7,7 +7,7 @@ public class ForumList {
 	private List<ForumInfo> forum;
 	
 	public ForumList(){
-		forum = new ArrayList();
+		forum = new ArrayList<ForumInfo>();
 	}
 	
 	public void setForumList(String tln,List<String> tn){

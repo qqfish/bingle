@@ -4,7 +4,7 @@ public class TagAlternate {
 	private String alternateName;
 
 	/**
-	 * 该替代名的状态 u for unchanged; n for new; d for delete;
+	 * u for unchanged; c for changed; n for new; d for delete;
 	 */
 	private char status;
 

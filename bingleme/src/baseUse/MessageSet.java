@@ -6,9 +6,18 @@ public class MessageSet {
 	/** @pdOid 9e0186ef-630a-438d-a837-507c254aedef */
 	   private String username;
 	   /** @pdOid a7c72728-470e-41b1-b1d5-f1d0863ae845 */
-	   private Set<Message> messages;
+	   private List<Message> messages;
 	   
-	   public MessageSet(){ 
+	   public MessageSet(){
+		   messages = new ArrayList<Message>();
+	   }
+	   
+	   public String getUsername() {
+		   return username;
+	   }
+
+	   public void setUsername(String username) {
+		   this.username = username;
 	   }
 	   
 	   public void addMessage(String from, String content, Date time){
@@ -28,7 +37,7 @@ public class MessageSet {
 	   }
 	   
 	   /** @pdOid ecdfdf15-4bed-49f9-880f-01af244b0a31 */
-	   public Set<Message> getNewMessage() {
+	   public List<Message> getNewMessage() {
 	      if(messages.isEmpty()){
 	    	  return null;
 	      }

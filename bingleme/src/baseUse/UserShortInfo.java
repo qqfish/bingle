@@ -1,5 +1,6 @@
 package baseUse;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserShortInfo {
@@ -15,10 +16,62 @@ public class UserShortInfo {
 	private Boolean gender;
 	
 	public UserShortInfo(String u, String cd, List<String> t, Short a, Boolean g){
-		username = u;
-		currentDisease = cd;
-		tagname = t;
-		age = a;
-		gender = g;
+		setUsername(u);
+		setCurrentDisease(cd);
+		setTagname(t);
+		setAge(a);
+		setGender(g);
+	}
+	
+	public UserShortInfo(String u, String cd, Short a, Boolean g){
+		setUsername(u);
+		setCurrentDisease(cd);
+		setAge(a);
+		setGender(g);
+		tagname = new ArrayList<String>();
+	}
+	
+	public void addTagname(String t){
+		tagname.add(t);
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getCurrentDisease() {
+		return currentDisease;
+	}
+
+	public void setCurrentDisease(String currentDisease) {
+		this.currentDisease = currentDisease;
+	}
+
+	public List<String> getTagname() {
+		return tagname;
+	}
+
+	public void setTagname(List<String> tagname) {
+		this.tagname = tagname;
+	}
+
+	public Short getAge() {
+		return age;
+	}
+
+	public void setAge(Short age) {
+		this.age = age;
+	}
+
+	public Boolean getGender() {
+		return gender;
+	}
+
+	public void setGender(Boolean gender) {
+		this.gender = gender;
 	}
 }
