@@ -9,8 +9,8 @@ public class Globalization{
 	public static IForumData forumData;
 	public static IForumSystem forumSystem;
 	
-	public Globalization() throws ClassNotFoundException, SQLException{
-			forumData = new ForumDataProxy();
-			forumSystem = new ForumProxy();
+	public Globalization() throws SQLException, ClassNotFoundException {
+		forumData = new ForumDataProxy();
+		forumSystem = new ForumProxy();
 	}
 }

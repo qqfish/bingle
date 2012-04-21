@@ -89,6 +89,7 @@ public class ForumDataProxy implements IForumData{
 	}
 	public TopicListDetail getTopicList(String topicListName) throws SQLException{
 		TopicListDetail tld = new TopicListDetail();
+		tld.setTopicListName(topicListName);
 		
 		sql = "select * from topic where ListName=?";
 		PreparedStatement ps = con.prepareStatement(sql);

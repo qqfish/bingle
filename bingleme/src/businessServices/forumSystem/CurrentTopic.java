@@ -37,8 +37,9 @@ public class CurrentTopic {
 		deleteReply.deleteReply(replyId);
 		updateTopic(topicId);
 	}
-	void editReply(int replyId){
-		
+	void editReply(int replyId,int topicId,String content) throws SQLException{
+		Globalization.forumData.editReply(replyId, content);
+		updateTopic(topicId);
 	}
 	void updateTopic(int topicId) throws SQLException{
 		for(int i =0;i < topic.size();i++){

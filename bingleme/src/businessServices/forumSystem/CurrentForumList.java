@@ -12,7 +12,7 @@ public class CurrentForumList {
 	DeleteTopic deleteTopic;
 	
 	public CurrentForumList(){
-		topicList = new ArrayList();
+		topicList = new ArrayList<TopicListDetail>();
 		deleteTopic = new DeleteTopic();
 	}
 	
@@ -21,7 +21,7 @@ public class CurrentForumList {
 			if(topicList.get(i).getTopicListName() == topicListName)
 				return topicList.get(i);
 		}
-		TopicListDetail tld = Globalization.forumData.getTopicList(topicListName);	
+		TopicListDetail tld = Globalization.forumData.getTopicList(topicListName);
 		topicList.add(tld);
 		return tld;
 	}
