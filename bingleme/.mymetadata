@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="bingleme"
+  id="myeclipse.1334937441195"
+  context-root="/bingleme"
+  j2ee-spec="6.0"
+  archive="bingleme.war">
+  <attributes>
+    <attribute name="webrootdir" value="&lt;prjroot&gt;" />
+  </attributes>
+</project-module>
+

@@ -60,12 +60,13 @@ public class DiseaseDataProxy implements IDiseaseData {
 				.executeQuery("SELECT tagName, count(*) as num FROM takeDrug WHERE diseaseName = '"
 						+ diseasename + "' GROUP BY tagName ORDER BY num");
 		if (rs1.next()) {
-			DiseaseDetailInfo result = new DIseaseDetailInfo(
+			DiseaseDetailInfo result = new DiseaseDetailInfo(
 					rs1.getString("diseaseName"),
 					rs1.getString("diseaseIntro"), rs1.getDate("editTime"));
 			while(rs2.next()){
 				result.addDrug(new DrugInfo(rs2.getString("tagName"), rs2.getInt("num")));
 			}
+			return result;
 		} else {
 			return null;
 		}

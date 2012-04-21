@@ -23,9 +23,9 @@ public class ForumProxy implements IForumSystem {
 	}
 
 	@Override
-	public TopicDetail getTopic(int topicId) {
+	public TopicDetail getTopic(int topicId) throws SQLException {
 		// TODO Auto-generated method stub
-		return null;
+		return currentTopic.getTopic(topicId);
 	}
 
 	@Override
@@ -36,9 +36,9 @@ public class ForumProxy implements IForumSystem {
 	}
 
 	@Override
-	public void deleteReply(int replyId,int topicId) {
+	public void deleteReply(int replyId,int topicId) throws SQLException {
 		// TODO Auto-generated method stub
-		
+		currentTopic.deleteReply(replyId, topicId);
 	}
 
 	@Override
@@ -56,15 +56,16 @@ public class ForumProxy implements IForumSystem {
 	}
 
 	@Override
-	public void newReply(String content, int topicId, String userName) {
+	public void newReply(String content, int topicId, String userName) throws SQLException {
 		// TODO Auto-generated method stub
-		
+		Globalization.forumData.newReply(content, topicId, userName);
+		currentTopic.updateTopic(topicId);
 	}
 
 	@Override
-	public void editRelpy(int Reply, String content) {
+	public void editRelpy(int replyId, int topicId, String content) throws SQLException {
 		// TODO Auto-generated method stub
-
+		currentTopic.editReply(replyId, topicId, content);
 	}
-
+	
 }
