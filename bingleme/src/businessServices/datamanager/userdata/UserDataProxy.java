@@ -5,7 +5,6 @@ import baseUse.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import java.sql.*;
 
 public class UserDataProxy implements IUserData {
@@ -15,12 +14,12 @@ public class UserDataProxy implements IUserData {
 	public UserDataProxy() throws SQLException {
 		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 		con = DriverManager
-				.getConnection("jdbc:mysql://localhost/bingleme?user=root&password=123");
+				.getConnection("jdbc:mysql://localhost/bingleme?user=root&password=zy102428");
 
 	}
 
 	/**
-	 * 调用current的函数
+	 * current
 	 * 
 	 * 
 	 * @param username
@@ -34,7 +33,7 @@ public class UserDataProxy implements IUserData {
 				+ "'";
 		ResultSet rs = con.createStatement().executeQuery(sql);
 		if (rs.next()) {
-			if (rs.getString(1) == password) {
+			if (rs.getString(1).equals(password)) {
 				rs.close();
 				return true;
 			} else {
@@ -48,7 +47,7 @@ public class UserDataProxy implements IUserData {
 	}
 
 	/**
-	 * 调用current的
+	 * current
 	 * 
 	 * @param username
 	 * @param groupname
@@ -57,14 +56,14 @@ public class UserDataProxy implements IUserData {
 	 */
 	public void changeUserGroup(String username, String groupname)
 			throws SQLException {
-		con.createStatement().executeQuery(
+		con.createStatement().executeUpdate(
 				"UPDATE user SET groupName = '" + groupname
 						+ "' WHERE userName = '" + username + "'");
 
 	}
 
 	/**
-	 * 调用current的
+	 * current
 	 * 
 	 * @param username
 	 * @param friendname
@@ -79,7 +78,7 @@ public class UserDataProxy implements IUserData {
 	}
 
 	/**
-	 * 调用current
+	 * current
 	 * 
 	 * @param username
 	 * @param friendname
@@ -94,7 +93,7 @@ public class UserDataProxy implements IUserData {
 	}
 
 	/**
-	 * 调用current
+	 * current
 	 * 
 	 * 
 	 * @param username
@@ -115,7 +114,7 @@ public class UserDataProxy implements IUserData {
 	}
 
 	/**
-	 * 用户一登陆时候 重数据库中取
+	 * 
 	 * 
 	 * 
 	 * @param username
@@ -135,7 +134,7 @@ public class UserDataProxy implements IUserData {
 	}
 
 	/**
-	 * 直接生成sql
+	 * sql
 	 * 
 	 * 
 	 * @param from
@@ -147,7 +146,7 @@ public class UserDataProxy implements IUserData {
 	public void saveMessage(String from, String to, String content)
 			throws SQLException {
 		Date now = new Date();
-		now.getTime();
+		Timestamp st = new Timestamp(now.getTime());
 		con.createStatement()
 				.executeUpdate(
 						"INSERT INTO message (friendName, userName, messageContent, messageTime) VALUES ('"
@@ -157,7 +156,7 @@ public class UserDataProxy implements IUserData {
 								+ "','"
 								+ content
 								+ "','"
-								+ now + "')");
+								+ st + "')");
 	}
 
 	/**
@@ -167,36 +166,27 @@ public class UserDataProxy implements IUserData {
 	 * @pdOid 4bc30bc4-937c-4e49-b4c6-b12b243fb624
 	 */
 	public UserShortInfoList searchUser(String keyword) throws SQLException {
-		ResultSet rs = con.createStatement().executeQuery(
-				"SELECT * FROM userTag WHERE userName like '%" + keyword
-						+ "%' or tagName like '%" + keyword
-						+ "%' ORDER BY userName");
-		UserShortInfoList result = new UserShortInfoList();
-		List<List<String>> tag = new ArrayList<List<String>>();
-		List<String> username = new ArrayList<String>();
-		String sql = "SELECT userName,age,gender,currentDisease FROM user WHERE userName is null";
+
+		ResultSet rs = con
+				.createStatement()
+				.executeQuery(
+						"SELECT * FROM (SELECT * FROM userTag WHERE userName = some (SELECT userName FROM userTag WHERE userName like '%"
+								+ keyword
+								+ "%' or tagName like '%"
+								+ keyword
+								+ "%')) as tmp natural left outer join user ORDER BY userName");
+		List<UserShortInfo> usi = new ArrayList<UserShortInfo>();
 		while (rs.next()) {
-			if (username.isEmpty()
-					|| username.get(username.size() - 1) != rs
-							.getString("userName")) {
-				username.add(rs.getString("userName"));
-				tag.add(new ArrayList<String>());
-				tag.get(tag.size() - 1).add(rs.getString("tagName"));
-				sql += " or userName = '" + rs.getString("userName") + "'";
-			} else {
-				tag.get(tag.size() - 1).add(rs.getString("tagName"));
+			if(usi.isEmpty() || !usi.get(usi.size() - 1).getUsername().equals(rs.getString("userName"))){
+				usi.add(new UserShortInfo(rs.getString("userName"), rs.getString("currentDisease"), rs.getShort("age"), rs.getBoolean("gender")));
+				usi.get(usi.size() - 1).addTagname(rs.getString("tagName"));
+			}
+			else{
+				usi.get(usi.size() - 1).addTagname(rs.getString("tagName"));
 			}
 		}
-		ResultSet rs1 = con.createStatement().executeQuery(
-				sql + "ORDER BY userName");
-		int i = 0;
-		while (rs.next()) {
-			result.add(rs1.getString("userName"),
-					rs1.getString("currentDisease"), tag.get(i),
-					rs1.getShort("age"), rs1.getBoolean("gender"));
-			i++;
-		}
 		rs.close();
+		UserShortInfoList result = new UserShortInfoList(usi);
 		return result;
 	}
 
@@ -208,7 +198,7 @@ public class UserDataProxy implements IUserData {
 	 */
 	public Boolean checkUsername(String username) throws SQLException {
 		ResultSet rs = con.createStatement().executeQuery(
-				"SELECT * FROM user WHERE userName '" + username + "'");
+				"SELECT * FROM user WHERE userName = '" + username + "'");
 		if (rs.next()) {
 			rs.close();
 			return true;
@@ -226,12 +216,13 @@ public class UserDataProxy implements IUserData {
 	 * @pdOid abda513f-a418-4860-b76f-3ad80ac354dc
 	 */
 	public void createUser(UserBaseInfo userinfo) throws SQLException {
+		int i = (userinfo.getGender())?1:0;
 		con.createStatement().executeUpdate(
 				"INSERT INTO user (userName,password,email,age,gender) VALUES ('"
 						+ userinfo.getUsername() + "','"
 						+ userinfo.getPassword() + "','" + userinfo.getEmail()
 						+ "','" + userinfo.getAge() + "','"
-						+ userinfo.getGender() + ")");
+						+ i + "')");
 	}
 
 	/**
@@ -241,17 +232,20 @@ public class UserDataProxy implements IUserData {
 	 */
 	public UserDetailInfo getDetailUserInfo(String username)
 			throws SQLException {
-		Statement st = con.createStatement();
-		ResultSet rsTag = st
+		Statement stTag = con.createStatement();
+		Statement stUser = con.createStatement();
+		Statement stDisease = con.createStatement();
+		Statement stDrug = con.createStatement();
+		ResultSet rsTag = stTag
 				.executeQuery("SELECT tagName FROM userTag WHERE userName = '"
 						+ username + "'");
-		ResultSet rsUser = st
+		ResultSet rsUser = stUser
 				.executeQuery("SELECT * FROM user WHERE userName = '"
 						+ username + "'");
-		ResultSet rsDisease = st
+		ResultSet rsDisease = stDisease
 				.executeQuery("SELECT * FROM getDisease WHERE userName = '"
 						+ username + "' ORDER BY diseaseName");
-		ResultSet rsDrug = st
+		ResultSet rsDrug = stDrug
 				.executeQuery("SELECT * FROM takeDrug WHERE userName = '"
 						+ username + "' ORDER BY diseaseName");
 		List<UserDiseaseInfo> userDisease = new ArrayList<UserDiseaseInfo>();
@@ -271,8 +265,8 @@ public class UserDataProxy implements IUserData {
 				}
 			}
 			while (rsDrug.next()
-					&& rsDrug.getString("diseaseName") == rsDisease
-							.getString("diseaseName")) {
+					&& rsDrug.getString("diseaseName").equals(rsDisease
+							.getString("diseaseName"))) {
 				drug.add(rsDrug.getString("tagName"));
 			}
 			userDisease.add(new UserDiseaseInfo(rsDisease
@@ -285,16 +279,26 @@ public class UserDataProxy implements IUserData {
 		while (rsTag.next()) {
 			tags.add(rsTag.getString("tagName"));
 		}
-		UserDetailInfo result = new UserDetailInfo(username,
+		rsTag.close();
+		rsDisease.close();
+		rsDrug.close();
+		stTag.close();
+		stDisease.close();
+		stDrug.close();
+		if(rsUser.next()){
+			UserDetailInfo result = new UserDetailInfo(username,
 				rsUser.getShort("age"), rsUser.getString("address"),
 				rsUser.getString("email"), rsUser.getInt("mindStatus"),
 				rsUser.getInt("bodyStatus"), tags, userDisease);
-		st.close();
-		rsTag.close();
-		rsUser.close();
-		rsDisease.close();
-		rsDrug.close();
-		return result;
+			rsUser.close();
+			stUser.close();
+			return result;
+		}
+		else{
+			rsUser.close();
+			stUser.close();
+			return null;
+		}
 	}
 
 	/**
@@ -308,7 +312,7 @@ public class UserDataProxy implements IUserData {
 		Statement st = con.createStatement();
 		st.executeUpdate("UPDATE user SET age = '" + age + "', address = '"
 				+ address + "', email = '" + email + "', mindStatus = '"
-				+ mindStatus + "' bodyStatus = '" + bodyStatus
+				+ mindStatus + "' ,bodyStatus = '" + bodyStatus
 				+ "' WHERE userName = '" + username + "'");
 		st.close();
 	}
@@ -319,7 +323,7 @@ public class UserDataProxy implements IUserData {
 		String sql = "DELETE FROM userTag WHERE userName = '" + username
 				+ "' and (tagName = '" + tagname.get(0) + "'";
 		for (int i = 1; i < tagname.size(); i++) {
-			sql = sql + " or tagName = '" + tagname + "'";
+			sql = sql + " or tagName = '" + tagname.get(i) + "'";
 		}
 		sql = sql + ")";
 		con.createStatement().executeUpdate(sql);
@@ -330,8 +334,8 @@ public class UserDataProxy implements IUserData {
 			throws SQLException {
 		Statement st = con.createStatement();
 		for (int i = 0; i < tagname.size(); i++) {
-			st.executeUpdate("INSERT INTO userTag (userName,tagName) VALUES ("
-					+ username + ", " + tagname.get(i) + ")");
+			st.executeUpdate("INSERT INTO userTag (userName,tagName,tagType) VALUES ('"
+					+ username + "', '" + tagname.get(i) + "','n')");
 		}
 		st.close();
 	}
@@ -342,17 +346,17 @@ public class UserDataProxy implements IUserData {
 			throws SQLException {
 		con.createStatement()
 				.executeUpdate(
-						"INSERT INTO getDisease (userName,diseaseName,treatmentIntro,reason,tips) VALUES ("
+						"INSERT INTO getDisease (userName,diseaseName,treatmentIntro,reason,tips) VALUES ('"
 								+ username
-								+ ","
+								+ "','"
 								+ diseasename
-								+ ","
+								+ "','"
 								+ treatmentIntro
-								+ ","
+								+ "','"
 								+ reason
-								+ ","
+								+ "','"
 								+ tips
-								+ ")");
+								+ "')");
 
 	}
 
@@ -365,7 +369,6 @@ public class UserDataProxy implements IUserData {
 						+ "', reason = '" + reason + "', tips = '" + tips
 						+ "' WHERE userName = '" + username
 						+ "' and diseaseName = '" + diseasename + "'");
-
 	}
 
 	@Override
@@ -384,13 +387,13 @@ public class UserDataProxy implements IUserData {
 			List<String> drugname) throws SQLException {
 		Statement st = con.createStatement();
 		for (int i = 0; i < drugname.size(); i++) {
-			st.executeUpdate("INSERT INTO takeDrug (userName,diseaseName,tagName) VALUES ("
+			st.executeUpdate("INSERT INTO takeDrug (userName,diseaseName,tagName,tagType) VALUES ('"
 					+ username
-					+ ", "
+					+ "','"
 					+ diseasename
-					+ ", "
+					+ "', '"
 					+ drugname.get(i)
-					+ ")");
+					+ "' ,'d')");
 		}
 		st.close();
 	}
@@ -408,5 +411,4 @@ public class UserDataProxy implements IUserData {
 		con.createStatement().executeUpdate(sql);
 
 	}
-
 }

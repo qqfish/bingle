@@ -15,7 +15,7 @@ public class TopicDetail {
 	private List<Reply> reply;
 	
 	public TopicDetail(){
-		reply = new ArrayList();
+		reply = new ArrayList<Reply>();
 	}
 	
 	public void setTopicName(String tn){
