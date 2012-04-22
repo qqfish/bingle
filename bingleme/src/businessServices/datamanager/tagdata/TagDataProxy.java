@@ -20,7 +20,7 @@ public class TagDataProxy implements ITagData {
 	public TagDataProxy() throws SQLException {
 		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 		con = DriverManager
-				.getConnection("jdbc:mysql://localhost/bingleme?user=root&password=123");
+				.getConnection("jdbc:mysql://localhost/bingleme?user=root&password=zy102428");
 	}
 
 	
@@ -98,21 +98,21 @@ public class TagDataProxy implements ITagData {
 		ResultSet rs1 = st
 				.executeQuery("SELECT tagAlternateName FROM tagAlternate WHERE tagName = '"
 						+ tagname + "' and tagType = '" + typename + "'");
-		ResultSet rs2 = st
-				.executeQuery("SELECT tagIntro FROM tag WHERE tagName = '"
-						+ tagname + "' and tagType = '" + typename + "'");
 		List<TagAlternate> ta = new ArrayList<TagAlternate>();
 		while (rs1.next()) {
 			ta.add(new TagAlternate(rs1.getString("tagAlternateName"), 'u'));
 		}
+		ResultSet rs2 = st
+				.executeQuery("SELECT tagIntro FROM tag WHERE tagName = '"
+						+ tagname + "' and tagType = '" + typename + "'");
 		if (rs2.next()) {
 			TagData result = new TagData(tagname, rs2.getString("tagIntro"),
-					ta, 'u');
+					ta, 'u' , typename);
 			return result;
 		} else {
 			return null;
 		}
 
 	}
-
+	
 }
