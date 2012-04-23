@@ -1,24 +1,19 @@
 package application.login;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
-<<<<<<< HEAD
-=======
 import javax.servlet.annotation.WebServlet;
->>>>>>> 90eaf1e821904b220dd8c7341484722dceca45a7
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import baseUse.*;
+import baseUse.UserDetailInfo;
+import baseUse.Global;;
 
-<<<<<<< HEAD
-
-=======
 @WebServlet("/LoginControlServlet")
->>>>>>> 90eaf1e821904b220dd8c7341484722dceca45a7
 public class LoginControlServlet extends HttpServlet {
 
 	/**
@@ -70,13 +65,19 @@ public class LoginControlServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
-		//try {
-		//	if(Globalization.userData.confirmUser(userName, password))
-		//		response.sendRedirect("/html/forum.htm");
-		//} catch (SQLException e) {
+		try {
+			UserDetailInfo udi = Global.iUserData().getDetailUserInfo(userName);
+			if(Global.iUserData().confirmUser(userName, password)){
+				request.setAttribute("UserDetailInfo", udi);
+				getServletConfig().getServletContext().getRequestDispatcher("/selfInfo.jsp").forward(request, response);
+				//response.sendRedirect("html/selfInfo.htm");
+			}
+			else
+				response.sendRedirect("index.jsp");
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-		//	e.printStackTrace();
-		//}
+			e.printStackTrace();
+		}
 	}
 
 	/**

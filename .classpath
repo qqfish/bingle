@@ -10,5 +10,5 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="output" path="WEB-INF/classes"/>
+	<classpathentry kind="output" path="build/classes"/>
 </classpath>
