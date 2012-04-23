@@ -3,6 +3,7 @@ package application.search;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,19 +17,12 @@ import baseUse.*;
 @WebServlet("/SearchControlServlet")
 public class SearchControlServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	private Globalization g;
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public SearchControlServlet() {
 		super();
-		try {
-			g = new Globalization();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	/**
@@ -37,7 +31,20 @@ public class SearchControlServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		try {
+
+			if (request.getParameter("searchType").equals("disease")) {
+				searchDisease(request, response);
+			} else if (request.getParameter("searchType").equals("user")) {
+				searchUser(request, response);
+			} else if (request.getParameter("diseasename") != null) {
+				selectDisease(request, response);
+			} else if (request.getParameter("username") != null) {
+				selectUser(request, response);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -49,22 +56,54 @@ public class SearchControlServlet extends HttpServlet {
 
 	}
 
-	private void searchDisease(String keyword,HttpServletResponse response) {
-		//g.diseaseData.searchDisease(keyword)
+	private void searchDisease(HttpServletRequest request,
+			HttpServletResponse response) throws SQLException,
+			ServletException, IOException {
+		String keyword = request.getParameter("keyword");
+		DiseaseShortInfoList result = Global.iDiseaseData().searchDisease(
+				keyword);
+		request.setAttribute("result", result);
+
+		String address = "jsp/search/searchDisease.jsp";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(address);
+		dispatcher.forward(request, response);
 	}
 
-	
-	private void selectUser(int username,HttpServletResponse response) {
-		// TODO: implement
+	private void selectUser(HttpServletRequest request,
+			HttpServletResponse response) throws SQLException,
+			ServletException, IOException {
+		String username = request.getParameter("username");
+		UserDetailInfo result = Global.iUserData().getDetailUserInfo(username);
+		request.setAttribute("result", result);
+
+		String address = "jsp/search/userDetail.jsp";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(address);
+		dispatcher.forward(request, response);
 	}
 
-	private void selectDisease(String diseasename,HttpServletResponse response) {
-		// TODO: implement
+	private void selectDisease(HttpServletRequest request,
+			HttpServletResponse response) throws SQLException,
+			ServletException, IOException {
+		String diseasename = request.getParameter("diseasename");
+		DiseaseDetailInfo result = Global.iDiseaseData().getDiseaseDetail(
+				diseasename);
+		request.setAttribute("result", result);
+
+		String address = "jsp/search/diseaseDetail.jsp";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(address);
+		dispatcher.forward(request, response);
 	}
 
+	private void searchUser(HttpServletRequest request,
+			HttpServletResponse response) throws SQLException,
+			ServletException, IOException {
+		String keyword = request.getParameter("keyword");
+		UserShortInfoList result = Global.iUserData().searchUser(keyword);
+		request.setAttribute("result", result);
 
-	private void searchUser(String keyword,HttpServletResponse response) {
-		// TODO: implement
+		String address = "jsp/search/searchUser.jsp";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(address);
+		dispatcher.forward(request, response);
 	}
 
 }

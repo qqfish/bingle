@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import baseUse.Globalization;
+import baseUse.Global;
 
 public class DeleteTopic {
 	List<Integer> topicIds;
@@ -18,6 +18,6 @@ public class DeleteTopic {
 	}
 	void updateDatabase() throws SQLException{
 		int[] i = new int[topicIds.size()];
-		Globalization.forumData.deleteTopic(i);
+		Global.iForumData().deleteTopic(i);
 	}
 }

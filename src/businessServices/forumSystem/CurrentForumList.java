@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import baseUse.Globalization;
+import baseUse.Global;
 import baseUse.TopicListDetail;
 
 public class CurrentForumList {
@@ -21,7 +21,7 @@ public class CurrentForumList {
 			if(topicList.get(i).getTopicListName() == topicListName)
 				return topicList.get(i);
 		}
-		TopicListDetail tld = Globalization.forumData.getTopicList(topicListName);
+		TopicListDetail tld = Global.iForumData().getTopicList(topicListName);
 		topicList.add(tld);
 		return tld;
 	}
@@ -32,7 +32,7 @@ public class CurrentForumList {
 	void updateTopicList(String topicListName) throws SQLException{
 		for(int i =0;i < topicList.size();i++){
 			if(topicList.get(i).getTopicListName() == topicListName){
-				TopicListDetail tld = Globalization.forumData.getTopicList(topicListName);
+				TopicListDetail tld = Global.iForumData().getTopicList(topicListName);
 				topicList.set(i, tld);
 				break;
 			}

@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import baseUse.Globalization;
+import baseUse.Global;
 
 public class DeleteReply {
 	List<Integer> replyIds;
@@ -18,6 +18,6 @@ public class DeleteReply {
 	}
 	void updataDataBase() throws SQLException{
 		int[] i = new int[replyIds.size()];
-		Globalization.forumData.deleteReply(i);
+		Global.iForumData().deleteReply(i);
 	}
 }

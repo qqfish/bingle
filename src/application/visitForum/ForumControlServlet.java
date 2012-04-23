@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import baseUse.Globalization;
+import baseUse.*;
 
 @WebServlet("/ForumControlServlet")
 public class ForumControlServlet extends HttpServlet {
@@ -108,7 +108,7 @@ public class ForumControlServlet extends HttpServlet {
 	
 	void getTopicList(String topicListName) {
 		try {
-			Globalization.forumSystem.getTopicList(topicListName);
+			Global.iForumSystem().getTopicList(topicListName);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -116,7 +116,7 @@ public class ForumControlServlet extends HttpServlet {
 	}
 	void editReply(int replyId,int topicId,String content){
 		try {
-			Globalization.forumSystem.editRelpy(replyId, topicId, content);
+			Global.iForumSystem().editRelpy(replyId, topicId, content);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -124,7 +124,7 @@ public class ForumControlServlet extends HttpServlet {
 	}
 	void deleteTopic(int topicId,String listName){
 		try {
-			Globalization.forumSystem.deleteTopic(topicId, listName);
+			Global.iForumSystem().deleteTopic(topicId, listName);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -132,7 +132,7 @@ public class ForumControlServlet extends HttpServlet {
 	}
 	void getTopic(int topicId){
 		try {
-			Globalization.forumSystem.getTopic(topicId);
+			Global.iForumSystem().getTopic(topicId);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -140,7 +140,7 @@ public class ForumControlServlet extends HttpServlet {
 	}
 	void getForumList(){
 		try {
-			Globalization.forumSystem.getForumList();
+			Global.iForumSystem().getForumList();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -149,7 +149,7 @@ public class ForumControlServlet extends HttpServlet {
 	void newTopic(String topicName, String userName, String content,
 			String topicListName){
 		try {
-			Globalization.forumSystem.newTopic(topicName, userName, content, topicListName);
+			Global.iForumSystem().newTopic(topicName, userName, content, topicListName);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -157,7 +157,7 @@ public class ForumControlServlet extends HttpServlet {
 	}
 	void newReply(String content, int topicId, String userName){
 		try {
-			Globalization.forumSystem.newReply(content, topicId, userName);
+			Global.iForumSystem().newReply(content, topicId, userName);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -165,7 +165,7 @@ public class ForumControlServlet extends HttpServlet {
 	}
 	void deleteReply(int replyId,int topicId){
 		try {
-			Globalization.forumSystem.deleteReply(replyId, topicId);
+			Global.iForumSystem().deleteReply(replyId, topicId);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
