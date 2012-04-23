@@ -16,7 +16,7 @@ public class CurrentTopic {
 		deleteReply = new DeleteReply();
 	}
 	
-	TopicDetail getTopic(int topicId) throws SQLException{
+	TopicDetail getTopic(int topicId) throws SQLException, ClassNotFoundException{
 		for(int i =0;i < topic.size();i++){
 			if(topic.get(i).getTopicId() == topicId){
 				return topic.get(i);
@@ -33,15 +33,15 @@ public class CurrentTopic {
 			}
 		}
 	}
-	void deleteReply(int replyId,int topicId) throws SQLException{
+	void deleteReply(int replyId,int topicId) throws SQLException, ClassNotFoundException{
 		deleteReply.deleteReply(replyId);
 		updateTopic(topicId);
 	}
-	void editReply(int replyId,int topicId,String content) throws SQLException{
+	void editReply(int replyId,int topicId,String content) throws SQLException, ClassNotFoundException{
 		Global.iForumData().editReply(replyId, content);
 		updateTopic(topicId);
 	}
-	void updateTopic(int topicId) throws SQLException{
+	void updateTopic(int topicId) throws SQLException, ClassNotFoundException{
 		for(int i =0;i < topic.size();i++){
 			if(topic.get(i).getTopicId() == topicId){
 				TopicDetail td = Global.iForumData().getTopic(topicId);

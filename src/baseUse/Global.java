@@ -15,21 +15,21 @@ public class Global{
 	private static IUserData userData;
 	private static ITagData tagData;
 	
-	public static IUserData iUserData() throws SQLException{
+	public static IUserData iUserData() throws SQLException, ClassNotFoundException{
 		if(userData == null){
 			userData = new UserDataProxy();
 		}
 		return userData;
 	}
 	
-	public static IDiseaseData iDiseaseData() throws SQLException{
+	public static IDiseaseData iDiseaseData() throws SQLException, ClassNotFoundException{
 		if(diseaseData == null){
 			diseaseData = new DiseaseDataProxy(); 
 		}
 		return diseaseData;
 	}
 	
-	public static IForumData iForumData() throws SQLException{
+	public static IForumData iForumData() throws SQLException, ClassNotFoundException{
 		if(forumData == null){
 			forumData = new ForumDataProxy();
 		}
@@ -43,10 +43,14 @@ public class Global{
 		return forumSystem;
 	}
 	
-	public static ITagData iTagData() throws SQLException{
+	public static ITagData iTagData() throws SQLException, ClassNotFoundException{
 		if(tagData == null){
 			tagData = new TagDataProxy();
 		}
 		return tagData;
+	}
+	
+	public static void main(String args[])	throws SQLException, ClassNotFoundException{
+		System.out.println(Global.iUserData().searchUser("y").getUserResult().get(0).getUsername());
 	}
 }

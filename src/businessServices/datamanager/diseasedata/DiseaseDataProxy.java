@@ -19,10 +19,10 @@ public class DiseaseDataProxy implements IDiseaseData {
 
 	private Connection con;
 
-	public DiseaseDataProxy() throws SQLException {
-		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+	public DiseaseDataProxy() throws SQLException, ClassNotFoundException {
+		Class.forName("org.git.mm.mysql.Driver");
 		con = DriverManager
-				.getConnection("jdbc:mysql://localhost/bingleme?user=root&password=zy102428");
+				.getConnection("jdbc:mysql://localhost/bingle?user=root&password=123");
 
 	}
 

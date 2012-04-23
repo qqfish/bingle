@@ -16,7 +16,7 @@ public class CurrentForumList {
 		deleteTopic = new DeleteTopic();
 	}
 	
-	TopicListDetail getTopicList(String topicListName) throws SQLException{
+	TopicListDetail getTopicList(String topicListName) throws SQLException, ClassNotFoundException{
 		for(int i =0;i < topicList.size();i++){
 			if(topicList.get(i).getTopicListName() == topicListName)
 				return topicList.get(i);
@@ -25,11 +25,11 @@ public class CurrentForumList {
 		topicList.add(tld);
 		return tld;
 	}
-	void deleteTopic(int topicId,String listName) throws SQLException{
+	void deleteTopic(int topicId,String listName) throws SQLException, ClassNotFoundException{
 		deleteTopic.deleteTopic(topicId);
 		updateTopicList(listName);
 	}
-	void updateTopicList(String topicListName) throws SQLException{
+	void updateTopicList(String topicListName) throws SQLException, ClassNotFoundException{
 		for(int i =0;i < topicList.size();i++){
 			if(topicList.get(i).getTopicListName() == topicListName){
 				TopicListDetail tld = Global.iForumData().getTopicList(topicListName);

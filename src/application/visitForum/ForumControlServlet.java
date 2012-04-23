@@ -63,22 +63,7 @@ public class ForumControlServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String path = request.getRequestURI();
 		String action = path.substring(path.lastIndexOf("/"), path.indexOf("."));
-		if(action.equals("/TopicListPageInit"))
-			getTopicList(request.getParameter(""));
-		else if(action.equals("/ViewTopicPageEditReply"))
-			editReply(Integer.parseInt(request.getParameter("")),Integer.parseInt(request.getParameter("")),request.getParameter(""));
-		else if(action.equals("/TopicListPageDeleteTopic"))
-			deleteTopic(Integer.parseInt(request.getParameter("")),request.getParameter(""));
-		else if(action.equals("/TopicListPageEnterTopic"))
-			getTopic(Integer.parseInt(request.getParameter("")));
-		else if(action.equals("/ForumListPageInit"))
-			getForumList();
-		else if(action.equals("/NewTopicFormSubmit"))
-			newTopic(request.getParameter(""),request.getParameter(""),request.getParameter(""),request.getParameter(""));
-		else if(action.equals("/ViewTopicPageNewReply"))
-			newReply(request.getParameter(""),Integer.parseInt(request.getParameter("")),request.getParameter(""));
-		else if(action.equals("/ViewTopicPageDeleteReply"))
-			deleteReply(Integer.parseInt(request.getParameter("")),Integer.parseInt(request.getParameter("")));
+
 	}
 
 	/**
@@ -106,7 +91,7 @@ public class ForumControlServlet extends HttpServlet {
 		// Put your code here
 	}
 	
-	void getTopicList(String topicListName) {
+	void getTopicList(String topicListName) throws ClassNotFoundException {
 		try {
 			Global.iForumSystem().getTopicList(topicListName);
 		} catch (SQLException e) {
@@ -114,7 +99,7 @@ public class ForumControlServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-	void editReply(int replyId,int topicId,String content){
+	void editReply(int replyId,int topicId,String content) throws ClassNotFoundException{
 		try {
 			Global.iForumSystem().editRelpy(replyId, topicId, content);
 		} catch (SQLException e) {
@@ -122,7 +107,7 @@ public class ForumControlServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-	void deleteTopic(int topicId,String listName){
+	void deleteTopic(int topicId,String listName) throws ClassNotFoundException{
 		try {
 			Global.iForumSystem().deleteTopic(topicId, listName);
 		} catch (SQLException e) {
@@ -130,7 +115,7 @@ public class ForumControlServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-	void getTopic(int topicId){
+	void getTopic(int topicId) throws ClassNotFoundException{
 		try {
 			Global.iForumSystem().getTopic(topicId);
 		} catch (SQLException e) {
@@ -138,7 +123,7 @@ public class ForumControlServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-	void getForumList(){
+	void getForumList() throws ClassNotFoundException{
 		try {
 			Global.iForumSystem().getForumList();
 		} catch (SQLException e) {
@@ -147,7 +132,7 @@ public class ForumControlServlet extends HttpServlet {
 		}
 	}
 	void newTopic(String topicName, String userName, String content,
-			String topicListName){
+			String topicListName) throws ClassNotFoundException{
 		try {
 			Global.iForumSystem().newTopic(topicName, userName, content, topicListName);
 		} catch (SQLException e) {
@@ -155,7 +140,7 @@ public class ForumControlServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-	void newReply(String content, int topicId, String userName){
+	void newReply(String content, int topicId, String userName) throws ClassNotFoundException{
 		try {
 			Global.iForumSystem().newReply(content, topicId, userName);
 		} catch (SQLException e) {
@@ -163,7 +148,7 @@ public class ForumControlServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-	void deleteReply(int replyId,int topicId){
+	void deleteReply(int replyId,int topicId) throws ClassNotFoundException{
 		try {
 			Global.iForumSystem().deleteReply(replyId, topicId);
 		} catch (SQLException e) {

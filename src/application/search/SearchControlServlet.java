@@ -33,16 +33,20 @@ public class SearchControlServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		try {
 
-			if (request.getParameter("searchType").equals("disease")) {
-				searchDisease(request, response);
-			} else if (request.getParameter("searchType").equals("user")) {
-				searchUser(request, response);
+			if (request.getParameter("searchType") != null) {
+				if (request.getParameter("searchType").equals("disease")) {
+					searchDisease(request, response);
+				} else if (request.getParameter("searchType").equals("user")) {
+					searchUser(request, response);
+				}
 			} else if (request.getParameter("diseasename") != null) {
 				selectDisease(request, response);
 			} else if (request.getParameter("username") != null) {
 				selectUser(request, response);
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e){
 			e.printStackTrace();
 		}
 	}
@@ -58,7 +62,7 @@ public class SearchControlServlet extends HttpServlet {
 
 	private void searchDisease(HttpServletRequest request,
 			HttpServletResponse response) throws SQLException,
-			ServletException, IOException {
+			ServletException, IOException, ClassNotFoundException {
 		String keyword = request.getParameter("keyword");
 		DiseaseShortInfoList result = Global.iDiseaseData().searchDisease(
 				keyword);
@@ -71,7 +75,7 @@ public class SearchControlServlet extends HttpServlet {
 
 	private void selectUser(HttpServletRequest request,
 			HttpServletResponse response) throws SQLException,
-			ServletException, IOException {
+			ServletException, IOException, ClassNotFoundException {
 		String username = request.getParameter("username");
 		UserDetailInfo result = Global.iUserData().getDetailUserInfo(username);
 		request.setAttribute("result", result);
@@ -83,7 +87,7 @@ public class SearchControlServlet extends HttpServlet {
 
 	private void selectDisease(HttpServletRequest request,
 			HttpServletResponse response) throws SQLException,
-			ServletException, IOException {
+			ServletException, IOException, ClassNotFoundException {
 		String diseasename = request.getParameter("diseasename");
 		DiseaseDetailInfo result = Global.iDiseaseData().getDiseaseDetail(
 				diseasename);
@@ -96,7 +100,7 @@ public class SearchControlServlet extends HttpServlet {
 
 	private void searchUser(HttpServletRequest request,
 			HttpServletResponse response) throws SQLException,
-			ServletException, IOException {
+			ServletException, IOException, ClassNotFoundException {
 		String keyword = request.getParameter("keyword");
 		UserShortInfoList result = Global.iUserData().searchUser(keyword);
 		request.setAttribute("result", result);
