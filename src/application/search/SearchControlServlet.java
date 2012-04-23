@@ -3,6 +3,7 @@ package application.search;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,19 +17,12 @@ import baseUse.*;
 @WebServlet("/SearchControlServlet")
 public class SearchControlServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	private Globalization g;
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public SearchControlServlet() {
 		super();
-		try {
-			g = new Globalization();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	/**
@@ -49,21 +43,29 @@ public class SearchControlServlet extends HttpServlet {
 
 	}
 
-	private void searchDisease(String keyword,HttpServletResponse response) {
-		//g.diseaseData.searchDisease(keyword)
+	private void searchDisease(HttpServletRequest request,
+			HttpServletResponse response) throws SQLException {
+		String keyword = request.getParameter("searchDisease");
+		DiseaseShortInfoList result = Global.iDiseaseData().searchDisease(
+				keyword);
+		request.setAttribute("result", result);
+		
+		//String address = 
+		RequestDispatcher dispatcher = request.getRequestDispatcher("123");
 	}
 
-	
-	private void selectUser(int username,HttpServletResponse response) {
+	private void selectUser(HttpServletRequest request,
+			HttpServletResponse response) {
 		// TODO: implement
 	}
 
-	private void selectDisease(String diseasename,HttpServletResponse response) {
+	private void selectDisease(HttpServletRequest request,
+			HttpServletResponse response) {
 		// TODO: implement
 	}
 
-
-	private void searchUser(String keyword,HttpServletResponse response) {
+	private void searchUser(HttpServletRequest request,
+			HttpServletResponse response) {
 		// TODO: implement
 	}
 
