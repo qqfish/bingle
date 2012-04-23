@@ -10,7 +10,7 @@ public class DeleteReply {
 	List<Integer> replyIds;
 	
 	public DeleteReply(){
-		replyIds = new ArrayList();
+		replyIds = new ArrayList<Integer>();
 	}
 	
 	void deleteReply(int replyId){

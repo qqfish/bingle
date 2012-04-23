@@ -12,7 +12,7 @@ public class CurrentTopic {
 	DeleteReply deleteReply;
 	
 	public CurrentTopic(){
-		topic = new ArrayList();
+		topic = new ArrayList<TopicDetail>();
 		deleteReply = new DeleteReply();
 	}
 	

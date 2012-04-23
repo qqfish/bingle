@@ -23,6 +23,7 @@ public class TagDataProxy implements ITagData {
 				.getConnection("jdbc:mysql://localhost/bingleme?user=root&password=zy102428");
 	}
 
+	
 	public List<String> searchTagName(String keyword, char typename)
 			throws SQLException {
 		List<String> result = new ArrayList<String>();
@@ -106,12 +107,12 @@ public class TagDataProxy implements ITagData {
 						+ tagname + "' and tagType = '" + typename + "'");
 		if (rs2.next()) {
 			TagData result = new TagData(tagname, rs2.getString("tagIntro"),
-					ta, 'u', typename);
+					ta, 'u' , typename);
 			return result;
 		} else {
 			return null;
 		}
 
 	}
-
+	
 }

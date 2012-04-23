@@ -10,7 +10,7 @@ public class DeleteTopic {
 	List<Integer> topicIds;
 	
 	public DeleteTopic(){
-		topicIds = new ArrayList();
+		topicIds = new ArrayList<Integer>();
 	}
 	
 	void deleteTopic(int topicId){
