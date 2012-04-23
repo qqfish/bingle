@@ -18,15 +18,12 @@ import baseUse.TopicDetail;
 import baseUse.TopicListDetail;
 
 public class ForumDataProxy implements IForumData{
-	private String dbDriver = "com.mysql.jdbc.Driver";
-	private String url = "jdbc:mysql://localhost/bingleme";
-	private String uid = "root";
-	private String pwd = "zy102428";
 	private String sql;
 	private Connection con;
-	public ForumDataProxy() throws SQLException, ClassNotFoundException{
-		Class.forName(dbDriver);
-		con = DriverManager.getConnection(url,uid,pwd);
+	public ForumDataProxy() throws SQLException{
+		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+		con = DriverManager
+				.getConnection("jdbc:mysql://localhost/bingleme?user=root&password=zy102428");
 	}
 	
 	public void deleteReply(int[] replyId) throws SQLException{

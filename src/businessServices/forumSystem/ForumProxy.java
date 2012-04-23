@@ -2,7 +2,7 @@ package businessServices.forumSystem;
 
 import java.sql.SQLException;
 import baseUse.ForumList;
-import baseUse.Globalization;
+import baseUse.Global;
 import baseUse.IForumSystem;
 import baseUse.TopicDetail;
 import baseUse.TopicListDetail;
@@ -44,21 +44,21 @@ public class ForumProxy implements IForumSystem {
 	@Override
 	public ForumList getForumList() throws SQLException {
 		// TODO Auto-generated method stub
-		return Globalization.forumData.getForumList();
+		return Global.iForumData().getForumList();
 	}
 
 	@Override
 	public void newTopic(String topicName, String userName, String content,
 			String topicListName) throws SQLException {
 		// TODO Auto-generated method stub
-		Globalization.forumData.newTopic(topicName,userName,content,topicListName);
+		Global.iForumData().newTopic(topicName,userName,content,topicListName);
 		currentForumList.updateTopicList(topicListName);
 	}
 
 	@Override
 	public void newReply(String content, int topicId, String userName) throws SQLException {
 		// TODO Auto-generated method stub
-		Globalization.forumData.newReply(content, topicId, userName);
+		Global.iForumData().newReply(content, topicId, userName);
 		currentTopic.updateTopic(topicId);
 	}
 

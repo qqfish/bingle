@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import baseUse.Globalization;
+import baseUse.Global;
 import baseUse.TopicDetail;
 
 public class CurrentTopic {
@@ -22,7 +22,7 @@ public class CurrentTopic {
 				return topic.get(i);
 			}
 		}
-		TopicDetail td = Globalization.forumData.getTopic(topicId);
+		TopicDetail td = Global.iForumData().getTopic(topicId);
 		topic.add(td);
 		return td;
 	}
@@ -38,13 +38,13 @@ public class CurrentTopic {
 		updateTopic(topicId);
 	}
 	void editReply(int replyId,int topicId,String content) throws SQLException{
-		Globalization.forumData.editReply(replyId, content);
+		Global.iForumData().editReply(replyId, content);
 		updateTopic(topicId);
 	}
 	void updateTopic(int topicId) throws SQLException{
 		for(int i =0;i < topic.size();i++){
 			if(topic.get(i).getTopicId() == topicId){
-				TopicDetail td = Globalization.forumData.getTopic(topicId);
+				TopicDetail td = Global.iForumData().getTopic(topicId);
 				topic.set(i, td);
 				break;
 			}

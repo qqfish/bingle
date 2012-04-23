@@ -28,4 +28,25 @@ public class Global{
 		}
 		return diseaseData;
 	}
+	
+	public static IForumData iForumData() throws SQLException{
+		if(forumData == null){
+			forumData = new ForumDataProxy();
+		}
+		return forumData;
+	}
+	
+	public static IForumSystem iForumSystem(){
+		if(forumSystem == null){
+			forumSystem = new ForumProxy();
+		}
+		return forumSystem;
+	}
+	
+	public static ITagData iTagData() throws SQLException{
+		if(tagData == null){
+			tagData = new TagDataProxy();
+		}
+		return tagData;
+	}
 }
