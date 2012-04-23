@@ -4,13 +4,21 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
+<<<<<<< HEAD
+=======
+import javax.servlet.annotation.WebServlet;
+>>>>>>> 90eaf1e821904b220dd8c7341484722dceca45a7
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import baseUse.Globalization;
 
+<<<<<<< HEAD
 
+=======
+@WebServlet("/LoginControlServlet")
+>>>>>>> 90eaf1e821904b220dd8c7341484722dceca45a7
 public class LoginControlServlet extends HttpServlet {
 
 	/**
