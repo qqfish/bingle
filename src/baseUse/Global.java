@@ -51,6 +51,6 @@ public class Global{
 	}
 	
 	public static void main(String args[])	throws SQLException, ClassNotFoundException{
-		System.out.println(Global.iUserData().searchUser("y").getUserResult().get(0).getUsername());
+		System.out.println(Global.iDiseaseData().getDiseaseDetail("sb"));
 	}
 }

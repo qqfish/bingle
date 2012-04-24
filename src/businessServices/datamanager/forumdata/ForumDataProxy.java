@@ -21,7 +21,7 @@ public class ForumDataProxy implements IForumData{
 	private String sql;
 	private Connection con;
 	public ForumDataProxy() throws SQLException, ClassNotFoundException{
-		Class.forName("org.git.mm.mysql.Driver");
+		Class.forName("com.mysql.jdbc.Driver");
 		con = DriverManager
 				.getConnection("jdbc:mysql://localhost/bingle?user=root&password=zy102428");
 	}

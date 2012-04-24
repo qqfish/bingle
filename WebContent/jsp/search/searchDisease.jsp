@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html;charset=gb2312">
 	<title>搜索结果</title>
 
-	<link rel="stylesheet" href="../css/search.css" type="text/css" />
+	<link rel="stylesheet" href="/bingle/css/search.css" type="text/css" />
 
 	<!--[if IE]>
 	 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->

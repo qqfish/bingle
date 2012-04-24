@@ -4,8 +4,8 @@
 	<meta http-equiv="Content-Type" content="text/html;charset=gb2312">
 	<title>个人资料</title>
 
-	<link rel="stylesheet" href="../css/selfInfo.css" type="text/css" />
-	<script type="text/javascript" src="../script/inNav.js"></script>
+	<link rel="stylesheet" href="/bingle/css/selfInfo.css" type="text/css" />
+	<script type="text/javascript" src="/bingle/script/inNav.js"></script>
 	<!--[if IE]>
 	 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<!--[if lte IE 7]>

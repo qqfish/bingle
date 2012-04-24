@@ -1,81 +1,78 @@
 <!DOCTYPE html>
 <html>
-	<head>
-	<meta http-equiv="Content-Type" content="text/html;charset=gb2312">
-	<title>搜索结果</title>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>鎼滅储缁撴灉</title>
 
-	<link rel="stylesheet" href="../css/search.css" type="text/css" />
+<link rel="stylesheet" href="/bingle/css/search.css" type="text/css" />
 
-	<!--[if IE]>
+<!--[if IE]>
 	 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-	<!--[if lte IE 7]>
+<!--[if lte IE 7]>
 	 <script src="../js/IE8.js" type="text/javascript"></script><![endif]-->
 
-	<!--[if lt IE 7]>
+<!--[if lt IE 7]>
 	 <link rel="stylesheet" type="text/css" media="all" href="../css/ie6.css"/><![endif]-->
-	</head>
+</head>
 
-	<body id="index" class="home">
-		<header id="banner" class="body">
-			<h1><img herf="#" src="../img/logo.jpg"></h1>
-						
-			<nav>
-				<ul>
-					<li class="active"><a href="#">病友</a></li>
-					<li><a href="#">病症</a></li>
-					<li><a href="forum.htm">交流区</a></li>
-				</ul>
-				<form action="#" id="search" method="get">
-					<input type="search" id="search_word" placeholder="Search this site">
-					<input type="submit" value="查找病友" class="search-btn" name="subBtn">
-					<input type="submit" value="查找病症" class="search-btn" name="subBtn">
-				</form>
-			</nav>
-		</header>
-		<section id="container" class="body">
-			<header id="search-list-header">
-			</header>
-			<table id="search-list-context" >
-				<thead>
-					<tr>
-						<th>状态</th>
-						<th>标签</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr class="search-result">
-						<td><a href="#">1</a></td>
-						<td><a href="#">111</a></td>
-					</tr>
-					<tr class="search-result">
-						<td><a href="#">lalal</a></td>
-						<td><a href="#">lala</a></td>
-					</tr>
-				</tbody>
-				<tfoot>
-					<tr>
-						<td>总共搜索结果:100</td>
-						<td>
-							<nav class="pageNav">
-								<span class="disabled"><=</span>
-								<span class="current">1</span>
-								<a href="#">2</a>
-								<a href="#">3</a>
-								<a href="#">4</a>
-								<span class="gap">...</span>
-								<a href="#">20</a>
-								<a href="#">21</a>
-								<a href="#" class="nextPage">=></a>
-							</nav>
-						</td>
-					</tr>
-				</tfoot>
-			</table>			
-		</section>
-		
-		<footer id="about" class="body">
-			<p>blablabla</p>
-		</footer>
-		
-	</body>
+<body id="index" class="home">
+	<header id="banner" class="body">
+		<h1>
+			<img herf="#" src="/bingle/img/logo.jpg">
+		</h1>
+
+		<nav>
+			<ul>
+				<li class="active"><a href="#">鐥呭弸</a></li>
+				<li><a href="#">鐥呯棁</a></li>
+				<li><a href="forum.htm">璁ㄨ鍖�</a></li>
+			</ul>
+			<form action="#" id="search" method="get">
+				<input type="search" id="keyword" placeholder="Search this site">
+				<input type="submit" value="鎼滅储鐥呬汉" class="search-btn"
+					name="subBtn"> <input type="submit" value="鎼滅储鐥呯棁"
+					class="search-btn" name="subBtn">
+			</form>
+		</nav>
+	</header>
+	<section id="container" class="body">
+		<header id="search-list-header"> </header>
+		<table id="search-list-context">
+			<thead>
+				<tr>
+					<th>脳麓脤卢</th>
+					<th>卤锚脟漏</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="search-result">
+					<td><a href="#">1</a></td>
+					<td><a href="#">111</a></td>
+				</tr>
+				<tr class="search-result">
+					<td><a href="#">lalal</a></td>
+					<td><a href="#">lala</a></td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td>脳脺鹿虏脣脩脣梅陆谩鹿没:100</td>
+					<td>
+						<nav class="pageNav">
+							<span class="disabled"><=</span> <span class="current">1</span> <a
+								href="#">2</a> <a href="#">3</a> <a href="#">4</a> <span
+								class="gap">...</span> <a href="#">20</a> <a href="#">21</a> <a
+								href="#" class="nextPage">=></a>
+						</nav>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+	</section>
+
+	<footer id="about" class="body">
+		<p>blablabla</p>
+	</footer>
+
+</body>
 </html>

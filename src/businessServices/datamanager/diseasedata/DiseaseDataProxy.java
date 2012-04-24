@@ -20,7 +20,7 @@ public class DiseaseDataProxy implements IDiseaseData {
 	private Connection con;
 
 	public DiseaseDataProxy() throws SQLException, ClassNotFoundException {
-		Class.forName("org.git.mm.mysql.Driver");
+		Class.forName("com.mysql.jdbc.Driver");
 		con = DriverManager
 				.getConnection("jdbc:mysql://localhost/bingle?user=root&password=123");
 
@@ -47,27 +47,32 @@ public class DiseaseDataProxy implements IDiseaseData {
 			ds.get(ds.size() - 1).addTagname(rs.getString("tagName"));
 		}
 		DiseaseShortInfoList result = new DiseaseShortInfoList(ds);
+		rs.close();
 		return result;
 	}
 
 	public DiseaseDetailInfo getDiseaseDetail(String diseasename)
 			throws SQLException {
-		Statement st = con.createStatement();
-		ResultSet rs1 = st
-				.executeQuery("SELECT * FROM diseaseData WHERE diseaseName = '"
-						+ diseasename + "'");
-		ResultSet rs2 = st
-				.executeQuery("SELECT tagName, count(*) as num FROM takeDrug WHERE diseaseName = '"
+		ResultSet rs1 = con.createStatement().executeQuery(
+				"SELECT * FROM diseaseData WHERE diseaseName = '" + diseasename
+						+ "'");
+		ResultSet rs2 = con.createStatement().executeQuery(
+				"SELECT tagName, count(*) as num FROM takeDrug WHERE diseaseName = '"
 						+ diseasename + "' GROUP BY tagName ORDER BY num");
 		if (rs1.next()) {
 			DiseaseDetailInfo result = new DiseaseDetailInfo(
 					rs1.getString("diseaseName"),
 					rs1.getString("diseaseIntro"), rs1.getDate("editTime"));
-			while(rs2.next()){
-				result.addDrug(new DrugInfo(rs2.getString("tagName"), rs2.getInt("num")));
+			while (rs2.next()) {
+				result.addDrug(new DrugInfo(rs2.getString("tagName"), rs2
+						.getInt("num")));
 			}
+			rs1.close();
+			rs2.close();
 			return result;
 		} else {
+			rs1.close();
+			rs2.close();
 			return null;
 		}
 	}

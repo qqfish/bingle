@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import baseUse.*;
 
 /**
@@ -32,7 +33,6 @@ public class SearchControlServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		try {
-
 			if (request.getParameter("searchType") != null) {
 				if (request.getParameter("searchType").equals("disease")) {
 					searchDisease(request, response);
@@ -46,7 +46,7 @@ public class SearchControlServlet extends HttpServlet {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} catch (ClassNotFoundException e){
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
@@ -57,7 +57,7 @@ public class SearchControlServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-
+		doGet(request, response);
 	}
 
 	private void searchDisease(HttpServletRequest request,
