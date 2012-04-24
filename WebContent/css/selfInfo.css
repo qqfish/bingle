@@ -56,6 +56,7 @@
 }
 
 #container h3{
+	text-align:center;
 	background:#C74451;
 	color: #fff;
 	font-size: 2em;
@@ -63,4 +64,21 @@
 	border-radius: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
+}
+
+#container tr:nth-of-type(even){
+	background:#F3F3F3;
+}
+
+#container tr:nth-of-type(odd){
+	background:#ddd;
+}
+
+#container table{
+	border-collapse:separate;
+	padding:5px;
+	border-color: #C74350;
+	border-width: 1px;
+	border-style: solid;
+	border-radius:5px;
 }

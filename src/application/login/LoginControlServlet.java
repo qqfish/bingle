@@ -1,6 +1,7 @@
 package application.login;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -9,7 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import baseUse.*;
+import baseUse.UserDetailInfo;
+import baseUse.Global;;
 
 @WebServlet("/LoginControlServlet")
 public class LoginControlServlet extends HttpServlet {
@@ -63,13 +65,43 @@ public class LoginControlServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
-		//try {
-		//	if(Globalization.userData.confirmUser(userName, password))
-		//		response.sendRedirect("/html/forum.htm");
-		//} catch (SQLException e) {
+		String groupName = null;
+		Short age = null;
+		String address = null;
+		String email = null;
+		String gender = null;
+		int mind;
+		int body;
+		String disease = null;
+		try {
+			if(Global.iUserData().confirmUser(userName, password)){
+				UserDetailInfo udi = Global.iUserData().getDetailUserInfo(userName);
+				groupName = udi.getGroupname();
+				age = udi.getAge();
+				address = udi.getAddress();
+				email = udi.getEmail();
+				gender = udi.getGender()?"Å®":"ÄÐ";
+				mind = udi.getMindStatus();
+				body = udi.getBodyStatus();
+				disease = udi.getUserDiseaseInfo().get(udi.getUserDiseaseInfo().size()-1).getDiseaseName();
+				
+				request.setAttribute("username", userName);
+				request.setAttribute("groupname", groupName);
+				request.setAttribute("age", age);
+				request.setAttribute("address", address);
+				request.setAttribute("email", email);
+				request.setAttribute("gender", gender);
+				request.setAttribute("disease", disease);
+				request.setAttribute("mind", mind);
+				request.setAttribute("body", body);
+				request.getRequestDispatcher("/jsp/info/selfInfo.jsp").forward(request, response);
+			}
+			else
+				response.sendRedirect("error404.jsp");
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-		//	e.printStackTrace();
-		//}
+			e.printStackTrace();
+		}
 	}
 
 	/**

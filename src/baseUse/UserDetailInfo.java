@@ -5,8 +5,10 @@ import java.util.List;
 public class UserDetailInfo {
 	/** @pdOid be1b31ae-ae46-4f34-8af4-6ffdcfe7231a */
 	private String username;
+	private String groupname;
 	/** @pdOid 526ff42b-d80e-4e69-b251-9c7fac0c1702 */
 	private Short age;
+	private boolean gender;
 	/** @pdOid 34e47f00-dd95-40e6-987d-1230ff610d70 */
 	private String address;
 	/** @pdOid d2c1fd56-4ecb-41bf-85eb-98dcbf6a9cc3 */
@@ -25,10 +27,12 @@ public class UserDetailInfo {
 	 */
 	private List<UserDiseaseInfo> userDiseaseInfo;
 
-	public UserDetailInfo(String u, Short a, String add, String e, int mind,
+	public UserDetailInfo(String u, String group, Short a, boolean gen, String add, String e, int mind,
 			int body, List<String> t, List<UserDiseaseInfo> ud) {
 		username = u;
+		groupname = group;
 		age = a;
+		gender = gen;
 		address = add;
 		email = e;
 		mindStatus = mind;
@@ -40,9 +44,17 @@ public class UserDetailInfo {
 	public String getUsername() {
 		return username;
 	}
+	
+	public String getGroupname(){
+		return groupname;
+	}
 
 	public Short getAge() {
 		return age;
+	}
+	
+	public boolean getGender(){
+		return gender;
 	}
 
 	public String getAddress() {

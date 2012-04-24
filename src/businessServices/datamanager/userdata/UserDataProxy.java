@@ -285,8 +285,8 @@ public class UserDataProxy implements IUserData {
 		stDisease.close();
 		stDrug.close();
 		if(rsUser.next()){
-			UserDetailInfo result = new UserDetailInfo(username,
-				rsUser.getShort("age"), rsUser.getString("address"),
+			UserDetailInfo result = new UserDetailInfo(username,rsUser.getString("groupName"),
+				rsUser.getShort("age"), rsUser.getBoolean("gender"),rsUser.getString("address"),
 				rsUser.getString("email"), rsUser.getInt("mindStatus"),
 				rsUser.getInt("bodyStatus"), tags, userDisease);
 			rsUser.close();
