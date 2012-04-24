@@ -47,7 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</header>
 	<section id="container" class="body">
 		<section id="login" class="body">
-			<form action="servlet/loginControlServlet" method="post">
+			<form action="LoginControlServlet" method="post">
 				<fieldset>
 					<legend>登陆：</legend>
 					<ol>
@@ -90,11 +90,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</label>
 						</li>
 						<li>
-							<label>生日:
-							<select><option>--</option></select>年
-							<select><option>--</option></select>月
-							<select><option>--</option></select>日
-							</label>
+							<label>年龄:<input type="number" class="inBox" min="0" max="150"></label>
 						</li>
 						<br>
 						<li>

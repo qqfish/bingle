@@ -14,7 +14,7 @@ public class UserDataProxy implements IUserData {
 	public UserDataProxy() throws SQLException {
 		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 		con = DriverManager
-				.getConnection("jdbc:mysql://localhost/bingleme?user=root&password=123");
+				.getConnection("jdbc:mysql://localhost/bingleme?user=root&password=zy102428");
 
 	}
 
@@ -285,8 +285,8 @@ public class UserDataProxy implements IUserData {
 		stDisease.close();
 		stDrug.close();
 		if(rsUser.next()){
-			UserDetailInfo result = new UserDetailInfo(username,
-				rsUser.getShort("age"), rsUser.getString("address"),
+			UserDetailInfo result = new UserDetailInfo(username,rsUser.getString("groupName"),
+				rsUser.getShort("age"), rsUser.getBoolean("gender"),rsUser.getString("address"),
 				rsUser.getString("email"), rsUser.getInt("mindStatus"),
 				rsUser.getInt("bodyStatus"), tags, userDisease);
 			rsUser.close();
@@ -410,4 +410,5 @@ public class UserDataProxy implements IUserData {
 		con.createStatement().executeUpdate(sql);
 
 	}
+	
 }
