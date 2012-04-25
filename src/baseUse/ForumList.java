@@ -1,5 +1,6 @@
 package baseUse;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,4 +19,5 @@ public class ForumList {
 	public List<ForumInfo> getForumList(){
 		return forum;
 	}
+
 }

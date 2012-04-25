@@ -1,0 +1,46 @@
+@import url("reset.css");
+@import url("global-forms.css");
+
+.forumHead{
+	margin-bottom:10px;
+	width:100%;
+}
+.forumTitle,.forumResult{
+	color:#000305;
+	background-color:#fff;
+	margin-bottom: 10px;
+	padding:5px;
+	border-color: #C74350;
+	border-width: 1px;
+	border-style: solid;
+	width:	98%;
+}
+.button{
+	margin: 10px 0px 10px 10px;
+}
+#container {
+	margin-bottom:2em;
+	overflow: hidden;
+	width: 1024px;
+}
+#textArea{
+	color:#000305;
+	background-color:#fff;
+	margin-bottom: 10px;
+	padding: 5px;
+	border-color: #C74350;
+	border-width: 1px;
+	border-style: solid;
+	width:	98%;
+	font-family:"Î¢ÈíÑÅºÚ","ºÚÌå";
+}
+#textArea p{
+	font-size: 15px;
+	margin: 10px 0px -5px 10px;
+}
+#textArea hr{
+	width: 72.8%;
+}
+#textArea textarea{
+	margin: 10px 0px 0px 10px;
+}

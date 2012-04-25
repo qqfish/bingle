@@ -20,10 +20,10 @@ import baseUse.TopicListDetail;
 public class ForumDataProxy implements IForumData{
 	private String sql;
 	private Connection con;
-	public ForumDataProxy() throws SQLException, ClassNotFoundException{
-		Class.forName("com.mysql.jdbc.Driver");
+	public ForumDataProxy() throws SQLException{
+		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 		con = DriverManager
-				.getConnection("jdbc:mysql://localhost/bingle?user=root&password=zy102428");
+				.getConnection("jdbc:mysql://localhost/bingleme?user=root&password=zy102428");
 	}
 	
 	public void deleteReply(int[] replyId) throws SQLException{

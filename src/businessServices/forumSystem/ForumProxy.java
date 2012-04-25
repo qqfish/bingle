@@ -17,55 +17,59 @@ public class ForumProxy implements IForumSystem {
 	}
 	
 	@Override
-	public TopicListDetail getTopicList(String topicListName) throws SQLException, ClassNotFoundException {
+	public TopicListDetail getTopicList(String topicListName) throws SQLException {
 		// TODO Auto-generated method stub
 		return currentForumList.getTopicList(topicListName);
 	}
 
 	@Override
-	public TopicDetail getTopic(int topicId) throws SQLException, ClassNotFoundException {
+	public TopicDetail getTopic(int topicId) throws SQLException {
 		// TODO Auto-generated method stub
 		return currentTopic.getTopic(topicId);
 	}
 
 	@Override
-	public void deleteTopic(int topicId,String listName) throws SQLException, ClassNotFoundException {
+	public void deleteTopic(int topicId,String listName) throws SQLException {
 		// TODO Auto-generated method stub
 		currentTopic.deleteTopic(topicId);
 		currentForumList.updateTopicList(listName);
 	}
 
 	@Override
-	public void deleteReply(int replyId,int topicId) throws SQLException, ClassNotFoundException {
+	public void deleteReply(int replyId,int topicId) throws SQLException {
 		// TODO Auto-generated method stub
 		currentTopic.deleteReply(replyId, topicId);
 	}
 
 	@Override
-	public ForumList getForumList() throws SQLException, ClassNotFoundException {
+	public ForumList getForumList() throws SQLException {
 		// TODO Auto-generated method stub
 		return Global.iForumData().getForumList();
 	}
 
 	@Override
 	public void newTopic(String topicName, String userName, String content,
-			String topicListName) throws SQLException, ClassNotFoundException {
+			String topicListName) throws SQLException {
 		// TODO Auto-generated method stub
 		Global.iForumData().newTopic(topicName,userName,content,topicListName);
 		currentForumList.updateTopicList(topicListName);
 	}
 
 	@Override
-	public void newReply(String content, int topicId, String userName) throws SQLException, ClassNotFoundException {
+	public void newReply(String content, int topicId, String userName) throws SQLException {
 		// TODO Auto-generated method stub
 		Global.iForumData().newReply(content, topicId, userName);
 		currentTopic.updateTopic(topicId);
 	}
 
 	@Override
-	public void editRelpy(int replyId, int topicId, String content) throws SQLException, ClassNotFoundException {
+	public void editRelpy(int replyId, int topicId, String content) throws SQLException {
 		// TODO Auto-generated method stub
 		currentTopic.editReply(replyId, topicId, content);
+	}
+	
+	public static void main(String[] args) throws SQLException{
+		System.out.println(Global.iForumSystem().getTopicList("asd").getTopicInfo().get(0).getAuthor());
 	}
 	
 }

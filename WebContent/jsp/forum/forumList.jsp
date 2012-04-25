@@ -11,7 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta charset="gkb" />
 	<title>Forum List</title>
 
-	<link rel="stylesheet" href="../../css/forumList.css" type="text/css" />
+	<link rel="stylesheet" href="/bingle/css/forumList.css" type="text/css" />
 
 	<!--[if IE]>
 	 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -24,7 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	<body id="index" class="home">
 		<header id="banner" class="body">
-			<h1><a href="index.jsp"><img src="../../img/logo.jpg"/></a></h1>
+			<h1><a href="index.jsp"><img src="/bingle/img/logo.jpg"/></a></h1>
 						
 			<nav>
 				<ul>
@@ -47,18 +47,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<a href="#">病友论坛</a>
 				</div>
 			</header>
+			
+			
 			<div id="selection">
 				<table>
 					<th>论坛列表</th>
 					<tr>
-						<td class="list"><img src="../../img/list.jpg"/></td>
-						<td class="textList"><a href="#">感冒</a><br/>交流有关感冒相关信息</td>
+						<td class="list"><img src="/bingle/img/list.jpg"/></td>
+						<td class="textList"><a href="ForumControlServlet?action=topic&list=1&topic=${fl.forumList[0].topicListName}">${fl.forumList[0].topicListName}</a>
+						<br/>交流有关${fl.forumList[0].topicListName}相关信息</td>
 						<td class="tags">
-							<a href="#">标签</a>,
+							<a href="#">${fl.forumList[0].tagName[0]}</a>,
 							<a href="#">标签</a>,
 							<a href="#">标签</a>
 						</td>
-						<td class="list"><img src="../../img/list.jpg"/></td>
+						<td class="list"><img src="/bingle/img/list.jpg"/></td>
 						<td class="textList"><a href="#">心脑血管疾病</a><br/>交流有关心脑血管疾病相关信息</td>
 						<td class="tags">
 							<a href="#">标签</a>,
@@ -67,14 +70,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</td>
 					</tr>
 					<tr>
-						<td class="list"><img src="../../img/list.jpg"/></td>
+						<td class="list"><img src="/bingle/img/list.jpg"/></td>
 						<td class="textList"><a href="ForumControlServlet">头痛</a><br/>交流有关头痛相关信息</td>
 						<td class="tags">
 							<a href="#">标签</a>,
 							<a href="#">标签</a>,
 							<a href="#">标签</a>
 						</td>
-						<td class="list"><img src="../../img/list.jpg"/></td>
+						<td class="list"><img src="/bingle/img/list.jpg"/></td>
 						<td class="textList"><a href="#">胃病</a><br/>交流有关胃病相关信息</td>
 						<td class="tags">
 							<a href="#">标签</a>,

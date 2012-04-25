@@ -11,10 +11,10 @@ public class UserDataProxy implements IUserData {
 
 	private Connection con;
 
-	public UserDataProxy() throws SQLException, ClassNotFoundException {
-		Class.forName("com.mysql.jdbc.Driver");
+	public UserDataProxy() throws SQLException {
+		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 		con = DriverManager
-				.getConnection("jdbc:mysql://localhost:3306/bingle?user=root&password=123");
+				.getConnection("jdbc:mysql://localhost/bingleme?user=root&password=zy102428");
 
 	}
 

@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sun.mail.imap.protocol.UID;
+
 import baseUse.UserDetailInfo;
 import baseUse.Global;;
 
@@ -73,27 +75,29 @@ public class LoginControlServlet extends HttpServlet {
 		int mind;
 		int body;
 		String disease = null;
+		UserDetailInfo udi = null;
 		try {
 			if(Global.iUserData().confirmUser(userName, password)){
-				UserDetailInfo udi = Global.iUserData().getDetailUserInfo(userName);
-				groupName = udi.getGroupname();
-				age = udi.getAge();
-				address = udi.getAddress();
-				email = udi.getEmail();
-				gender = udi.getGender()?"Å®":"ÄÐ";
-				mind = udi.getMindStatus();
-				body = udi.getBodyStatus();
-				disease = udi.getUserDiseaseInfo().get(udi.getUserDiseaseInfo().size()-1).getDiseaseName();
+				udi = Global.iUserData().getDetailUserInfo(userName);
+				//groupName = udi.getGroupname();
+				//age = udi.getAge();
+				//address = udi.getAddress();
+				//email = udi.getEmail();
+				//gender = udi.getGender()?"Å®":"ÄÐ";
+				//mind = udi.getMindStatus();
+				//body = udi.getBodyStatus();
+				//disease = udi.getUserDiseaseInfo().get(udi.getUserDiseaseInfo().size()-1).getDiseaseName();
 				
-				request.setAttribute("username", userName);
-				request.setAttribute("groupname", groupName);
-				request.setAttribute("age", age);
-				request.setAttribute("address", address);
-				request.setAttribute("email", email);
-				request.setAttribute("gender", gender);
-				request.setAttribute("disease", disease);
-				request.setAttribute("mind", mind);
-				request.setAttribute("body", body);
+				//request.setAttribute("username", userName);
+				//request.setAttribute("groupname", groupName);
+				//request.setAttribute("age", age);
+				//request.setAttribute("address", address);
+				//request.setAttribute("email", email);
+				//request.setAttribute("gender", gender);
+				//request.setAttribute("disease", disease);
+				//request.setAttribute("mind", mind);
+				//request.setAttribute("body", body);
+				request.setAttribute("udi", udi);
 				request.getRequestDispatcher("/jsp/info/selfInfo.jsp").forward(request, response);
 			}
 			else

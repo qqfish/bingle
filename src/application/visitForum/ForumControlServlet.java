@@ -61,9 +61,29 @@ public class ForumControlServlet extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String path = request.getRequestURI();
-		String action = path.substring(path.lastIndexOf("/"), path.indexOf("."));
-
+		String action = request.getParameter("action");
+		if(action.equals("ini"))
+			getForumList(request,response);
+		else if(action.equals("topic")){
+			String topic = request.getParameter("list");
+			if(topic.equals("1"))
+				getTopicList(request.getParameter("topic"),request,response);
+			else
+				response.sendRedirect("/error404.jsp");
+		}
+		else if(action.equals("/ViewTopicPageEditReply"))
+			editReply(Integer.parseInt(request.getParameter("")),Integer.parseInt(request.getParameter("")),request.getParameter(""));
+		else if(action.equals("/TopicListPageDeleteTopic"))
+			deleteTopic(Integer.parseInt(request.getParameter("")),request.getParameter(""));
+		else if(action.equals("/TopicListPageEnterTopic"))
+			getTopic(Integer.parseInt(request.getParameter("")));
+		else if(action.equals("/NewTopicFormSubmit"))
+			newTopic(request.getParameter(""),request.getParameter(""),request.getParameter(""),request.getParameter(""));
+		else if(action.equals("/ViewTopicPageNewReply"))
+			newReply(request.getParameter(""),Integer.parseInt(request.getParameter("")),request.getParameter(""));
+		else if(action.equals("/ViewTopicPageDeleteReply"))
+			deleteReply(Integer.parseInt(request.getParameter("")),Integer.parseInt(request.getParameter("")));
+	
 	}
 
 	/**
@@ -91,15 +111,24 @@ public class ForumControlServlet extends HttpServlet {
 		// Put your code here
 	}
 	
-	void getTopicList(String topicListName) throws ClassNotFoundException {
+	void getTopicList(String topicListName,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			Global.iForumSystem().getTopicList(topicListName);
+			TopicListDetail tld = Global.iForumSystem().getTopicList(topicListName);
+			//request.setAttribute("listname", topicListName);
+			//request.setAttribute("name", tld.getTopicInfo().get(0).getTopicName());
+			//request.setAttribute("number", tld.getTopicNum());
+			//request.setAttribute("author", tld.getTopicInfo().get(0).getAuthor());
+			//request.setAttribute("reply", tld.getTopicInfo().get(0).getReplyNum());
+			//request.setAttribute("view", tld.getTopicInfo().get(0).getViewNum());
+			//request.setAttribute("time", tld.getTopicInfo().get(0).getFirstEditTime());
+			request.setAttribute("tld",tld);
+			request.getRequestDispatcher("/jsp/forum/topicList.jsp").forward(request, response);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	void editReply(int replyId,int topicId,String content) throws ClassNotFoundException{
+	void editReply(int replyId,int topicId,String content){
 		try {
 			Global.iForumSystem().editRelpy(replyId, topicId, content);
 		} catch (SQLException e) {
@@ -107,7 +136,7 @@ public class ForumControlServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-	void deleteTopic(int topicId,String listName) throws ClassNotFoundException{
+	void deleteTopic(int topicId,String listName){
 		try {
 			Global.iForumSystem().deleteTopic(topicId, listName);
 		} catch (SQLException e) {
@@ -115,7 +144,7 @@ public class ForumControlServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-	void getTopic(int topicId) throws ClassNotFoundException{
+	void getTopic(int topicId){
 		try {
 			Global.iForumSystem().getTopic(topicId);
 		} catch (SQLException e) {
@@ -123,16 +152,20 @@ public class ForumControlServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-	void getForumList() throws ClassNotFoundException{
+	void getForumList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		try {
-			Global.iForumSystem().getForumList();
+			ForumList fl = Global.iForumSystem().getForumList();
+			//request.setAttribute("disease", fl.getForumList().get(0).getTopicListName());
+			//request.setAttribute("tag0", fl.getForumList().get(0).getTagName().get(0));
+			request.setAttribute("fl", fl);
+			request.getRequestDispatcher("/jsp/forum/forumList.jsp").forward(request, response);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	void newTopic(String topicName, String userName, String content,
-			String topicListName) throws ClassNotFoundException{
+			String topicListName){
 		try {
 			Global.iForumSystem().newTopic(topicName, userName, content, topicListName);
 		} catch (SQLException e) {
@@ -140,7 +173,7 @@ public class ForumControlServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-	void newReply(String content, int topicId, String userName) throws ClassNotFoundException{
+	void newReply(String content, int topicId, String userName){
 		try {
 			Global.iForumSystem().newReply(content, topicId, userName);
 		} catch (SQLException e) {
@@ -148,7 +181,7 @@ public class ForumControlServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-	void deleteReply(int replyId,int topicId) throws ClassNotFoundException{
+	void deleteReply(int replyId,int topicId){
 		try {
 			Global.iForumSystem().deleteReply(replyId, topicId);
 		} catch (SQLException e) {
@@ -156,4 +189,5 @@ public class ForumControlServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
+
 }

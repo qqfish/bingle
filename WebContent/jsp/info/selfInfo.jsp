@@ -22,13 +22,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	<body id="index" class="home" onload="init();">
 		<header id="banner" class="body">
-			<h1><img src="img/logo.jpg"/></h1>
+			<h1><img src="/bingle/img/logo.jpg"/></h1>
 						
 			<nav>
 				<ul>
 					<li><a href="search.htm">病友</a></li>
 					<li><a href="search.htm">病症</a></li>
-					<li><a href="forum.htm">交流区</a></li>
+					<li><a href="ForumControlServlet?action=ini">交流区</a></li>
 					<li class="active"><a href="#">控制面板</a></li>
 				</ul>
 				<form action="#" id="search" method="get">
@@ -54,27 +54,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<table>
 				<tr>
 					<th>用户名</th>
-					<td><%= request.getAttribute("username")%></td>
+					<td>${udi.username}</td>
 				</tr>
 				<tr>
 					<th>用户群</th>
-					<td><%= request.getAttribute("groupname")%></td>
+					<td>${udi.groupname}</td>
 				</tr>
 				<tr>
 					<th>年龄</th>
-					<td><%= request.getAttribute("age")%></td>
+					<td>${udi.age}</td>
 				</tr>
 				<tr>
 					<th>性别</th>
-					<td><%= request.getAttribute("gender")%></td>
+					<td>${udi.gender?"女":"男"}</td>
 				</tr>
 				<tr>
 					<th>email</th>
-					<td><%= request.getAttribute("email")%></td>
+					<td>${udi.email}</td>
 				</tr>
 				<tr>
 					<th>现有疾病</th>
-					<td><%= request.getAttribute("disease")%></td>
+					<td>${udi.userDiseaseInfo[0].diseaseName }</td>
 				</tr>	
 				<tr>
 					<th>身体状况</th>

@@ -16,7 +16,7 @@ public class DeleteTopic {
 	void deleteTopic(int topicId){
 		topicIds.add(topicId);
 	}
-	void updateDatabase() throws SQLException, ClassNotFoundException{
+	void updateDatabase() throws SQLException{
 		int[] i = new int[topicIds.size()];
 		Global.iForumData().deleteTopic(i);
 	}

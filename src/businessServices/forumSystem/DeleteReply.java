@@ -16,7 +16,7 @@ public class DeleteReply {
 	void deleteReply(int replyId){
 		replyIds.add(replyId);
 	}
-	void updataDataBase() throws SQLException, ClassNotFoundException{
+	void updataDataBase() throws SQLException{
 		int[] i = new int[replyIds.size()];
 		Global.iForumData().deleteReply(i);
 	}
