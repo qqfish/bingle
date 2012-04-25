@@ -3,69 +3,90 @@ package businessServices.forumSystem;
 import java.sql.SQLException;
 import baseUse.ForumList;
 import baseUse.Global;
+import baseUse.IForumData;
 import baseUse.IForumSystem;
 import baseUse.TopicDetail;
 import baseUse.TopicListDetail;
+import businessServices.datamanager.forumdata.ForumDataProxy;
 
 public class ForumProxy implements IForumSystem {
-	private CurrentForumList currentForumList;
-	private CurrentTopic currentTopic;
 	
 	public ForumProxy(){
-		currentForumList = new CurrentForumList();
-		currentTopic = new CurrentTopic();
+		super();
 	}
 	
 	@Override
 	public TopicListDetail getTopicList(String topicListName) throws SQLException, ClassNotFoundException {
-		// TODO Auto-generated method stub
-		return currentForumList.getTopicList(topicListName);
+		TopicListDetail result = (TopicListDetail) Global.cache().getCache("CurrentForumList", topicListName);
+		if(result == null){
+			IForumData  itf = new ForumDataProxy();
+			result = itf.getTopicList(topicListName);
+			if(result != null){
+				Global.cache().insert("CurrentForumList", topicListName, result);
+			}
+		}
+		return result;
 	}
 
 	@Override
 	public TopicDetail getTopic(int topicId) throws SQLException, ClassNotFoundException {
-		// TODO Auto-generated method stub
-		return currentTopic.getTopic(topicId);
+		TopicDetail result = (TopicDetail) Global.cache().getCache("CurrentTopic", String.valueOf(topicId));
+		if(result == null){
+			IForumData itf = new ForumDataProxy();
+			result = itf.getTopic(topicId);
+			if(result != null){
+				Global.cache().insert("CurrentTopic", String.valueOf(topicId), result);
+			}
+		}
+		return result;
 	}
 
 	@Override
 	public void deleteTopic(int topicId,String listName) throws SQLException, ClassNotFoundException {
-		// TODO Auto-generated method stub
-		currentTopic.deleteTopic(topicId);
-		currentForumList.updateTopicList(listName);
+		Global.cache().deleteCache("CurrentTopic", String.valueOf(topicId));
+		Global.cache().deleteCache("CurrentForumList", listName);
+		IForumData itf = new ForumDataProxy();
+		int del[] = new int[1];
+		del[0] = topicId;
+		itf.deleteTopic(del);
 	}
 
 	@Override
 	public void deleteReply(int replyId,int topicId) throws SQLException, ClassNotFoundException {
-		// TODO Auto-generated method stub
-		currentTopic.deleteReply(replyId, topicId);
+		Global.cache().deleteCache("CurrentTopic", String.valueOf(topicId));
+		IForumData itf = new ForumDataProxy();
+		int del[] = new int[1];
+		del[0] = replyId;
+		itf.deleteReply(del);
 	}
 
 	@Override
 	public ForumList getForumList() throws SQLException, ClassNotFoundException {
-		// TODO Auto-generated method stub
-		return Global.iForumData().getForumList();
+		IForumData itf = new ForumDataProxy();
+		return itf.getForumList();
 	}
 
 	@Override
 	public void newTopic(String topicName, String userName, String content,
 			String topicListName) throws SQLException, ClassNotFoundException {
-		// TODO Auto-generated method stub
-		Global.iForumData().newTopic(topicName,userName,content,topicListName);
-		currentForumList.updateTopicList(topicListName);
+		IForumData itf = new ForumDataProxy();
+		itf.newTopic(topicName,userName,content,topicListName);
+		Global.cache().deleteCache("CurrentForumList", topicListName);
 	}
 
 	@Override
 	public void newReply(String content, int topicId, String userName) throws SQLException, ClassNotFoundException {
 		// TODO Auto-generated method stub
-		Global.iForumData().newReply(content, topicId, userName);
-		currentTopic.updateTopic(topicId);
+		IForumData itf = new ForumDataProxy();
+		itf.newReply(content, topicId, userName);
+		Global.cache().deleteCache("CurrentTopic", String.valueOf(topicId));
 	}
 
 	@Override
 	public void editRelpy(int replyId, int topicId, String content) throws SQLException, ClassNotFoundException {
-		// TODO Auto-generated method stub
-		currentTopic.editReply(replyId, topicId, content);
+		IForumData itf = new ForumDataProxy();
+		itf.editReply(replyId, content);
+		Global.cache().deleteCache("CurrentTopic", String.valueOf(topicId));
 	}
 	
 }
