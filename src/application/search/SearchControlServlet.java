@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import baseUse.*;
+import businessServices.datamanager.diseasedata.DiseaseDataProxy;
+import businessServices.datamanager.userdata.UserDataProxy;
 
 /**
  * Servlet implementation class SearchControlServlet
@@ -63,8 +65,9 @@ public class SearchControlServlet extends HttpServlet {
 	private void searchDisease(HttpServletRequest request,
 			HttpServletResponse response) throws SQLException,
 			ServletException, IOException, ClassNotFoundException {
+		IDiseaseData diseaseI = new DiseaseDataProxy();
 		String keyword = request.getParameter("keyword");
-		DiseaseShortInfoList result = Global.iDiseaseData().searchDisease(
+		DiseaseShortInfoList result = diseaseI.searchDisease(
 				keyword);
 		request.setAttribute("result", result);
 
@@ -76,8 +79,9 @@ public class SearchControlServlet extends HttpServlet {
 	private void selectUser(HttpServletRequest request,
 			HttpServletResponse response) throws SQLException,
 			ServletException, IOException, ClassNotFoundException {
+		IUserData userI = new UserDataProxy();
 		String username = request.getParameter("username");
-		UserDetailInfo result = Global.iUserData().getDetailUserInfo(username);
+		UserDetailInfo result = userI.getDetailUserInfo(username);
 		request.setAttribute("result", result);
 
 		String address = "jsp/search/userDetail.jsp";
@@ -88,8 +92,9 @@ public class SearchControlServlet extends HttpServlet {
 	private void selectDisease(HttpServletRequest request,
 			HttpServletResponse response) throws SQLException,
 			ServletException, IOException, ClassNotFoundException {
+		IDiseaseData diseaseI = new DiseaseDataProxy();
 		String diseasename = request.getParameter("diseasename");
-		DiseaseDetailInfo result = Global.iDiseaseData().getDiseaseDetail(
+		DiseaseDetailInfo result = diseaseI.getDiseaseDetail(
 				diseasename);
 		request.setAttribute("result", result);
 
@@ -101,8 +106,9 @@ public class SearchControlServlet extends HttpServlet {
 	private void searchUser(HttpServletRequest request,
 			HttpServletResponse response) throws SQLException,
 			ServletException, IOException, ClassNotFoundException {
+		IUserData userI = new UserDataProxy();
 		String keyword = request.getParameter("keyword");
-		UserShortInfoList result = Global.iUserData().searchUser(keyword);
+		UserShortInfoList result = userI.searchUser(keyword);
 		request.setAttribute("result", result);
 
 		String address = "jsp/search/searchUser.jsp";
