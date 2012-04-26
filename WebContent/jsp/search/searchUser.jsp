@@ -29,9 +29,8 @@
 			</ul>
 			<form action="#" id="search" method="get">
 				<input type="search" id="keyword" placeholder="Search this site">
-				<input type="submit" value="搜索病人" class="search-btn"
-					name="subBtn"> <input type="submit" value="搜索病症"
-					class="search-btn" name="subBtn">
+				<input type="submit" value="搜索病人" class="search-btn" name="subBtn">
+				<input type="submit" value="搜索病症" class="search-btn" name="subBtn">
 			</form>
 		</nav>
 	</header>
@@ -40,29 +39,25 @@
 		<table id="search-list-context">
 			<thead>
 				<tr>
-					<th>×´Ì¬</th>
-					<th>±êÇ©</th>
+					<th>用户名</th>
+					<th>性别</th>
+					<th>年龄</th>
+					<th>近期疾病</th>
+					<th>标签</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr class="search-result">
-					<td><a href="#">1</a></td>
-					<td><a href="#">111</a></td>
-				</tr>
-				<tr class="search-result">
-					<td><a href="#">lalal</a></td>
-					<td><a href="#">lala</a></td>
-				</tr>
+				${table }
 			</tbody>
 			<tfoot>
 				<tr>
-					<td>×Ü¹²ËÑË÷½á¹û:100</td>
+					<td>×Ü¹²ËÑË÷½á¹û:${total }</td>
+					<td></td>
+					<td></td>
+					<td></td>
 					<td>
 						<nav class="pageNav">
-							<span class="disabled"><=</span> <span class="current">1</span> <a
-								href="#">2</a> <a href="#">3</a> <a href="#">4</a> <span
-								class="gap">...</span> <a href="#">20</a> <a href="#">21</a> <a
-								href="#" class="nextPage">=></a>
+							${nav }
 						</nav>
 					</td>
 				</tr>

@@ -49,7 +49,7 @@ public class SearchSystemProxy implements ISearchSystem {
 	}
 
 	@Override
-	public List<UserShortInfo> searchUser(String keyword, int page, int perPage)
+	public UserShortInfoList searchUser(String keyword, int page, int perPage)
 			throws ClassNotFoundException, SQLException {
 		UserShortInfoList resultlist = (UserShortInfoList) Global.cache()
 				.getCache("UserShortInfoList", keyword);
@@ -60,11 +60,14 @@ public class SearchSystemProxy implements ISearchSystem {
 				Global.cache().insert("UserShortInfoList", keyword, resultlist);
 			}
 		}
-		return resultlist.getUserResultPage(page, perPage);
+		List<UserShortInfo> currentList = resultlist.getUserResultPage(page, perPage);
+		UserShortInfoList result = new UserShortInfoList(currentList);
+		result.setNum(resultlist.getNum());
+		return result;
 	}
 
 	@Override
-	public List<DiseaseShortInfo> searchDisease(String keyword, int page,
+	public DiseaseShortInfoList searchDisease(String keyword, int page,
 			int perPage) throws ClassNotFoundException, SQLException {
 		DiseaseShortInfoList resultlist = (DiseaseShortInfoList) Global.cache()
 				.getCache("DiseaseShortInfoList", keyword);
@@ -76,17 +79,21 @@ public class SearchSystemProxy implements ISearchSystem {
 						resultlist);
 			}
 		}
-		return resultlist.getDiseaseResultPage(page, perPage);
+		List<DiseaseShortInfo> currentList = resultlist.getDiseaseResultPage(page, perPage);
+		DiseaseShortInfoList result = new DiseaseShortInfoList(currentList);
+		result.setNum(resultlist.getNum());
+		return result;
 	}
 
 	@Override
-	public List<UserShortInfo> searchUser(String keyword, int page)
+	public UserShortInfoList searchUser(String keyword, int page)
 			throws ClassNotFoundException, SQLException {
 		return searchUser(keyword, page, 25);
 	}
 
 	@Override
-	public List<DiseaseShortInfo> searchDisease(String keyword, int page) throws ClassNotFoundException, SQLException {
+	public DiseaseShortInfoList searchDisease(String keyword, int page) throws ClassNotFoundException, SQLException {
 		return searchDisease(keyword, page, 25);
 	}
+
 }

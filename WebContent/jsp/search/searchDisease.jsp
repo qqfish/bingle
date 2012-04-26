@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	<meta http-equiv="Content-Type" content="text/html;charset=gb2312">
-	<title>搜索结果</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+	<title>脣脩脣梅陆谩鹿没</title>
 
 	<link rel="stylesheet" href="/bingle/css/search.css" type="text/css" />
 
@@ -21,14 +21,14 @@
 						
 			<nav>
 				<ul>
-					<li class="active"><a href="#">病友</a></li>
-					<li><a href="#">病症</a></li>
-					<li><a href="forum.htm">交流区</a></li>
+					<li class="active"><a href="#">虏隆脫脩</a></li>
+					<li><a href="#">虏隆脰垄</a></li>
+					<li><a href="forum.htm">陆禄脕梅脟酶</a></li>
 				</ul>
 				<form action="#" id="search" method="get">
 					<input type="search" id="search_word" placeholder="Search this site">
-					<input type="submit" value="查找病友" class="search-btn" name="subBtn">
-					<input type="submit" value="查找病症" class="search-btn" name="subBtn">
+					<input type="submit" value="虏茅脮脪虏隆脫脩" class="search-btn" name="subBtn">
+					<input type="submit" value="虏茅脮脪虏隆脰垄" class="search-btn" name="subBtn">
 				</form>
 			</nav>
 		</header>
@@ -38,34 +38,19 @@
 			<table id="search-list-context" >
 				<thead>
 					<tr>
-						<th>状态</th>
-						<th>标签</th>
+						<th>鐤剧梾鍚嶇О</th>
+						<th>鏍囩</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr class="search-result">
-						<td><a href="#">1</a></td>
-						<td><a href="#">111</a></td>
-					</tr>
-					<tr class="search-result">
-						<td><a href="#">lalal</a></td>
-						<td><a href="#">lala</a></td>
-					</tr>
+					${table}
 				</tbody>
 				<tfoot>
 					<tr>
-						<td>总共搜索结果:100</td>
+						<td>鎬昏:${total }</td>
 						<td>
 							<nav class="pageNav">
-								<span class="disabled"><=</span>
-								<span class="current">1</span>
-								<a href="#">2</a>
-								<a href="#">3</a>
-								<a href="#">4</a>
-								<span class="gap">...</span>
-								<a href="#">20</a>
-								<a href="#">21</a>
-								<a href="#" class="nextPage">=></a>
+								${nav}
 							</nav>
 						</td>
 					</tr>
