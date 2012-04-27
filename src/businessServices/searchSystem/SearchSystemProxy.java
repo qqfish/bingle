@@ -3,16 +3,16 @@ package businessServices.searchSystem;
 import java.sql.SQLException;
 import java.util.List;
 
-import baseUse.DiseaseDetailInfo;
-import baseUse.DiseaseShortInfo;
-import baseUse.DiseaseShortInfoList;
 import baseUse.Global;
 import baseUse.IDiseaseData;
 import baseUse.ISearchSystem;
 import baseUse.IUserData;
-import baseUse.UserDetailInfo;
-import baseUse.UserShortInfo;
-import baseUse.UserShortInfoList;
+import baseUse.searchData.DiseaseDetailInfo;
+import baseUse.searchData.DiseaseShortInfo;
+import baseUse.searchData.DiseaseShortInfoList;
+import baseUse.searchData.UserDetailInfo;
+import baseUse.searchData.UserShortInfo;
+import baseUse.searchData.UserShortInfoList;
 import businessServices.datamanager.diseasedata.DiseaseDataProxy;
 import businessServices.datamanager.userdata.UserDataProxy;
 

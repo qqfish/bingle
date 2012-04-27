@@ -11,11 +11,13 @@ import java.util.List;
 import baseUse.DiseaseData;
 import baseUse.DiseaseDataList;
 import baseUse.DiseaseDataTag;
-import baseUse.DiseaseDetailInfo;
-import baseUse.DiseaseShortInfo;
-import baseUse.DiseaseShortInfoList;
 import baseUse.DrugInfo;
 import baseUse.IDiseaseData;
+import baseUse.IUserData;
+import baseUse.searchData.DiseaseDetailInfo;
+import baseUse.searchData.DiseaseShortInfo;
+import baseUse.searchData.DiseaseShortInfoList;
+import businessServices.datamanager.userdata.UserDataProxy;
 
 public class DiseaseDataProxy implements IDiseaseData {
 
@@ -97,7 +99,7 @@ public class DiseaseDataProxy implements IDiseaseData {
 	}
 
 	public DiseaseDetailInfo getDiseaseDetail(String diseasename)
-			throws SQLException {
+			throws SQLException, ClassNotFoundException {
 		ResultSet rs1 = con.createStatement().executeQuery(
 				"SELECT * FROM diseaseData WHERE diseaseName = '" + diseasename
 						+ "'");
@@ -108,6 +110,11 @@ public class DiseaseDataProxy implements IDiseaseData {
 			DiseaseDetailInfo result = new DiseaseDetailInfo(
 					rs1.getString("diseaseName"),
 					rs1.getString("diseaseIntro"), rs1.getDate("editTime"));
+			//get user info list from userData
+			IUserData itf = new UserDataProxy();
+			
+			result.setUserOfThis(itf.searchUser(diseasename).getUserResultPage(1, 10));
+			
 			while (rs2.next()) {
 				result.addDrug(new DrugInfo(rs2.getString("tagName"), rs2
 						.getInt("num")));

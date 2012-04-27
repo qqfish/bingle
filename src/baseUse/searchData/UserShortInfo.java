@@ -1,4 +1,4 @@
-package baseUse;
+package baseUse.searchData;
 
 import java.util.ArrayList;
 import java.util.List;

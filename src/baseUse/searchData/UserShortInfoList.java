@@ -1,4 +1,4 @@
-package baseUse;
+package baseUse.searchData;
 
 import java.util.List;
 
@@ -22,6 +22,7 @@ public class UserShortInfoList {
 	
 	public void add(String username, String currentDisease, List<String> tagName, Short age, Boolean gender){
 		userResult.add(new UserShortInfo(username, currentDisease, tagName, age, gender));
+		num++;
 	}
 	
 	public int getNum(){

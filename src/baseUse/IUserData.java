@@ -3,6 +3,9 @@ package baseUse;
 import java.sql.SQLException;
 import java.util.List;
 
+import baseUse.searchData.UserDetailInfo;
+import baseUse.searchData.UserShortInfoList;
+
 public interface IUserData {
 	/**
 	 * @param username

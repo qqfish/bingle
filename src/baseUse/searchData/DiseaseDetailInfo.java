@@ -1,8 +1,10 @@
-package baseUse;
+package baseUse.searchData;
 
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
+
+import baseUse.DrugInfo;
 
 public class DiseaseDetailInfo {
 	/** @pdOid 39aa7c7c-26ae-4eb3-ae57-32eec7e8bec8 */
@@ -13,12 +15,14 @@ public class DiseaseDetailInfo {
 	private Date editTime;
 	/** @pdOid 7a8f2383-be35-4f9d-9005-6e8f07e9efee */
 	private List<DrugInfo> drugs;
+	private List<UserShortInfo> userOfThis;
 
-	public DiseaseDetailInfo(String dn, String di, Date et, List<DrugInfo> d) {
+	public DiseaseDetailInfo(String dn, String di, Date et, List<DrugInfo> d, List<UserShortInfo> user) {
 		diseaseName = dn;
 		diseaseIntro = di;
 		editTime = et;
 		drugs = d;
+		userOfThis = user;
 	}
 
 	public DiseaseDetailInfo(String dn, String di, Date et) {
@@ -32,6 +36,10 @@ public class DiseaseDetailInfo {
 		drugs.add(d);
 	}
 	
+	public void setUserOfThis(List<UserShortInfo> user){
+		userOfThis = user;
+	}
+	
 	public String getDiseaseName(){
 		return diseaseName;
 	}
@@ -43,5 +51,8 @@ public class DiseaseDetailInfo {
 	}
 	public List<DrugInfo> getDrugs(){
 		return drugs;
+	}
+	public List<UserShortInfo> getUserOfThis(){
+		return userOfThis;
 	}
 }

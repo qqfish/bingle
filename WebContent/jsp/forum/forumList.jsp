@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="GBK"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -8,7 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <html lang="en">
 	<head>
-	<meta charset="gkb" />
+	<meta charset="gbk" />
 	<title>Forum List</title>
 
 	<link rel="stylesheet" href="../../css/forumList.css" type="text/css" />
@@ -28,58 +28,58 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						
 			<nav>
 				<ul>
-					<li><a href="search.jsp">Г≈┘Е▐▀</a></li>
-					<li><a href="search.jsp">Г≈┘Г≈┤</a></li>
-					<li class="active"><a href="forum.jsp">Д╨╓Ф╣│Е▄╨</a></li>
+					<li><a href="search.jsp">╡║ся</a></li>
+					<li><a href="search.jsp">╡║ж╒</a></li>
+					<li class="active"><a href="forum.jsp">╫╩аВгЬ</a></li>
 				</ul>
 				<form action="#" id="search" method="get">
 					<input type="search" id="search_word" placeholder="Search this site">
-					<input type="submit" value="Ф÷╔Ф┴╬Г≈┘Е▐▀" class="search-btn" name="subBtn">
-					<input type="submit" value="Ф÷╔Ф┴╬Г≈┘Г≈┤" class="search-btn" name="subBtn">
+					<input type="submit" value="╡Иур╡║ся" class="search-btn" name="subBtn">
+					<input type="submit" value="╡Иур╡║ж╒" class="search-btn" name="subBtn">
 				</form>
 			</nav>
 		</header>
 		<section id="container" class="body">
 			<header class="forumHead">
 				<div class="forumTitle">
-					<a href="index.jsp">Г≈┘Д╨├Д╧┬</a>
+					<a href="index.jsp">╡║акц╢</a>
 					 - 
-					<a href="#">Г≈┘Е▐▀Х╝╨Е²⌡</a>
+					<a href="#">╡║сябшлЁ</a>
 				</div>
 			</header>
 			<div id="selection">
 				<table>
-					<th>Х╝╨Е²⌡Е┬≈Х║╗</th>
+					<th>бшлЁап╠М</th>
 					<tr>
 						<td class="list"><img src="../../img/list.jpg"/></td>
-						<td class="textList"><a href="#">Ф└÷Е├▓</a><br/>Д╨╓Ф╣│Ф°┴Е┘ЁФ└÷Е├▓Г⌡╦Е┘ЁД©║Ф│╞</td>
+						<td class="textList"><a href="#">╦пц╟</a><br/>╫╩аВсп╧ь╦пц╟оЮ╧ьпео╒</td>
 						<td class="tags">
-							<a href="#">Ф═┤Г╜╬</a>,
-							<a href="#">Ф═┤Г╜╬</a>,
-							<a href="#">Ф═┤Г╜╬</a>
+							<a href="#">╠Йг╘</a>,
+							<a href="#">╠Йг╘</a>,
+							<a href="#">╠Йг╘</a>
 						</td>
 						<td class="list"><img src="../../img/list.jpg"/></td>
-						<td class="textList"><a href="#">Е©┐Х└▒Х║─Г╝║Г√╬Г≈┘</a><br/>Д╨╓Ф╣│Ф°┴Е┘ЁЕ©┐Х└▒Х║─Г╝║Г√╬Г≈┘Г⌡╦Е┘ЁД©║Ф│╞</td>
+						<td class="textList"><a href="#">пддтя╙╧э╪╡╡║</a><br/>╫╩аВсп╧ьпддтя╙╧э╪╡╡║оЮ╧ьпео╒</td>
 						<td class="tags">
-							<a href="#">Ф═┤Г╜╬</a>,
-							<a href="#">Ф═┤Г╜╬</a>,
-							<a href="#">Ф═┤Г╜╬</a>
+							<a href="#">╠Йг╘</a>,
+							<a href="#">╠Йг╘</a>,
+							<a href="#">╠Йг╘</a>
 						</td>
 					</tr>
 					<tr>
 						<td class="list"><img src="../../img/list.jpg"/></td>
-						<td class="textList"><a href="ForumControlServlet">Е╓╢Г≈⌡</a><br/>Д╨╓Ф╣│Ф°┴Е┘ЁЕ╓╢Г≈⌡Г⌡╦Е┘ЁД©║Ф│╞</td>
+						<td class="textList"><a href="ForumControlServlet">м╥м╢</a><br/>╫╩аВсп╧ьм╥м╢оЮ╧ьпео╒</td>
 						<td class="tags">
-							<a href="#">Ф═┤Г╜╬</a>,
-							<a href="#">Ф═┤Г╜╬</a>,
-							<a href="#">Ф═┤Г╜╬</a>
+							<a href="#">╠Йг╘</a>,
+							<a href="#">╠Йг╘</a>,
+							<a href="#">╠Йг╘</a>
 						</td>
 						<td class="list"><img src="../../img/list.jpg"/></td>
-						<td class="textList"><a href="#">Х┐┐Г≈┘</a><br/>Д╨╓Ф╣│Ф°┴Е┘ЁХ┐┐Г≈┘Г⌡╦Е┘ЁД©║Ф│╞</td>
+						<td class="textList"><a href="#">н╦╡║</a><br/>╫╩аВсп╧ьн╦╡║оЮ╧ьпео╒</td>
 						<td class="tags">
-							<a href="#">Ф═┤Г╜╬</a>,
-							<a href="#">Ф═┤Г╜╬</a>,
-							<a href="#">Ф═┤Г╜╬</a>
+							<a href="#">╠Йг╘</a>,
+							<a href="#">╠Йг╘</a>,
+							<a href="#">╠Йг╘</a>
 						</td>
 					</tr>
 				</table>

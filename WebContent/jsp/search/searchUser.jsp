@@ -1,8 +1,9 @@
+<%@page pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-<title>搜索结果</title>
+<title>查找病友</title>
 
 <link rel="stylesheet" href="/bingle/css/search.css" type="text/css" />
 
@@ -18,7 +19,7 @@
 <body id="index" class="home">
 	<header id="banner" class="body">
 		<h1>
-			<img herf="#" src="/bingle/img/logo.jpg">
+			<img href="#" src="/bingle/img/logo.jpg">
 		</h1>
 
 		<nav>
@@ -29,8 +30,8 @@
 			</ul>
 			<form action="#" id="search" method="get">
 				<input type="search" id="keyword" placeholder="Search this site">
-				<input type="submit" value="搜索病人" class="search-btn" name="subBtn">
-				<input type="submit" value="搜索病症" class="search-btn" name="subBtn">
+				<input type="submit" value="查找病友" class="search-btn" name="subBtn">
+				<input type="submit" value="查找病症" class="search-btn" name="subBtn">
 			</form>
 		</nav>
 	</header>
@@ -51,7 +52,7 @@
 			</tbody>
 			<tfoot>
 				<tr>
-					<td>×Ü¹²ËÑË÷½á¹û:${total }</td>
+					<td>总计:${total }</td>
 					<td></td>
 					<td></td>
 					<td></td>

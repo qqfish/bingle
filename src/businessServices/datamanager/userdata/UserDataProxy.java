@@ -1,6 +1,10 @@
 package businessServices.datamanager.userdata;
 
 import baseUse.*;
+import baseUse.searchData.UserDetailInfo;
+import baseUse.searchData.UserDiseaseInfo;
+import baseUse.searchData.UserShortInfo;
+import baseUse.searchData.UserShortInfoList;
 
 import java.util.ArrayList;
 import java.util.Date;

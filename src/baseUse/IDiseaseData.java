@@ -2,6 +2,9 @@ package baseUse;
 
 import java.sql.SQLException;
 
+import baseUse.searchData.DiseaseDetailInfo;
+import baseUse.searchData.DiseaseShortInfoList;
+
 public interface IDiseaseData {
 	/**
 	 * @param content
@@ -20,7 +23,8 @@ public interface IDiseaseData {
 	/**
 	 * @param diseasename
 	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 * @pdOid b605bb3c-2213-42ce-99d3-c5e711b0e52a
 	 */
-	DiseaseDetailInfo getDiseaseDetail(String diseasename) throws SQLException;
+	DiseaseDetailInfo getDiseaseDetail(String diseasename) throws SQLException, ClassNotFoundException;
 }

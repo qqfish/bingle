@@ -2,8 +2,6 @@ package application.search;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import baseUse.*;
+import baseUse.searchData.DiseaseDetailInfo;
+import baseUse.searchData.DiseaseShortInfoList;
+import baseUse.searchData.UserDetailInfo;
+import baseUse.searchData.UserShortInfo;
+import baseUse.searchData.UserShortInfoList;
 import businessServices.searchSystem.SearchSystemProxy;
 
 /**
@@ -87,22 +90,28 @@ public class SearchControlServlet extends HttpServlet {
 			page = 1;
 			result = itf.searchDisease(keyword, 1, perPage);
 		}
-		String table = "";
-		for (int i = 0; i < result.getDiseaseResult().size(); i++) {
-			table = table + "<tr class='search-result'>";
-			table = table + "<td><a href='" + website
-					+ "/SearchControlServlet?diseasename="
-					+ result.getDiseaseResult().get(i).getDiseasename() + "'>"
-					+ result.getDiseaseResult().get(i).getDiseasename() + "</a></td>";
-			table = table + "<td>";
-			for(int j = 0 ; j < result.getDiseaseResult().get(i).getTagname().size(); j++){
-				table = table + result.getDiseaseResult().get(i).getTagname().get(j) + "<nbsp>";
-			}
-			table = table + "</td>";
-		}
-		request.setAttribute("table", table);
-		//nav
+		
 		int num = result.getNum();
+		if(num > 0){
+			String table = "";
+			for (int i = 0; i < result.getDiseaseResult().size(); i++) {
+				table = table + "<tr class='search-result'>";
+				table = table + "<td><a href='" + website
+						+ "/SearchControlServlet?diseasename="
+						+ result.getDiseaseResult().get(i).getDiseasename() + "'>"
+						+ result.getDiseaseResult().get(i).getDiseasename() + "</a></td>";
+				table = table + "<td>";
+				for(int j = 0 ; j < result.getDiseaseResult().get(i).getTagname().size(); j++){
+					table = table +"<div class='tag'><a href='#'>" + result.getDiseaseResult().get(i).getTagname().get(j) + "</a></div>";
+				}
+				table = table + "</td>";
+			}
+			request.setAttribute("table", table);
+		}
+		else{
+			request.setAttribute("table", "<p>√ª”–∆•≈‰–≈œ¢</p>");
+		}
+		//nav		
 		int pageNum = num / perPage + 1;
 		boolean point = false;
 		String nav = "";
@@ -149,7 +158,14 @@ public class SearchControlServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		UserDetailInfo result = itf.getDetailUserInfo(username);
 		request.setAttribute("result", result);
-
+		
+		//tag
+		String tag = "";
+		for(int i = 0; i < result.getTags().size(); i++){
+			tag = tag + "<div class='tag'>" + result.getTags().get(i) + "</div>";
+		}
+		request.setAttribute("tag", tag);
+		
 		String address = "jsp/search/userDetail.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(address);
 		dispatcher.forward(request, response);
@@ -193,35 +209,41 @@ public class SearchControlServlet extends HttpServlet {
 			page = 1;
 			result = itf.searchUser(keyword, 1, perPage);
 		}
-		String table = "";
-		for (int i = 0; i < result.getUserResult().size(); i++) {
-			UserShortInfo current = result.getUserResult().get(i); 
-			//username
-			table = table + "<tr class='search-result'>";
-			table = table + "<td><a href='" + website
-					+ "/SearchControlServlet?diseasename="
-					+ current.getUsername() + "'>"
-					+ current.getUsername() + "</a></td>";
-			//gender
-			if(current.getGender()){
-				table += "<td>Â•≥</td>";
-			}else{
-				table += "<td>Áî∑</td>";
-			}
-			//age
-			table = table + "<td>" + current.getAge() + "</td>";
-			//currentDisease
-			table = table + "<td>" + current.getCurrentDisease() + "</td>";
-			//tag
-			table = table + "<td>";
-			for(int j = 0 ; j < current.getTagname().size(); j++){
-				table = table + current.getTagname().get(j) + "<nbsp>";
-			}
-			table = table + "</td>";
-		}
-		request.setAttribute("table", table);
-		//nav
+		
 		int num = result.getNum();
+		if(num > 0){
+		String table = "";
+			for (int i = 0; i < result.getUserResult().size(); i++) {
+				UserShortInfo current = result.getUserResult().get(i); 
+				//username
+				table = table + "<tr class='search-result'>";
+				table = table + "<td><a href='" + website
+						+ "/SearchControlServlet?username="
+						+ current.getUsername() + "'>"
+						+ current.getUsername() + "</a></td>";
+				//gender
+				if(current.getGender()){
+					table += "<td>female</td>";
+				}else{
+					table += "<td>male</td>";
+				}
+				//age
+				table = table + "<td>" + current.getAge() + "</td>";
+				//currentDisease
+				table = table + "<td>" + current.getCurrentDisease() + "</td>";
+				//tag
+				table = table + "<td>";
+				for(int j = 0 ; j < current.getTagname().size(); j++){
+					table = table + "<div class='tag'><a href='#'>"+ current.getTagname().get(j) + "</a></div>";
+				}
+				table = table + "</td>";
+			}
+			request.setAttribute("table", table);
+		}
+		else{
+			request.setAttribute("table","<p>√ª”–∆•≈‰µƒ–≈œ¢</p>");
+		}
+		//nav
 		int pageNum = num / perPage + 1;
 		boolean point = false;
 		String nav = "";
@@ -255,6 +277,7 @@ public class SearchControlServlet extends HttpServlet {
 		
 		request.setAttribute("nav", nav);
 		request.setAttribute("total", num);
+		
 
 		String address = "jsp/search/searchUser.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(address);

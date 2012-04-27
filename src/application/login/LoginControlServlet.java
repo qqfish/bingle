@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import baseUse.UserDetailInfo;
 import baseUse.Global;;
+import baseUse.searchData.UserDetailInfo;
 
 @WebServlet("/LoginControlServlet")
 public class LoginControlServlet extends HttpServlet {
@@ -80,7 +80,7 @@ public class LoginControlServlet extends HttpServlet {
 				age = udi.getAge();
 				address = udi.getAddress();
 				email = udi.getEmail();
-				gender = udi.getGender()?"Å®":"ÄÐ";
+				gender = udi.getGender()?"Å®":"ï¿½ï¿½";
 				mind = udi.getMindStatus();
 				body = udi.getBodyStatus();
 				disease = udi.getUserDiseaseInfo().get(udi.getUserDiseaseInfo().size()-1).getDiseaseName();

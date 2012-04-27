@@ -1,0 +1,88 @@
+@import url("reset.css");
+@import url("global-forms.css");
+
+.forumHead{
+	margin-bottom:10px;
+	width:100%;
+}
+.forumTitle,.forumResult{
+	color:#000305;
+	background-color:#fff;
+	margin-bottom: 10px;
+	padding:5px;
+	border-color: #C74350;
+	border-width: 1px;
+	border-style: solid;
+	width:	98%;
+}
+.information td,.information th{
+	padding: 4px;
+	font-family: "Î¢ÈíÑÅºÚ","ºÚÌå";
+}
+.title{
+	font-size: 15px;
+	color: #FFFFFF;
+	background-color: #C74350;
+	text-align: center;
+}
+.alt{
+	background-color: #EAF2D3;
+}
+.left{
+	text-align: center;
+	width: 18%;
+	border-right-style: solid;
+	border-color: #FFFFFF;
+	border-width: 8px;
+}
+.right{
+	text-align: center;
+}
+.selfInfo{
+	width:70%;
+	margin: 15px 0px 0px 285px;
+}
+.diseaseInfo:nth-child(even){
+	width:70%;
+	margin: 0px 0px 0px 15px;
+}
+.diseaseInfo:nth-child(odd){
+	width:70%;
+	margin: 0px 0px 0px 285px;
+}
+#container {
+	background: #fff;
+	margin-bottom: 2em;
+	overflow: hidden;
+	padding: 20px 20px;
+	width: 1024px;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+#resultTitle{
+	background: #000;
+	font-family: "Î¢ÈíÑÅºÚ","ºÚÌå";
+	color: #fff;
+	height: 40px;
+	line-height: 30px;
+	margin: 0 auto 2em auto;
+	text-align: center;
+	padding: 5px 0 0 0;
+	-moz-border-radius: 20px 20px 20px 20px;
+    -webkit-border-radius: 20px 20px 20px 20px;
+    border-radius: 20px 20px 20px 20px;
+}
+
+.tag{
+	min-width: 40px;
+	color: #fff;
+	float:left;
+	background: #C64350;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	box-shadow: 2px 2px 5px #333333;
+	-moz-box-shadow: 2px 2px 5px #333333;
+	-webkit-box-shadow: 2px 2px 5px #333333;
+}

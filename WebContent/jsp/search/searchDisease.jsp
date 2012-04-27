@@ -1,8 +1,9 @@
+<%@page pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 	<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
-	<title>ËÑË÷½á¹û</title>
+	<title>查找病症</title>
 
 	<link rel="stylesheet" href="/bingle/css/search.css" type="text/css" />
 
@@ -17,18 +18,18 @@
 
 	<body id="index" class="home">
 		<header id="banner" class="body">
-			<h1><img herf="#" src="../img/logo.jpg"></h1>
+			<h1><img href="#" src="/bingle/img/logo.jpg"></h1>
 						
 			<nav>
 				<ul>
-					<li class="active"><a href="#">²¡ÓÑ</a></li>
-					<li><a href="#">²¡Ö¢</a></li>
-					<li><a href="forum.htm">½»Á÷Çø</a></li>
+					<li class="active"><a href="#">病友</a></li>
+					<li><a href="#">病症</a></li>
+					<li><a href="forum.htm">讨论区</a></li>
 				</ul>
 				<form action="#" id="search" method="get">
 					<input type="search" id="search_word" placeholder="Search this site">
-					<input type="submit" value="²éÕÒ²¡ÓÑ" class="search-btn" name="subBtn">
-					<input type="submit" value="²éÕÒ²¡Ö¢" class="search-btn" name="subBtn">
+					<input type="submit" value="查找病友" class="search-btn" name="subBtn">
+					<input type="submit" value="查找病症" class="search-btn" name="subBtn">
 				</form>
 			</nav>
 		</header>

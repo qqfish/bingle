@@ -1,55 +1,113 @@
-<!DOCTYPE html>
+ï»¿<!DOCTYPE html>
+<%@ page language="java"%>
+<%@ page import="baseUse.searchData.UserDetailInfo"%>
 <html>
-	<head>
-	<meta http-equiv="Content-Type" content="text/html;charset=gb2312">
-	<title>¸öÈË×ÊÁÏ</title>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=gb2312">
+<title>User Detail Result</title>
 
-	<link rel="stylesheet" href="/bingle/css/selfInfo.css" type="text/css" />
-	<script type="text/javascript" src="/bingle/script/inNav.js"></script>
-	<!--[if IE]>
+<link rel="stylesheet" href="/bingle/css/userDetailResult.css"
+	type="text/css" />
+
+<!--[if IE]>
 	 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-	<!--[if lte IE 7]>
+<!--[if lte IE 7]>
 	 <script src="../js/IE8.js" type="text/javascript"></script><![endif]-->
 
-	<!--[if lt IE 7]>
+<!--[if lt IE 7]>
 	 <link rel="stylesheet" type="text/css" media="all" href="../css/ie6.css"/><![endif]-->
-	</head>
+</head>
 
-	<body id="index" class="home" onload="init();">
-		<header id="banner" class="body">
-			<h1><img src="../img/logo.jpg"/></h1>
-						
-			<nav>
-				<ul>
-					<li><a href="search.htm">²¡ÓÑ</a></li>
-					<li><a href="search.htm">²¡Ö¢</a></li>
-					<li><a href="forum.htm">½»Á÷Çø</a></li>
-					<li class="active"><a href="#">¿ØÖÆÃæ°å</a></li>
-				</ul>
-				<form action="#" id="search" method="get">
-					<input type="search" id="search_word" placeholder="Search this site">
-					<input type="submit" value="²éÕÒ²¡ÓÑ" class="search-btn" name="subBtn">
-					<input type="submit" value="²éÕÒ²¡Ö¢" class="search-btn" name="subBtn">
-				</form>
-			</nav>
-		</header>
-		
-		<nav id="infoNav" class="body" onmouseover='nowMouse="on";move();' onmouseout='nowMouse="off";move();' >
+<body id="index" class="home">
+	<header id="banner" class="body">
+		<h1>
+			<a href="index.jsp"><img src="/bingle/img/logo.jpg" /></a>
+		</h1>
+		<nav>
 			<ul>
-				<li><a href="#" class="active">»ù±¾×ÊÁÏ</a></li>
-				<li><a href="#">¸öÈË×´Ì¬</a></li>
-				<li><a href="#">¼²²¡Çé¿ö</a></li>
-				<li><a href="#">ÖÎÁÆ¹ı³Ì</a></li>
-				<li><a href="#">¹ÜÀí±êÇ©</a></li>
+				<li class="active"><a href="#">ç—…å‹</a></li>
+				<li><a href="#">ç—…ç—‡</a></li>
+				<li><a href="forum.jsp">äº¤æµåŒº</a></li>
 			</ul>
+			<form action="#" id="search" method="get">
+				<input type="search" id="search_word" placeholder="Search this site">
+				<input type="submit" value="æŸ¥æ‰¾ç—…å‹" class="search-btn" name="subBtn">
+				<input type="submit" value="æŸ¥æ‰¾ç—…ç—‡" class="search-btn" name="subBtn">
+			</form>
 		</nav>
-		
-		<section id="container" class="body">
-			<h3>»ù±¾×ÊÁÏ</h3>
-		</section>
-		
-		<footer id="about" class="body">
-			<p>blablabla</p>
-		</footer>
-		
-	</body>
+	</header>
+	<section id="container" class="body">
+		<header>
+			<h3 id="resultTitle">ç—…å‹ä¿¡æ¯</h3>
+		</header>
+		<div class="information">
+			<table class="selfInfo">
+				<th class="title" colspan="2">ç—…å‹ä¸ªäººä¿¡æ¯</th>
+				<tr class="alt">
+					<td class="left">ç”¨æˆ·å:</td>
+					<td class="right">${result.username}</td>
+				</tr>
+				<tr>
+					<td class="left">å¹´é¾„:</td>
+					<td class="right">${result.age }</td>
+				</tr>
+				<tr class="alt">
+					<td class="left">åœ°å€:</td>
+					<td class="right">${result.address }</td>
+				</tr>
+				<tr>
+					<td class="left">e-mail:</td>
+					<td class="right">${result.email }</td>
+				</tr>
+				<tr class="alt">
+					<td class="left">æ ‡ç­¾:</td>
+					<td class="right">${tag }</td>
+				</tr>
+			</table>
+			<br /> <br />
+			<% 
+			UserDetailInfo result = (UserDetailInfo) request.getAttribute("result");
+			%>
+			<%=result.getUserDiseaseInfo().size() %>
+			<%
+			for(int i = 0; i < result.getUserDiseaseInfo().size(); i++){ 
+			%>
+				<table class="diseaseInfo">
+					<th class="title" colspan="2">æ‰€æ‚£ç—…ç—‡ç›¸å…³ä¿¡æ¯</th>
+					<tr class="alt">
+						<td class="left">ç—…å:</td>
+						<td class="right"><%=result.getUserDiseaseInfo().get(i).getDiseaseName() %></td>
+					</tr>
+					<tr>
+						<td class="left">æ²»ç–—æƒ…å†µ:</td>
+						<td class="right"><%=result.getUserDiseaseInfo().get(i).getTreatmentIntro()%></td>
+					</tr>
+					<tr class="alt">
+						<td class="left">å¾—ç—…åŸå› :</td>
+						<td class="right"><%=result.getUserDiseaseInfo().get(i).getReason()%></td>
+					</tr>
+					<tr>
+						<td class="left">Tips:</td>
+						<td class="right"><%=result.getUserDiseaseInfo().get(i).getTips()%></td>
+					</tr>
+					<tr class="alt">
+						<td class="left">æ‰€ç”¨è¯ç‰©:</td>
+						<td class="right"><%for(int j = 0; j < result.getUserDiseaseInfo().get(i).getDrugName().size(); j++){ %>
+							<div class="tag"><%=result.getUserDiseaseInfo().get(i).getDrugName().get(j) %></div>
+						
+						<%} %>
+						</td>
+					</tr>
+				</table>
+				<br />
+				<br />
+			<%} %>
+		</div>
+	</section>
+
+	<footer id="about" class="body">
+		<p>blablabla</p>
+	</footer>
+
+</body>
+</html>
