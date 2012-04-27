@@ -34,8 +34,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						
 		<nav>
 			<ul>
-				<li><a href="html/search.htm">病友</a></li>
-				<li><a href="html/search.htm">病症</a></li>
+				<li><a href="/bingle/SearchControlServlet?searchType=patients">病友</a></li>
+				<li><a href="/bingle/SearchControlServlet?searchType=diseases">病症</a></li>
 				<li><a href="html/forum.htm">交流区</a></li>
 			</ul>
 			<form action="/bingle/SearchControlServlet" id="search" method="get">

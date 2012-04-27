@@ -24,8 +24,8 @@
 
 		<nav>
 			<ul>
-				<li class="active"><a href="#">病友</a></li>
-				<li><a href="#">病症</a></li>
+				<li class="active"><a href="/bingle/SearchControlServlet?searchType=patients">病友</a></li>
+				<li><a href="/bingle/SearchControlServlet?searchType=diseases">病症</a></li>
 				<li><a href="forum.htm">讨论区</a></li>
 			</ul>
 			<form action="/bingle/SearchControlServlet" id="search" method="get">
