@@ -28,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<ul>
 					<li><a href="search.htm">病友</a></li>
 					<li><a href="search.htm">病症</a></li>
-					<li><a href="ForumControlServlet?action=ini">交流区</a></li>
+					<li><a href="ForumControlServlet?func=ini">交流区</a></li>
 					<li class="active"><a href="#">控制面板</a></li>
 				</ul>
 				<form action="#" id="search" method="get">

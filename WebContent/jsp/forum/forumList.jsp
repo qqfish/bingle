@@ -54,7 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<th>论坛列表</th>
 					<tr>
 						<td class="list"><img src="/bingle/img/list.jpg"/></td>
-						<td class="textList"><a href="ForumControlServlet?action=topic&list=1&topic=${fl.forumList[0].topicListName}">${fl.forumList[0].topicListName}</a>
+						<td class="textList"><a href="ForumControlServlet?func=topicList&topic=${fl.forumList[0].topicListName}">${fl.forumList[0].topicListName}</a>
 						<br/>交流有关${fl.forumList[0].topicListName}相关信息</td>
 						<td class="tags">
 							<a href="#">${fl.forumList[0].tagName[0]}</a>,

@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sun.mail.imap.protocol.UID;
 
@@ -67,18 +68,12 @@ public class LoginControlServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
-		String groupName = null;
-		Short age = null;
-		String address = null;
-		String email = null;
-		String gender = null;
-		int mind;
-		int body;
-		String disease = null;
 		UserDetailInfo udi = null;
+		HttpSession session = null;
 		try {
 			if(Global.iUserData().confirmUser(userName, password)){
 				udi = Global.iUserData().getDetailUserInfo(userName);
+				session = request.getSession();
 				//groupName = udi.getGroupname();
 				//age = udi.getAge();
 				//address = udi.getAddress();
@@ -97,7 +92,7 @@ public class LoginControlServlet extends HttpServlet {
 				//request.setAttribute("disease", disease);
 				//request.setAttribute("mind", mind);
 				//request.setAttribute("body", body);
-				request.setAttribute("udi", udi);
+				session.setAttribute("udi", udi);
 				request.getRequestDispatcher("/jsp/info/selfInfo.jsp").forward(request, response);
 			}
 			else

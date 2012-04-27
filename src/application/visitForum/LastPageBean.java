@@ -1,7 +1,7 @@
 package application.visitForum;
 
 public class LastPageBean {
-	String url;
+	private String url;
 	
 	public LastPageBean(){
 		url = null;

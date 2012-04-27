@@ -53,12 +53,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</header>
 			<div id="textArea">
-				<form action="#">
+				<form action="ForumControlServlet" method="post">
 					<p>发表帖子<p><hr>
-					<input id="title" type="text" name="title"/><br/>
-					<textarea cols="100" rows="10" name="post"></textarea><br/>
+					<input id="title" type="text" name="tittle"/><br/>
+					<textarea cols="100" rows="10" name="content"></textarea><br/>
 					<input class="button" type="submit" value="发表帖子">
 					<input class="button" type="reset" value="重置内容">
+					<input type="hidden" name="func" value="newtopic">
+					<input type="hidden" name="user" value="${user}">
+					<input type="hidden" name="list" value="${list}">
+					<input type="hidden" name="url" value="${lpb.url}">
 				</form>
 			</div>
 		</section>

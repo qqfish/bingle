@@ -45,66 +45,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					 - 
 					<a href="#">病友论坛</a>
 					 -
-					<a href="#">${tld.topicListName}</a>
+					<a href="Forum">${tld.topicListName}</a>
 				</div>
 				<nav class="pageNav">
 					<span class="disabled"><=</span>
 					<span class="current">1</span>
-					<a href="#">2</a>
-					<a href="#">3</a>
-					<a href="#">4</a>
-					<span class="gap">...</span>
-					<a href="#">20</a>
-					<a href="#">21</a>
-					<a href="#" class="nextPage">=></a>
+					<span class="disabled">=></span>
 				</nav>
-				<input type="button" value="发表新帖"/>
+				<input type="button" value="发表新帖" onclick="window.location.href='ForumControlServlet?func=newtopicpage&user=${udi.username}&list=${tld.topicListName}'"/>
 			</header>
 			<div class="forumResult">
-				<article class="group">
-					<ul class="group">
-						<li class="date">8<sup>th</sup> January 2012</li>
-						<li class="posttitle">
-						<header>
-							<a href="#">${tld.topicInfo[0].topicName }</a>
-						</header>
-						</li>
-						<li class="comments"><a href="#">${tld.topicInfo[0].replyNum } Comments</a></li>
-					</ul>
-				</article>
-				<article class="group">
-					<ul class="group">
-						<li class="date">24<sup>th</sup> March 2011</li>
-						<li class="posttitle">
-						<header>
-							<a href="#">Archiving an Old WordPress Site</a>
-						</header>
-						</li>
-						<li class="comments"><a href="#">6 Comments</a></li>
-					</ul>
-				</article>
-				<article class="group">
-					<ul class="group">
-						<li class="date">23<sup>rd</sup> March 2011</li>
-						<li class="posttitle">
-						<header>
-							<a href="#">Minted</a>
-						</header>
-						</li>
-						<li class="comments"><a href="#">One Comment</a></li>
-					</ul>
-				</article>
+				${table}
 			</div>
 			<nav class="pageNav">
 				<span class="disabled"><=</span>
 				<span class="current">1</span>
-				<a href="#">2</a>
-				<a href="#">3</a>
-				<a href="#">4</a>
-				<span class="gap">...</span>
-				<a href="#">20</a>
-				<a href="#">21</a>
-				<a href="#" class="nextPage">=></a>
+				<span class="disabled">=></span>
 			</nav>
 		</section>
 		

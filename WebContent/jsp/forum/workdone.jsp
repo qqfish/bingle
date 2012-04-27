@@ -52,10 +52,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<br>
 				<br>
 				<br>
-				<jsp:useBean id="lastPage" class="application.visitForum.LastPageBean" scope="request"/>
 				<%
-					lastPage.setUrl("/bingle/jsp/search/search.jsp");
-					String url=lastPage.getUrl();
+					String url = request.getParameter("url");
 					response.setHeader("refresh","5;URL="+url);
 					out.println("<a href=\""+url+"\">手动点击返回</a>");
 				%>
