@@ -1,0 +1,83 @@
+﻿@import url("reset.css");
+@import url("global-forms.css");
+
+.forumHead{
+	margin-bottom:10px;
+	width:100%;
+}
+.forumTitle,.forumResult{
+	color:#000305;
+	background-color:#fff;
+	margin-bottom: 10px;
+	padding:5px;
+	border-color: #C74350;
+	border-width: 1px;
+	border-style: solid;
+	width:	98%;
+}
+#container {
+	background: #fff;
+	margin-bottom: 2em;
+	overflow: hidden;
+	padding: 20px 20px;
+	width: 1024px;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+.information td,.information th{
+	padding: 4px;
+	font-family: "微软雅黑","黑体";
+}
+.title{
+	font-size: 15px;
+	color: #FFFFFF;
+	background-color: #C74350;
+	text-align: center;
+}
+.alt{
+	background-color: #EAF2D3;
+}
+.left{
+	text-align: center;
+	width: 22%;
+	border-right-style: solid;
+	border-color: #FFFFFF;
+	border-width: 8px;
+}
+.right{
+	text-align: center;
+}
+.Info{
+	float: left;
+	margin: 15px 0px 0px 15px;
+	width: 70%
+}
+#resultTitle{
+	background: #000;
+	font-family: "微软雅黑","黑体";
+	color: #fff;
+	height: 40px;
+	line-height: 30px;
+	margin: 0 auto 2em auto;
+	text-align: center;
+	padding: 5px 0 0 0;
+	-moz-border-radius: 20px 20px 20px 20px;
+    -webkit-border-radius: 20px 20px 20px 20px;
+    border-radius: 20px 20px 20px 20px;
+}
+#relation{
+	margin: -20px 38px auto auto;
+	text-align: center;
+	width: 20%;
+	float: right;
+}
+#update{
+	text-align: left;
+	padding-top: 10px;
+	padding-left: 10px;
+}
+#update a{
+	font-family: "微软雅黑","黑体";
+	color: #BBBBBB;
+}
