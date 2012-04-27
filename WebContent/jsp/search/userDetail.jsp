@@ -67,9 +67,6 @@
 			<br /> <br />
 			<% 
 			UserDetailInfo result = (UserDetailInfo) request.getAttribute("result");
-			%>
-			<%=result.getUserDiseaseInfo().size() %>
-			<%
 			for(int i = 0; i < result.getUserDiseaseInfo().size(); i++){ 
 			%>
 				<table class="diseaseInfo">
