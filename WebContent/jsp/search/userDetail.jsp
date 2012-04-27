@@ -6,8 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=gb2312">
 <title>User Detail Result</title>
 
-<link rel="stylesheet" href="/bingle/css/userDetailResult.css"
-	type="text/css" />
+<link rel="stylesheet" href="/bingle/css/userDetailResult.css" type="text/css" />
 
 <!--[if IE]>
 	 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
