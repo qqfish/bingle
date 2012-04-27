@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'index.jsp' starting page</title>
+    <title>病了么</title>
     <meta charset="gkb" />
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -38,10 +38,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<li><a href="html/search.htm">病症</a></li>
 				<li><a href="html/forum.htm">交流区</a></li>
 			</ul>
-			<form action="#" id="search" method="get">
-				<input type="search" id="search_word" placeholder="Search this site">
-				<input type="submit" value="查找病友" class="search-btn" name="subBtn">
-				<input type="submit" value="查找病症" class="search-btn" name="subBtn">
+			<form action="/bingle/SearchControlServlet" id="search" method="get">
+				<input type="search" name="keyword" placeholder="Search this site">
+				<input type="submit" value="patients" class="search-btn" name="searchType">
+				<input type="submit" value="diseases" class="search-btn" name="searchType">
 			</form>
 		</nav>
 	</header>

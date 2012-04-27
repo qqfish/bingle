@@ -39,9 +39,9 @@ public class SearchControlServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		try {
 			if (request.getParameter("searchType") != null) {
-				if (request.getParameter("searchType").equals("disease")) {
+				if (request.getParameter("searchType").equals("diseases")) {
 					searchDisease(request, response);
-				} else if (request.getParameter("searchType").equals("user")) {
+				} else if (request.getParameter("searchType").equals("patients")) {
 					searchUser(request, response);
 				}
 			} else if (request.getParameter("diseasename") != null) {
@@ -70,6 +70,9 @@ public class SearchControlServlet extends HttpServlet {
 			ServletException, IOException, ClassNotFoundException {
 		ISearchSystem itf = new SearchSystemProxy();
 		String keyword = request.getParameter("keyword");
+		if(keyword == null){
+			keyword = "";
+		}
 		DiseaseShortInfoList result;
 
 		String website = "http://localhost:8080/bingle";
@@ -189,6 +192,9 @@ public class SearchControlServlet extends HttpServlet {
 			ServletException, IOException, ClassNotFoundException {
 		ISearchSystem itf = new SearchSystemProxy();
 		String keyword = request.getParameter("keyword");
+		if(keyword == null){
+			keyword = "";
+		}
 		UserShortInfoList result;
 
 		String website = "http://localhost:8080/bingle";

@@ -28,10 +28,10 @@
 				<li><a href="#">病症</a></li>
 				<li><a href="forum.htm">讨论区</a></li>
 			</ul>
-			<form action="#" id="search" method="get">
-				<input type="search" id="keyword" placeholder="Search this site">
-				<input type="submit" value="查找病友" class="search-btn" name="subBtn">
-				<input type="submit" value="查找病症" class="search-btn" name="subBtn">
+			<form action="/bingle/SearchControlServlet" id="search" method="get">
+				<input type="search" name="keyword" placeholder="Search this site">
+				<input type="submit" value="patients" class="search-btn" name="searchType">
+				<input type="submit" value="diseases" class="search-btn" name="searchType">
 			</form>
 		</nav>
 	</header>
