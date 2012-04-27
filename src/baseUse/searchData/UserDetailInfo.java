@@ -26,6 +26,10 @@ public class UserDetailInfo {
 	 *             type=Aggregation
 	 */
 	private List<UserDiseaseInfo> userDiseaseInfo;
+	
+	public UserDetailInfo(){
+		
+	}
 
 	public UserDetailInfo(String u, String group, Short a, boolean gen, String add, String e, int mind,
 			int body, List<String> t, List<UserDiseaseInfo> ud) {
@@ -40,6 +44,47 @@ public class UserDetailInfo {
 		tags = t;
 		userDiseaseInfo = ud;
 	}
+	
+	public void setUsername(String u) {
+		username = u;
+	}
+	
+	public  void setGroupname(String group){
+		groupname = group;
+	}
+
+	public  void setAge(Short a) {
+		age = a;
+	}
+	
+	public  void setGender(boolean gen){
+		gender = gen;
+	}
+
+	public  void setAddress(String add) {
+		address = add;
+	}
+
+	public  void setEmail(String e) {
+		email = e;
+	}
+
+	public  void setMindStatus(int mind) {
+		mindStatus = mind;
+	}
+
+	public  void setBodyStatus(int body) {
+		bodyStatus = body;
+	}
+
+	public  void setTags(List<String> t) {
+		tags = t;
+	}
+
+	public  void setUserDiseaseInfo(List<UserDiseaseInfo> ud) {
+		userDiseaseInfo = ud;
+	}
+
 
 	public String getUsername() {
 		return username;

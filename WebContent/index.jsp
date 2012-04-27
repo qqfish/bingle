@@ -71,7 +71,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<form>
 					<ol>
 						<li>
-							<label>用户名称:<input type="text" class="inBox" placeholder="first character must be letter"/></label>
+							<label>用户名称:<input type="text" class="inBox" placeholder="consist of 6-16 characters" pattern="^[a-zA-Z][a-zA-Z0-9_]{5,15}$"/></label>
 						</li>
 						<li>
 							<label>输入密码:<input type="password" class="inBox" placeholder="at least 6 character"/></label>

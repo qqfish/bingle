@@ -75,7 +75,7 @@ public class ForumProxy implements IForumSystem {
 	}
 
 	@Override
-	public void newReply(String content, int topicId, String userName) throws SQLException, ClassNotFoundException {
+	public void newReply(String content, int topicId, String userName) throws SQLException {
 		// TODO Auto-generated method stub
 		IForumData itf = new ForumDataProxy();
 		itf.newReply(content, topicId, userName);
@@ -87,6 +87,10 @@ public class ForumProxy implements IForumSystem {
 		IForumData itf = new ForumDataProxy();
 		itf.editReply(replyId, content);
 		Global.cache().deleteCache("CurrentTopic", String.valueOf(topicId));
+	}
+	
+	public static void main(String[] args) throws SQLException{
+		System.out.println(Global.iForumSystem().getTopicList("asd").getTopicInfo().get(0).getAuthor());
 	}
 	
 }
