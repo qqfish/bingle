@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.sun.mail.imap.protocol.UID;
-
-import baseUse.Global;;
+import baseUse.Global;
+import baseUse.IUserData;
 import baseUse.searchData.UserDetailInfo;
+import businessServices.datamanager.userdata.UserDataProxy;
 
 @WebServlet("/LoginControlServlet")
 public class LoginControlServlet extends HttpServlet {
@@ -71,8 +71,9 @@ public class LoginControlServlet extends HttpServlet {
 		UserDetailInfo udi = null;
 		HttpSession session = null;
 		try {
-			if(Global.iUserData().confirmUser(userName, password)){
-				udi = Global.iUserData().getDetailUserInfo(userName);
+			IUserData ud = new UserDataProxy();
+			if(ud.confirmUser(userName, password)){
+				udi = ud.getDetailUserInfo(userName);
 				session = request.getSession();
 				//groupName = udi.getGroupname();
 				//age = udi.getAge();

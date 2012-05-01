@@ -89,8 +89,5 @@ public class ForumProxy implements IForumSystem {
 		Global.cache().deleteCache("CurrentTopic", String.valueOf(topicId));
 	}
 	
-	public static void main(String[] args) throws SQLException{
-		System.out.println(Global.iForumSystem().getTopicList("asd").getTopicInfo().get(0).getAuthor());
-	}
-	
+
 }

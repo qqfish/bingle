@@ -29,15 +29,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						
 			<nav>
 				<ul>
-					<li><a href="search.jsp">病友</a></li>
-					<li><a href="search.jsp">病症</a></li>
-					<li class="active"><a href="forum.jsp">交流区</a></li>
+					<li><a href="/bingle/SearchControlServlet?searchType=patients">病友</a></li>
+				<li><a href="/bingle/SearchControlServlet?searchType=diseases">病症</a></li>
+					<li class="active"><a href="ForumControlServlet?func=ini">交流区</a></li>
 				</ul>
-				<form action="#" id="search" method="get">
-					<input type="search" id="search_word" placeholder="Search this site">
-					<input type="submit" value="查找病友" class="search-btn" name="subBtn">
-					<input type="submit" value="查找病症" class="search-btn" name="subBtn">
-				</form>
+				<form action="/bingle/SearchControlServlet" id="search" method="get">
+				<input type="search" name="keyword" placeholder="Search this site">
+				<input type="submit" value="patients" class="search-btn" name="searchType">
+				<input type="submit" value="diseases" class="search-btn" name="searchType">
+			</form>
 			</nav>
 		</header>
 		<section id="container" class="body">
@@ -53,9 +53,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</header>
 			<div id="textArea">
-				<form action="ForumControlServlet" method="post">
+				<form action="/bingle/ForumControlServlet" method="post">
 					<p>发表帖子<p><hr>
-					<input id="title" type="text" name="tittle"/><br/>
+					<input id="tittle" type="text" name="tittle"/><br/>
 					<textarea cols="100" rows="10" name="content"></textarea><br/>
 					<input class="button" type="submit" value="发表帖子">
 					<input class="button" type="reset" value="重置内容">

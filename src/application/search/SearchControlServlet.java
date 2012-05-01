@@ -50,6 +50,9 @@ public class SearchControlServlet extends HttpServlet {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

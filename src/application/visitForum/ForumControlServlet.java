@@ -3,7 +3,7 @@ package application.visitForum;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import baseUse.*;
+import businessServices.forumSystem.ForumProxy;
 
 @WebServlet("/ForumControlServlet")
 public class ForumControlServlet extends HttpServlet {
@@ -142,7 +143,8 @@ public class ForumControlServlet extends HttpServlet {
 	void getTopicList(String topicListName,HttpServletRequest request, HttpServletResponse response) {
 		try {
 			HttpSession session = request.getSession();
-			TopicListDetail tld = Global.iForumSystem().getTopicList(topicListName);
+			IForumSystem fp = new ForumProxy( );
+			TopicListDetail tld = fp.getTopicList(topicListName);
 			String table = "";
 			for(int i =0;i < tld.getTopicNum();i++){
 				table += "<article class='group'><ul class='group'><li class='date'>" + tld.getTopicInfo().get(i).getFirstEditTime()
@@ -163,27 +165,39 @@ public class ForumControlServlet extends HttpServlet {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	void editReply(int replyId,int topicId,String content){
 		try {
-			Global.iForumSystem().editRelpy(replyId, topicId, content);
+			IForumSystem fp = new ForumProxy( );
+			fp.editRelpy(replyId, topicId, content);
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	void deleteTopic(int topicId,String listName){
 		try {
-			Global.iForumSystem().deleteTopic(topicId, listName);
+			IForumSystem fp = new ForumProxy( );
+			fp.deleteTopic(topicId, listName);
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	void getTopic(int topicId, HttpServletRequest request, HttpServletResponse response){
 		try {
-			TopicDetail td = Global.iForumSystem().getTopic(topicId);
+			IForumSystem fp = new ForumProxy( );
+			TopicDetail td = fp.getTopic(topicId);
 			String table="<th class='number'>²é¿´:"+td.getViewNum()+"| »Ø¸´:" + (td.getReplyNum()-1) + "</th><th class='title'>"+
 					td.getTopicName() + "</th>";
 			for(int i=0;i < td.getReply().size();i++){
@@ -204,12 +218,16 @@ public class ForumControlServlet extends HttpServlet {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	void getForumList(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			HttpSession session = request.getSession();
-			ForumList fl = Global.iForumSystem().getForumList();
+			IForumSystem fp = new ForumProxy( );
+			ForumList fl = fp.getForumList();
 			//request.setAttribute("disease", fl.getForumList().get(0).getTopicListName());
 			//request.setAttribute("tag0", fl.getForumList().get(0).getTagName().get(0));
 			session.setAttribute("fl", fl);
@@ -223,14 +241,18 @@ public class ForumControlServlet extends HttpServlet {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	void newTopic(String topicName, String userName, String content,
 			String topicListName,HttpServletRequest request, HttpServletResponse response){
 		try {
+			IForumSystem fp = new ForumProxy( );
 			HttpSession session = request.getSession();
-			Global.iForumSystem().newTopic(topicName, userName, content, topicListName);
-			TopicListDetail tld = Global.iForumSystem().getTopicList(topicListName);
+			fp.newTopic(topicName, userName, content, topicListName);
+			TopicListDetail tld = fp.getTopicList(topicListName);
 			session.setAttribute("tld",tld);
 			request.setAttribute("url", request.getParameter("url"));
 			request.getRequestDispatcher("/jsp/forum/workdone.jsp").forward(request, response);
@@ -243,13 +265,17 @@ public class ForumControlServlet extends HttpServlet {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	void newReply(String content, int topicId, String userName,HttpServletRequest request, HttpServletResponse response){
 		try {
+			IForumSystem fp = new ForumProxy( );
 			HttpSession session = request.getSession();
-			Global.iForumSystem().newReply(content, topicId, userName);
-			TopicDetail td = Global.iForumSystem().getTopic(topicId);
+			fp.newReply(content, topicId, userName);
+			TopicDetail td = fp.getTopic(topicId);
 			session.setAttribute("td", td);
 			request.setAttribute("url", request.getParameter("url"));
 			request.getRequestDispatcher("/jsp/forum/workdone.jsp").forward(request, response);
@@ -262,12 +288,19 @@ public class ForumControlServlet extends HttpServlet {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	void deleteReply(int replyId,int topicId){
 		try {
-			Global.iForumSystem().deleteReply(replyId, topicId);
+			IForumSystem fp = new ForumProxy( );
+			fp.deleteReply(replyId, topicId);
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

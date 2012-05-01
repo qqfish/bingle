@@ -28,15 +28,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						
 			<nav>
 				<ul>
-					<li><a href="search.jsp">²¡ÓÑ</a></li>
-					<li><a href="search.jsp">²¡Ö¢</a></li>
-					<li class="active"><a href="forum.jsp">½»Á÷Çø</a></li>
+					<li><a href="/bingle/SearchControlServlet?searchType=patients">²¡ÓÑ</a></li>
+				<li><a href="/bingle/SearchControlServlet?searchType=diseases">²¡Ö¢</a></li>
+					<li class="active"><a href="ForumControlServlet?func=ini">½»Á÷Çø</a></li>
 				</ul>
-				<form action="#" id="search" method="get">
-					<input type="search" id="search_word" placeholder="Search this site">
-					<input type="submit" value="²éÕÒ²¡ÓÑ" class="search-btn" name="subBtn">
-					<input type="submit" value="²éÕÒ²¡Ö¢" class="search-btn" name="subBtn">
-				</form>
+				<form action="/bingle/SearchControlServlet" id="search" method="get">
+				<input type="search" name="keyword" placeholder="Search this site">
+				<input type="submit" value="patients" class="search-btn" name="searchType">
+				<input type="submit" value="diseases" class="search-btn" name="searchType">
+			</form>
 			</nav>
 		</header>
 		<section id="container" class="body">
@@ -55,14 +55,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<tr>
 						<td class="list"><img src="/bingle/img/list.jpg"/></td>
 						<td class="textList"><a href="ForumControlServlet?func=topicList&topic=${fl.forumList[0].topicListName}">${fl.forumList[0].topicListName}</a>
-						<br/>äº¤æµæœ‰å…³${fl.forumList[0].topicListName}ç›¸å…³ä¿¡æ¯</td>
+						<br/>${fl.forumList[0].topicListName}</td>
 						<td class="tags">
 							<a href="#">${fl.forumList[0].tagName[0]}</a>,
-							<a href="#">æ ‡ç­¾</a>,
-							<a href="#">æ ‡ç­¾</a>
+							<a href="#">±êÇ©</a>,
+							<a href="#">±êÇ©</a>
 						</td>
 						<td class="list"><img src="/bingle/img/list.jpg"/></td>
-						<td class="textList"><a href="#">å¿ƒè„‘è¡€ç®¡ç–¾ç—…</a><br/>äº¤æµæœ‰å…³å¿ƒè„‘è¡€ç®¡ç–¾ç—…ç›¸å…³ä¿¡æ¯</td>
+						<td class="textList"><a href="#">¸ĞÃ°</a><br/>¸ĞÃ°ÁË</td>
 						<td class="tags">
 							<a href="#">±êÇ©</a>,
 							<a href="#">±êÇ©</a>,
@@ -71,14 +71,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</tr>
 					<tr>
 						<td class="list"><img src="/bingle/img/list.jpg"/></td>
-						<td class="textList"><a href="ForumControlServlet">å¤´ç—›</a><br/>äº¤æµæœ‰å…³å¤´ç—›ç›¸å…³ä¿¡æ¯</td>
+						<td class="textList"><a href="ForumControlServlet">¸ĞÃ°</a><br/>¸ĞÃ°ÁË</td>
 						<td class="tags">
 							<a href="#">±êÇ©</a>,
 							<a href="#">±êÇ©</a>,
 							<a href="#">±êÇ©</a>
 						</td>
 						<td class="list"><img src="/bingle/img/list.jpg"/></td>
-						<td class="textList"><a href="#">èƒƒç—…</a><br/>äº¤æµæœ‰å…³èƒƒç—…ç›¸å…³ä¿¡æ¯</td>
+						<td class="textList"><a href="#">¸ĞÃ°ÁË</a><br/>¸ĞÃ°ÁË</td>
 						<td class="tags">
 							<a href="#">±êÇ©</a>,
 							<a href="#">±êÇ©</a>,
