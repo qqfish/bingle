@@ -44,6 +44,18 @@ public class CacheMap {
 		}
 	}
 	
+	public synchronized boolean updateOne(String key, Object element) {
+		if (!cacheMap.containsKey(key)) {
+			return false;
+		} else {
+			CacheData cache = new CacheData(element);
+			cache.setHitNum((cacheMap.get(key).getHitNum() + 1));
+			cacheMap.remove(key);
+			cacheMap.put(key, cache);
+			return true;
+		}
+	}
+	
 	public synchronized void deleteCache(String key){
 		if(cacheMap.containsKey(key)){
 			cacheMap.remove(key);

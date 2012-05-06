@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import baseUse.ITagData;
-import baseUse.TagAlternate;
-import baseUse.TagData;
-import baseUse.TagDataList;
+import baseUse.wikiData.TagAlternate;
+import baseUse.wikiData.TagData;
+import baseUse.wikiData.TagDataList;
 
 public class TagDataProxy implements ITagData {
 

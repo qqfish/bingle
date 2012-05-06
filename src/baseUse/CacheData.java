@@ -25,7 +25,11 @@ public class CacheData {
 	
 	public void setElement(Object element){
 		this.element = element;
-		this.hitNum = 0;
+		this.hitNum = 1;
+	}
+	
+	public void setHitNum(int num){
+		hitNum = num;
 	}
 	
 	public void resetHitNum(){

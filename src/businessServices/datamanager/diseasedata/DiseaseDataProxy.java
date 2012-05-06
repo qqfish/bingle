@@ -8,15 +8,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import baseUse.DiseaseData;
-import baseUse.DiseaseDataList;
-import baseUse.DiseaseDataTag;
-import baseUse.DrugInfo;
 import baseUse.IDiseaseData;
 import baseUse.IUserData;
 import baseUse.searchData.DiseaseDetailInfo;
 import baseUse.searchData.DiseaseShortInfo;
 import baseUse.searchData.DiseaseShortInfoList;
+import baseUse.searchData.DrugInfo;
+import baseUse.wikiData.DiseaseData;
+import baseUse.wikiData.DiseaseDataList;
+import baseUse.wikiData.DiseaseDataTag;
 import businessServices.datamanager.userdata.UserDataProxy;
 
 public class DiseaseDataProxy implements IDiseaseData {

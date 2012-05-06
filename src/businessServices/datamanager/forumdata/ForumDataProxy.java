@@ -12,10 +12,10 @@ import java.util.List;
 
 import com.mysql.jdbc.Statement;
 
-import baseUse.ForumList;
 import baseUse.IForumData;
-import baseUse.TopicDetail;
-import baseUse.TopicListDetail;
+import baseUse.forumData.ForumList;
+import baseUse.forumData.TopicDetail;
+import baseUse.forumData.TopicListDetail;
 
 public class ForumDataProxy implements IForumData{
 	private String sql;

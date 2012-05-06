@@ -3,6 +3,8 @@ package baseUse;
 import java.sql.SQLException;
 import java.util.List;
 
+import baseUse.bTalkData.FriendList;
+import baseUse.bTalkData.MessageList;
 import baseUse.searchData.UserDetailInfo;
 import baseUse.searchData.UserShortInfoList;
 
@@ -47,14 +49,13 @@ public interface IUserData {
 	FriendList getFriendList(String username) throws SQLException;
 
 	/**
-	 * 用户一登陆时候
-	 * 
+	 * 鐢ㄦ埛涓�櫥闄嗘椂鍊�	 * 
 	 * 
 	 * @param username
 	 * @throws SQLException
 	 * @pdOid 5b8a0473-964d-444d-96ee-64e0c02091c9
 	 */
-	MessageSet getMessage(String username) throws SQLException;
+	MessageList getMessage(String username) throws SQLException;
 
 	/**
 	 * @param from

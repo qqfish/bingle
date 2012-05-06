@@ -1,6 +1,8 @@
 package businessServices.datamanager.userdata;
 
 import baseUse.*;
+import baseUse.bTalkData.FriendList;
+import baseUse.bTalkData.MessageList;
 import baseUse.searchData.UserDetailInfo;
 import baseUse.searchData.UserDiseaseInfo;
 import baseUse.searchData.UserShortInfo;
@@ -124,10 +126,10 @@ public class UserDataProxy implements IUserData {
 	 * @throws SQLException
 	 * @pdOid 064dcadf-4c86-4279-9480-5bfe16b59b82
 	 */
-	public MessageSet getMessage(String username) throws SQLException {
+	public MessageList getMessage(String username) throws SQLException {
 		ResultSet rs = con.createStatement().executeQuery(
 				"SELECT * FROM message WHERE userName = '" + username + "'");
-		MessageSet result = new MessageSet();
+		MessageList result = new MessageList();
 		while (rs.next()) {
 			result.addMessage(rs.getString("friendName"),
 					rs.getString("messageContent"), rs.getDate("messageTime"));

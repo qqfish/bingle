@@ -2,6 +2,10 @@ package baseUse;
 
 import java.sql.SQLException;
 
+import baseUse.forumData.ForumList;
+import baseUse.forumData.TopicDetail;
+import baseUse.forumData.TopicListDetail;
+
 public interface IForumData {
 	void deleteReply(int[] replyId) throws SQLException;
 	void deleteTopic(int[] topicId) throws SQLException;

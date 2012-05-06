@@ -2,6 +2,10 @@ package baseUse;
 
 import java.sql.SQLException;
 
+import baseUse.forumData.ForumList;
+import baseUse.forumData.TopicDetail;
+import baseUse.forumData.TopicListDetail;
+
 public interface IForumSystem {
 	TopicListDetail getTopicList(String topicListName) throws SQLException, ClassNotFoundException;
 	TopicDetail	getTopic(int topicId) throws SQLException, ClassNotFoundException;

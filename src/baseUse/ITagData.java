@@ -3,6 +3,9 @@ package baseUse;
 import java.sql.SQLException;
 import java.util.List;
 
+import baseUse.wikiData.TagData;
+import baseUse.wikiData.TagDataList;
+
 public interface ITagData {
 	/**
 	 * @param keyword

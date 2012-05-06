@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
 
-import baseUse.DrugInfo;
 
 public class DiseaseDetailInfo {
 	/** @pdOid 39aa7c7c-26ae-4eb3-ae57-32eec7e8bec8 */

@@ -13,9 +13,13 @@ public class CacheManager {
 	public CacheManager() {
 		maps = new TreeMap<String, CacheMap>();
 	}
+	
+	public boolean hasCacheMap(String mapName){
+		return maps.containsKey(mapName);
+	}
 
 	public boolean setMinNum(String mapName, int minNum){
-		if(!maps.containsKey(mapName)){
+		if(!hasCacheMap(mapName)){
 			return false;
 		}
 		else{
@@ -23,21 +27,39 @@ public class CacheManager {
 			return true;
 		}
 	}
+	
+	public boolean createUncleanMap(String mapName){
+		if(hasCacheMap(mapName)){
+			return false;
+		}
+		else {
+			maps.put(mapName, new CacheMap(0));
+			return true;
+		}
+	}
+	
 	public boolean insert(String mapName, String key, Object element) {
-		if (!maps.containsKey(mapName)) {
+		if (!hasCacheMap(mapName)) {
 			maps.put(mapName, new CacheMap());
 		}
 		return maps.get(mapName).insert(key, element);
 	}
+	
+	public boolean updateOne(String mapName, String key, Object element){
+		if (!hasCacheMap(mapName)) {
+			maps.put(mapName, new CacheMap());
+		}
+		return maps.get(mapName).updateOne(key, element);
+	}
 
 	public void deleteCache(String mapName, String key){
-		if(maps.containsKey(mapName)){
+		if(hasCacheMap(mapName)){
 			maps.get(mapName).deleteCache(key);
 		}
 	}
 	
 	public Object getCache(String mapName, String key) {
-		if (!maps.containsKey(mapName)) {
+		if (!hasCacheMap(mapName)) {
 			return null;
 		} else {
 			return maps.get(mapName).getCache(key);

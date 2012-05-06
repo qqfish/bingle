@@ -1,12 +1,12 @@
 package businessServices.forumSystem;
 
 import java.sql.SQLException;
-import baseUse.ForumList;
 import baseUse.Global;
 import baseUse.IForumData;
 import baseUse.IForumSystem;
-import baseUse.TopicDetail;
-import baseUse.TopicListDetail;
+import baseUse.forumData.ForumList;
+import baseUse.forumData.TopicDetail;
+import baseUse.forumData.TopicListDetail;
 import businessServices.datamanager.forumdata.ForumDataProxy;
 
 public class ForumProxy implements IForumSystem {

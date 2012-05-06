@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import baseUse.searchData.DiseaseDetailInfo;
 import baseUse.searchData.DiseaseShortInfoList;
+import baseUse.wikiData.DiseaseDataList;
 
 public interface IDiseaseData {
 	/**

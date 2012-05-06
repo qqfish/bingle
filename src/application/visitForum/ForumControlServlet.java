@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import baseUse.*;
+import baseUse.forumData.ForumList;
+import baseUse.forumData.TopicDetail;
+import baseUse.forumData.TopicListDetail;
 import businessServices.forumSystem.ForumProxy;
 
 @WebServlet("/ForumControlServlet")
