@@ -71,7 +71,7 @@ public class ForumControlServlet extends HttpServlet {
 		if(func.equals("ini"))
 			getForumList(request,response);
 		else if(func.equals("topicList")){
-				getTopicList(request.getParameter("topic"),request,response);
+			getTopicList(request.getParameter("topic"),request,response);
 		}
 		else if(func.equals("topic")){	
 			getTopic(Integer.parseInt(request.getParameter("id")),request,response);

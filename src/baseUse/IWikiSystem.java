@@ -3,6 +3,10 @@ package baseUse;
 import java.sql.SQLException;
 
 import baseUse.wikiData.*;
+import baseUse.wikiData.DiseaseData;
+import baseUse.wikiData.DiseaseDataList;
+import baseUse.wikiData.TagData;
+import baseUse.wikiData.TagDataList;
 
 public interface IWikiSystem {
 	/**
