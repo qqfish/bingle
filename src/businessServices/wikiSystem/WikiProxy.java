@@ -1,7 +1,6 @@
 package businessServices.wikiSystem;
 
 import java.sql.SQLException;
-
 import baseUse.Global;
 import baseUse.IDiseaseData;
 import baseUse.ITagData;
@@ -19,7 +18,7 @@ public class WikiProxy implements IWikiSystem {
 	private String diseaseCache;
 	private String wikiCache;
 
-	WikiProxy() {
+	public WikiProxy() {
 		tagCache = "editTag";
 		diseaseCache = "editDisease";
 		wikiCache = "wiki";
@@ -80,5 +79,7 @@ public class WikiProxy implements IWikiSystem {
 				tagCache);
 		return result.getOneTag(tagname);
 	}
+	
+
 
 }
