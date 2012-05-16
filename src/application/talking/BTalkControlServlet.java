@@ -1,4 +1,4 @@
-package application.login;
+package application.talking;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,23 +11,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import baseUse.Global;
-import baseUse.IUserData;
-import baseUse.searchData.UserDetailInfo;
-import businessServices.datamanager.userdata.UserDataProxy;
+import baseUse.IBTalkSystem;
+import baseUse.bTalkData.FriendList;
+import baseUse.bTalkData.MessageList;
+import businessServices.bTalkSystem.BTalkProxy;
 
-@WebServlet("/LoginControlServlet")
-public class LoginControlServlet extends HttpServlet {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+@WebServlet("/BTalkControlServlet")
+public class BTalkControlServlet extends HttpServlet {
 
 	/**
 	 * Constructor of the object.
 	 */
-	public LoginControlServlet() {
+	public BTalkControlServlet() {
 		super();
 	}
 
@@ -66,43 +61,13 @@ public class LoginControlServlet extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String userName = request.getParameter("username");
-		String password = request.getParameter("password");
-		UserDetailInfo udi = null;
-		HttpSession session = null;
-		try {
-			IUserData ud = new UserDataProxy();
-			if(ud.confirmUser(userName, password)){
-				//udi = ud.getDetailUserInfo(userName);
-				session = request.getSession();
-				//groupName = udi.getGroupname();
-				//age = udi.getAge();
-				//address = udi.getAddress();
-				//email = udi.getEmail();
-				//gender = udi.getGender()?"Å®":"ÄÐ";
-				//mind = udi.getMindStatus();
-				//body = udi.getBodyStatus();
-				//disease = udi.getUserDiseaseInfo().get(udi.getUserDiseaseInfo().size()-1).getDiseaseName();
-				
-				request.setAttribute("username", userName);
-				//request.setAttribute("groupname", groupName);
-				//request.setAttribute("age", age);
-				//request.setAttribute("address", address);
-				//request.setAttribute("email", email);
-				//request.setAttribute("gender", gender);
-				//request.setAttribute("disease", disease);
-				//request.setAttribute("mind", mind);
-				//request.setAttribute("body", body);
-				//session.setAttribute("udi", udi);
-				session.setAttribute("login", 1);
-				request.getRequestDispatcher("/UpdateInfoControlServlet").forward(request, response);
-			}
-			else
-				response.sendRedirect("error404.jsp");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("username");
+		requestFriendList(username);
+		sendMessage(username,request.getParameter("name"),request.getParameter("content"));
+		getMessage(username);
+		deleteFriend(username,request.getParameter("name"));
+		addFriend(username,request.getParameter("name"));
 	}
 
 	/**
@@ -130,4 +95,48 @@ public class LoginControlServlet extends HttpServlet {
 		// Put your code here
 	}
 
+	public void requestFriendList(String username){
+		IBTalkSystem ibs = new BTalkProxy();
+		try {
+			FriendList fl = ibs.getFriendList(username);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void sendMessage(String from, String to,String content){
+		IBTalkSystem ibs = new BTalkProxy();
+		try {
+			ibs.sendMessage(from, to, content);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void getMessage(String username){
+		IBTalkSystem ibs = new BTalkProxy();
+		MessageList ml = ibs.getMessage(username);
+	}
+	
+	public void deleteFriend(String username,String friendname){
+		IBTalkSystem ibs = new BTalkProxy();
+		try {
+			ibs.deleteFriend(username, friendname);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void addFriend(String username,String friendname){
+		IBTalkSystem ibs = new BTalkProxy();
+		try {
+			ibs.addFriend(username, friendname);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

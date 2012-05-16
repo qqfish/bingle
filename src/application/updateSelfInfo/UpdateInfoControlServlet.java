@@ -1,4 +1,4 @@
-package application.login;
+package application.updateSelfInfo;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,13 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import baseUse.Global;
 import baseUse.IUserData;
 import baseUse.searchData.UserDetailInfo;
 import businessServices.datamanager.userdata.UserDataProxy;
 
-@WebServlet("/LoginControlServlet")
-public class LoginControlServlet extends HttpServlet {
+@WebServlet("/UpdateInfoControlServlet")
+public class UpdateInfoControlServlet extends HttpServlet {
 
 	/**
 	 * 
@@ -27,7 +26,7 @@ public class LoginControlServlet extends HttpServlet {
 	/**
 	 * Constructor of the object.
 	 */
-	public LoginControlServlet() {
+	public UpdateInfoControlServlet() {
 		super();
 	}
 
@@ -66,39 +65,14 @@ public class LoginControlServlet extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String userName = request.getParameter("username");
-		String password = request.getParameter("password");
-		UserDetailInfo udi = null;
-		HttpSession session = null;
+		HttpSession  session = request.getSession();
+		String username = request.getParameter("username");
+		IUserData ud;
 		try {
-			IUserData ud = new UserDataProxy();
-			if(ud.confirmUser(userName, password)){
-				//udi = ud.getDetailUserInfo(userName);
-				session = request.getSession();
-				//groupName = udi.getGroupname();
-				//age = udi.getAge();
-				//address = udi.getAddress();
-				//email = udi.getEmail();
-				//gender = udi.getGender()?"Å®":"ÄÐ";
-				//mind = udi.getMindStatus();
-				//body = udi.getBodyStatus();
-				//disease = udi.getUserDiseaseInfo().get(udi.getUserDiseaseInfo().size()-1).getDiseaseName();
-				
-				request.setAttribute("username", userName);
-				//request.setAttribute("groupname", groupName);
-				//request.setAttribute("age", age);
-				//request.setAttribute("address", address);
-				//request.setAttribute("email", email);
-				//request.setAttribute("gender", gender);
-				//request.setAttribute("disease", disease);
-				//request.setAttribute("mind", mind);
-				//request.setAttribute("body", body);
-				//session.setAttribute("udi", udi);
-				session.setAttribute("login", 1);
-				request.getRequestDispatcher("/UpdateInfoControlServlet").forward(request, response);
-			}
-			else
-				response.sendRedirect("error404.jsp");
+			ud = new UserDataProxy();
+			UserDetailInfo udi = ud.getDetailUserInfo(username);
+			session.setAttribute("udi", udi);
+			request.getRequestDispatcher("/jsp/info/selfInfo.jsp").forward(request, response);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

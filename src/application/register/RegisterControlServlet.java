@@ -76,7 +76,7 @@ public class RegisterControlServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		request.getRequestDispatcher("/jsp/info/selfInfo.jsp").forward(request, response);
+		request.getRequestDispatcher("/UpdateInfoControlServlet").forward(request, response);
 	}
 
 	/**

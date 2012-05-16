@@ -1,4 +1,4 @@
-package application.login;
+package application.updateDiseaseAndTag;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,15 +9,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import baseUse.Global;
-import baseUse.IUserData;
-import baseUse.searchData.UserDetailInfo;
-import businessServices.datamanager.userdata.UserDataProxy;
+import baseUse.IWikiSystem;
+import baseUse.wikiData.DiseaseDataList;
+import baseUse.wikiData.TagData;
+import baseUse.wikiData.TagDataList;
+import businessServices.wikiSystem.WikiProxy;
 
-@WebServlet("/LoginControlServlet")
-public class LoginControlServlet extends HttpServlet {
+@WebServlet("/UpdateWikiControlServlet")
+public class UpdateWikiControlServlet extends HttpServlet {
 
 	/**
 	 * 
@@ -27,7 +31,7 @@ public class LoginControlServlet extends HttpServlet {
 	/**
 	 * Constructor of the object.
 	 */
-	public LoginControlServlet() {
+	public UpdateWikiControlServlet() {
 		super();
 	}
 
@@ -51,7 +55,8 @@ public class LoginControlServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doPost(request,response);
+		System.out.println(request.getParameter("tagname"));
+		getTag(request.getParameter("tagname"),request,response);
 	}
 
 	/**
@@ -66,43 +71,9 @@ public class LoginControlServlet extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String userName = request.getParameter("username");
-		String password = request.getParameter("password");
-		UserDetailInfo udi = null;
-		HttpSession session = null;
-		try {
-			IUserData ud = new UserDataProxy();
-			if(ud.confirmUser(userName, password)){
-				//udi = ud.getDetailUserInfo(userName);
-				session = request.getSession();
-				//groupName = udi.getGroupname();
-				//age = udi.getAge();
-				//address = udi.getAddress();
-				//email = udi.getEmail();
-				//gender = udi.getGender()?"Å®":"ÄÐ";
-				//mind = udi.getMindStatus();
-				//body = udi.getBodyStatus();
-				//disease = udi.getUserDiseaseInfo().get(udi.getUserDiseaseInfo().size()-1).getDiseaseName();
-				
-				request.setAttribute("username", userName);
-				//request.setAttribute("groupname", groupName);
-				//request.setAttribute("age", age);
-				//request.setAttribute("address", address);
-				//request.setAttribute("email", email);
-				//request.setAttribute("gender", gender);
-				//request.setAttribute("disease", disease);
-				//request.setAttribute("mind", mind);
-				//request.setAttribute("body", body);
-				//session.setAttribute("udi", udi);
-				session.setAttribute("login", 1);
-				request.getRequestDispatcher("/UpdateInfoControlServlet").forward(request, response);
-			}
-			else
-				response.sendRedirect("error404.jsp");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		submitEditDisease();
+		getTag(request.getParameter("tagname"),request,response);
+		submitEditTag();
 	}
 
 	/**
@@ -130,4 +101,47 @@ public class LoginControlServlet extends HttpServlet {
 		// Put your code here
 	}
 
+	public void submitEditDisease(){
+		IWikiSystem iws = new WikiProxy();
+		DiseaseDataList ddl = null;
+		try {
+			iws.submitDisease(ddl);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void getTag(String tagname,HttpServletRequest request, HttpServletResponse response){
+		Global.cache().autoClean();
+		Global.cache().autoClean();
+		IWikiSystem iws = new WikiProxy();
+		TagData td = iws.getTagData(tagname);		
+		try {
+			PrintWriter out = response.getWriter();
+			JSONObject json = new JSONObject();
+			JSONArray jsonArray = new JSONArray();
+			json.put("intro", td.getTagIntro());
+			json.put("type", td.getType());
+			for(int i=0;i<td.getAlterName().size();i++){
+				jsonArray.add(td.getAlterName().get(i));
+			}
+			json.put("altername", jsonArray);
+			String output = json.toString();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void submitEditTag(){
+		IWikiSystem iws = new WikiProxy();
+		TagDataList td = null;
+		try {
+			iws.submitTag(td);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
