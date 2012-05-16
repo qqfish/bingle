@@ -26,6 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--[if lt IE 7]>
 	 <link rel="stylesheet" type="text/css" media="all" href="css/ie6.css"/><![endif]-->
 	 
+	 <script src="script/check.js" charset="utf-8"></script>
   </head>
   
   <body id="index" class="home">
@@ -52,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<legend>登陆：</legend>
 					<ol>
 						<li>
-							<label>用户名：<input type="text" name="userName"/></label>
+							<label>用户名：<input type="text" name="username"/></label>
 						</li>
 						<li>
 							<label>密码：<input type="password" name="password"/></label>
@@ -68,19 +69,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<section id="main">
 			<img src="img/logo.jpg"/>
 			<section id="register" class="body">
-				<form>
+				<form action="RegisterControlServlet" method="post" onsubmit="return check();">
 					<ol>
 						<li>
-							<label>用户名称:<input type="text" class="inBox" placeholder="consist of 6-16 characters" pattern="^[a-zA-Z][a-zA-Z0-9_]{5,15}$"/></label>
+							<label>用户名称:<input type="text" id="username" name="username" class="inBox" placeholder="begin with a letter and of 6-16 characters " pattern="^[a-zA-Z][a-zA-Z0-9_]{5,15}$" onblur="checkUsername();"/>
+							<span id="usernameMsg"></span></label>
 						</li>
 						<li>
-							<label>输入密码:<input type="password" class="inBox" placeholder="at least 6 character"/></label>
+							<label>输入密码:<input type="password" id="password1" name="password" class="inBox" placeholder="at least 6 character" onblur="validPassword();"/>
+							<span id="passwordMsg1"></span></label>
 						</li>
 						<li>
-							<label>确认密码:<input type="password" class="inBox" placeholder="type your password"/></label>
+							<label>确认密码:<input type="password" id="password2" class="inBox" placeholder="type your password" onblur="checkPassword();"/>
+							<span id="passwordMsg2"></span></label>
 						</li>
 						<li>
-							<label>邮件地址:<input type="email" class="inBox" placeholder="user@example.com"/></label>
+							<label>邮件地址:<input type="email" id="email" name="email" class="inBox" placeholder="user@example.com" onblur="checkEmail();"/>
+							<span id="emailMsg"></span></label>
 						</li>
 						<hr><br>
 						<li>
@@ -90,11 +95,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</label>
 						</li>
 						<li>
-							<label>年龄:<input type="number" class="inBox" min="0" max="150"></label>
+							<label>年龄:<input type="number" name="age" class="inBox" min="0" max="150"></label>
 						</li>
 						<br>
 						<li>
-							<label><input type="submit" class="regButton" value="立即注册" /></label>
+							<label><input type="submit" class="regButton" value="立即注册"/></label>
 						</li>
 						</ol>
 				</form>
@@ -114,6 +119,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<footer id="about" class="body">
 		<p>blablabla</p>
 	</footer>
-    This is my JSP page. <br>
   </body>
 </html>

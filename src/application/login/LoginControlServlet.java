@@ -66,14 +66,14 @@ public class LoginControlServlet extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String userName = request.getParameter("userName");
+		String userName = request.getParameter("username");
 		String password = request.getParameter("password");
 		UserDetailInfo udi = null;
 		HttpSession session = null;
 		try {
 			IUserData ud = new UserDataProxy();
 			if(ud.confirmUser(userName, password)){
-				udi = ud.getDetailUserInfo(userName);
+				//udi = ud.getDetailUserInfo(userName);
 				session = request.getSession();
 				//groupName = udi.getGroupname();
 				//age = udi.getAge();
@@ -84,7 +84,7 @@ public class LoginControlServlet extends HttpServlet {
 				//body = udi.getBodyStatus();
 				//disease = udi.getUserDiseaseInfo().get(udi.getUserDiseaseInfo().size()-1).getDiseaseName();
 				
-				//request.setAttribute("username", userName);
+				request.setAttribute("username", userName);
 				//request.setAttribute("groupname", groupName);
 				//request.setAttribute("age", age);
 				//request.setAttribute("address", address);
@@ -93,8 +93,9 @@ public class LoginControlServlet extends HttpServlet {
 				//request.setAttribute("disease", disease);
 				//request.setAttribute("mind", mind);
 				//request.setAttribute("body", body);
-				session.setAttribute("udi", udi);
-				request.getRequestDispatcher("/jsp/info/selfInfo.jsp").forward(request, response);
+				//session.setAttribute("udi", udi);
+				session.setAttribute("login", 1);
+				request.getRequestDispatcher("/UpdateInfoControlServlet").forward(request, response);
 			}
 			else
 				response.sendRedirect("error404.jsp");

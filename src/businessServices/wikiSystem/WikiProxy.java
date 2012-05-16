@@ -19,7 +19,7 @@ public class WikiProxy implements IWikiSystem {
 	private String diseaseCache;
 	private String wikiCache;
 
-	WikiProxy() {
+	public WikiProxy() {
 		tagCache = "editTag";
 		diseaseCache = "editDisease";
 		wikiCache = "wiki";

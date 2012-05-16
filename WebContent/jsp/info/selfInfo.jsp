@@ -11,6 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	<link rel="stylesheet" href="css/selfInfo.css" type="text/css" />
 	<script type="text/javascript" src="script/inNav.js"></script>
+	
 	<!--[if IE]>
 	 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<!--[if lte IE 7]>
@@ -86,9 +87,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</tr>
 			</table>
 		</section>
-		
+
 		<footer id="about" class="body">
 			<p>blablabla</p>
+
 		</footer>
 		
 	</body>
