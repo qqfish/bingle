@@ -1,6 +1,6 @@
 package baseUse.wikiData;
 
-public class TagAlternate {
+public class TagAltername {
 	private String alternateName;
 
 	/**
@@ -8,7 +8,7 @@ public class TagAlternate {
 	 */
 	private char status;
 
-	public TagAlternate(String a, char s) {
+	public TagAltername(String a, char s) {
 		alternateName = a;
 		status = s;
 	}

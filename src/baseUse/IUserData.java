@@ -49,7 +49,7 @@ public interface IUserData {
 	FriendList getFriendList(String username) throws SQLException;
 
 	/**
-	 * 鐢ㄦ埛涓�櫥闄嗘椂鍊�	 * 
+	 * 閻劍鍩涙稉锟芥闂勫棙妞傞崐锟� * 
 	 * 
 	 * @param username
 	 * @throws SQLException
@@ -118,4 +118,9 @@ public interface IUserData {
 	
 	void deleteUserDiseaseDrug(String username, String diseasename, List<String> drugname) throws SQLException;
 
+	void updateAllUserStatus() throws SQLException;
+	
+	void updateBodyStatus(String username, int sta) throws SQLException;
+	
+	void updateMindStatus(String username, int sta) throws SQLException;
 }

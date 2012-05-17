@@ -4,6 +4,7 @@ encoding//WebContent/jsp/search/diseaseDetail.jsp=UTF-8
 encoding//WebContent/jsp/search/searchDisease.jsp=UTF-8
 encoding//WebContent/jsp/search/searchUser.jsp=UTF-8
 encoding//WebContent/jsp/search/userDetail.jsp=UTF-8
+<<<<<<< HEAD
 =======
 eclipse.preferences.version=1
 encoding//WebContent/jsp/search/diseaseDetail.jsp=UTF-8
@@ -12,3 +13,6 @@ encoding//WebContent/jsp/search/searchUser.jsp=UTF-8
 encoding//WebContent/jsp/search/userDetail.jsp=UTF-8
 encoding//src/baseUse/IUserData.java=UTF-8
 >>>>>>> zy
+=======
+encoding//src/baseUse/IUserData.java=UTF-8
+>>>>>>> 9994b18258518859d097061670f3c7899faf46cf

@@ -20,7 +20,7 @@ public class UserDataProxy implements IUserData {
 	public UserDataProxy() throws SQLException {
 		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 		con = DriverManager
-				.getConnection("jdbc:mysql://localhost/bingleme?user=root&password=zy102428");
+				.getConnection("jdbc:mysql://localhost/bingle?user=root&password=123");
 
 	}
 
@@ -416,5 +416,30 @@ public class UserDataProxy implements IUserData {
 		con.createStatement().executeUpdate(sql);
 
 	}
-	
+
+	@Override
+	public void updateAllUserStatus() throws SQLException {
+		String sql = "UPDATE user SET mindStatus=10*mindStatus, bodyStatus=10*bodyStatus";
+		con.createStatement().executeUpdate(sql);		
+	}
+
+	@Override
+	public void updateBodyStatus(String username, int sta) throws SQLException {
+		if(sta > 0 && sta < 6){
+			String sql = "UPDATE user SET bodyStatus=bodyStatus+";
+			sql = sql + String.valueOf(sta);
+			sql = sql + " WHERE userName='" + username + "'";
+			con.createStatement().executeUpdate(sql);
+		}
+	}
+
+	@Override
+	public void updateMindStatus(String username, int sta) throws SQLException {
+		if(sta > 0 && sta < 6){
+			String sql = "UPDATE user SET mindStatus=mindStatus+";
+			sql = sql + String.valueOf(sta);
+			sql = sql + " WHERE userName='" + username + "'";
+			con.createStatement().executeUpdate(sql);
+		}		
+	}
 }

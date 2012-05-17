@@ -44,7 +44,7 @@ public class BTalkProxy implements IBTalkSystem{
 
 	@Override
 	public void logoutTalk(String username) {
-		// leave blank now save the message for a while
+		// leave blank now to save the message for a while
 		
 	}
 
