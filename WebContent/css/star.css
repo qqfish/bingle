@@ -1,0 +1,8 @@
+@CHARSET "UTF-8";
+.dengji{ position:relative; padding:0; margin:0;}
+.xing{ overflow:hidden; padding:0; margin:0; width:140px; display:inline-block;background:url(/bingle/img/two_stars.gif") repeat-x 0 -32px; float:left;}
+.xing ul{ list-style:none;padding:0; margin:0;}
+.xing ul li{height:32px; width:28px; float:left; line-height:32px; overflow:hidden; cursor:pointer; z-index:1000; display:inline-block; position:relative; text-indent:-9999px;} 
+.xing_chen{ background:url(/bingle/img/two_stars.gif) repeat-x 0 0; height:32px; position:absolute; top:0; left:0; width:0;  cursor:pointer;}
+.xing_show{ float:left; line-height:32px; padding-left:20px;}
+.xing_show span{ color:#f50; font-size:14px; font-weight:700; padding:0 10px;}
