@@ -164,7 +164,7 @@ public class SearchControlServlet extends HttpServlet {
 		
 		//tag
 		String tag = "";
-		for(int i = 0; i < result.getTags().size(); i++){
+		for(int i = 0;i < result.getTags().size(); i++){
 			tag = tag + "<div class='tag'>" + result.getTags().get(i) + "</div>";
 		}
 		request.setAttribute("tag", tag);
