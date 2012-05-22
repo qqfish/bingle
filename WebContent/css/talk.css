@@ -19,7 +19,7 @@ a.button {
 	text-align: center;
 	text-decoration: none;
 	text-shadow: 0 1px 1px rgba(255, 255, 255, 0.37);
-	background: url('/bingle/img/bg_button_span.gif') no-repeat scroll top right;;
+	background: url('/bingle/img/bg_button_span.gif') no-repeat scroll top right;
 	border: 1px solid #2A3F56;
 	-moz-border-radius: 6px;
 	-webkit-border-radius: 6px;

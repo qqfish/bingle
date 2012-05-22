@@ -15,9 +15,11 @@ import net.sf.json.JSONObject;
 
 import baseUse.Global;
 import baseUse.IWikiSystem;
+import baseUse.wikiData.DiseaseData;
 import baseUse.wikiData.DiseaseDataList;
 import baseUse.wikiData.TagData;
 import baseUse.wikiData.TagDataList;
+import businessServices.datamanager.tagdata.TagDataProxy;
 import businessServices.wikiSystem.WikiProxy;
 
 @WebServlet("/UpdateWikiControlServlet")
@@ -55,7 +57,6 @@ public class UpdateWikiControlServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println(request.getParameter("tagname"));
 		getTag(request.getParameter("tagname"),request,response);
 	}
 
@@ -71,9 +72,15 @@ public class UpdateWikiControlServlet extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		submitEditDisease();
-		getTag(request.getParameter("tagname"),request,response);
-		submitEditTag();
+		String func = request.getParameter("func");
+		if(func.equals("tag")){
+			sendEditTag(request.getParameter("tagname"), request.getParameter("content"));
+		}
+		else if(func.equals("disease")){
+			sendEditDisease();
+		}
+		else
+			response.sendRedirect("error404.jsp");
 	}
 
 	/**
@@ -101,44 +108,47 @@ public class UpdateWikiControlServlet extends HttpServlet {
 		// Put your code here
 	}
 
-	public void submitEditDisease(){
+	public void sendEditDisease(){
 		IWikiSystem iws = new WikiProxy();
-		DiseaseDataList ddl = null;
-		try {
-			iws.submitDisease(ddl);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		DiseaseData ddl = null;
+		iws.sendEditDisease(ddl);
 	}
 	
 	public void getTag(String tagname,HttpServletRequest request, HttpServletResponse response){
-		Global.cache().autoClean();
-		Global.cache().autoClean();
-		IWikiSystem iws = new WikiProxy();
-		TagData td = iws.getTagData(tagname);		
 		try {
 			PrintWriter out = response.getWriter();
+			TagDataProxy tdp = new TagDataProxy();		
+			TagData td = tdp.getTagData(tagname,'n');
 			JSONObject json = new JSONObject();
 			JSONArray jsonArray = new JSONArray();
+			json.put("tagname", tagname);
 			json.put("intro", td.getTagIntro());
 			json.put("type", td.getType());
 			for(int i=0;i<td.getAlterName().size();i++){
-				jsonArray.add(td.getAlterName().get(i));
+				jsonArray.add(td.getAlterName().get(i).getAlternateName());
 			}
-			json.put("altername", jsonArray);
-			String output = json.toString();
-		} catch (IOException e) {
+			json.element("altername", jsonArray);
+			out.print(json.toString());
+		} catch (SQLException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	public void submitEditTag(){
+	public void sendEditTag(String tagname,String content){
 		IWikiSystem iws = new WikiProxy();
-		TagDataList td = null;
+		TagData td;
 		try {
-			iws.submitTag(td);
+			System.out.println(tagname);
+			TagDataProxy tdp = new TagDataProxy();
+			//td = tdp.getTagData(tagname, 'n');
+			td = iws.getTagData(tagname);
+			if(td.getTagIntro()!=content){
+				td.setTagIntro(content);
+				td.setStatus('c');
+			}
+			System.out.println(td.getTagIntro());
+			iws.sendEditTag(td);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

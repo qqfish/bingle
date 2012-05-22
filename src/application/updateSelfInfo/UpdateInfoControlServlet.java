@@ -65,17 +65,24 @@ public class UpdateInfoControlServlet extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession  session = request.getSession();
-		String username = request.getParameter("username");
-		IUserData ud;
-		try {
-			ud = new UserDataProxy();
-			UserDetailInfo udi = ud.getDetailUserInfo(username);
-			session.setAttribute("udi", udi);
+		String func = request.getParameter("func");
+		if(func.equals("login")){
+			String username = request.getParameter("username");
+			HttpSession  session = request.getSession();
+			IUserData ud;
+			try {
+				ud = new UserDataProxy();
+				UserDetailInfo udi = ud.getDetailUserInfo(username);
+				session.setAttribute("udi", udi);
+				request.getRequestDispatcher("/jsp/info/selfInfo.jsp").forward(request, response);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else if(func.equals("updateDisease")){
+			HttpSession  session = request.getSession();
 			request.getRequestDispatcher("/jsp/info/selfInfo.jsp").forward(request, response);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 

@@ -1,8 +1,3 @@
-function $(element)
-{
-	return document.getElementById(element);
-}
-
 var hidPosX;
 var showPosX;
 var curPosX;
@@ -18,7 +13,7 @@ function init()
 	speed = 5;
 	dps = 50;
 	nowMouse = "off";
-	$("infoNav").style.left = curPosX+"px";
+	document.getElementById("infoNav").style.left = curPosX+"px";
 }
 
 function showNav()
@@ -28,7 +23,7 @@ function showNav()
 		curPosX += speed;
 		if(curPosX > showPosX)
 			curPosX = showPosX;
-		$("infoNav").style.left = curPosX+"px";
+		document.getElementById("infoNav").style.left = curPosX+"px";
 		setTimeout('move()',1000/dps);
 	}
 }
@@ -40,7 +35,7 @@ function hidNav()
 		curPosX -= speed;
 		if(curPosX < hidPosX)
 			curPosX = hidPosX;
-		$("infoNav").style.left = curPosX+"px";
+		document.getElementById("infoNav").style.left = curPosX+"px";
 		setTimeout('move()',1000/dps);
 	}
 }

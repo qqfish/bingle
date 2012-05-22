@@ -27,8 +27,15 @@ function sendRequest(url) {
 function processResponse() {
 	if (XMLHttpReq.readyState == 4) {
 		if (XMLHttpReq.status == 200) {
-			var json = eval(xmlhttp.responseText);
-			$(content).innerinnerHTML = json[0] + json[1] + json[2];
+			var json = eval("("+XMLHttpReq.responseText+")");
+			document.getElementById("title").innerHTML = json.tagname;
+			document.getElementById("text").innerHTML = json.intro;
+			for(var i=0;i<json.altername.length;i++){
+				var li= document.createElement("li");
+				li.className = "item";
+				li.innerHTML = "<a href='#'>"+json.altername[i]+"</a>";
+				document.getElementById("tag").appendChild(li);
+			}
 		} else {
 			window.alert("页面有错误");
 		}
@@ -37,4 +44,10 @@ function processResponse() {
 
 function getTagname(tagname){
 	sendRequest("UpdateWikiControlServlet?tagname="+tagname);
+}
+
+function updateTag(){
+	document.getElementById("tagname").value = document.getElementById("title").innerHTML;
+	document.getElementById("content").value = document.getElementById("text").innerHTML;
+	document.getElementById("form").submit();
 }

@@ -28,8 +28,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<nav>
 				<ul>
 					<li><a href="/bingle/SearchControlServlet?searchType=patients">病友</a></li>
-				<li><a href="/bingle/SearchControlServlet?searchType=diseases">病症</a></li>
+					<li><a href="/bingle/SearchControlServlet?searchType=diseases">病症</a></li>
 					<li class="active"><a href="ForumControlServlet?func=ini">交流区</a></li>
+					<% if(request.getSession().getAttribute("login").equals("1"))
+						out.println("<li><a href='jsp/info/selfInfo.jsp'>控制面板</a></li>");
+					%>
 				</ul>
 				<form action="/bingle/SearchControlServlet" id="search" method="get">
 				<input type="search" name="keyword" placeholder="Search this site">
@@ -52,7 +55,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<span class="current">1</span>
 					<span class="disabled">=></span>
 				</nav>
-				<input type="button" value="发表新帖" onclick="window.location.href='ForumControlServlet?func=newtopicpage&user=${udi.username}&list=${tld.topicListName}'"/>
+				<input type="button" id="post" value="发表新帖" onclick="window.location.href='ForumControlServlet?func=newtopicpage&user=${udi.username}&list=${tld.topicListName}'"/>
+				<%if(request.getSession().getAttribute("login").equals("0"))
+					out.println("<script>document.getElementById('post').disabled='disabled';</script>");
+				%>
+				
 			</header>
 			<div class="forumResult">
 				${table}

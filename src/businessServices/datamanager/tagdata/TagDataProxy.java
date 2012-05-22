@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import baseUse.ITagData;
-import baseUse.wikiData.TagAltername;
+import baseUse.wikiData.TagAlternate;
 import baseUse.wikiData.TagData;
 import baseUse.wikiData.TagDataList;
 
@@ -20,7 +20,7 @@ public class TagDataProxy implements ITagData {
 	public TagDataProxy() throws SQLException {
 		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 		con = DriverManager
-				.getConnection("jdbc:mysql://localhost/bingle?user=root&password=123");
+				.getConnection("jdbc:mysql://localhost/bingleme?user=root&password=zy102428");
 	}
 
 	
@@ -50,7 +50,7 @@ public class TagDataProxy implements ITagData {
 						+ current.getType()
 						+ "')");
 				for (int j = 0; j < current.getAlterName().size(); j++) {
-					TagAltername currentAl = current.getAlterName().get(j);
+					TagAlternate currentAl = current.getAlterName().get(j);
 					st.executeUpdate("INSERT INTO tagAlternate (tagName, tagAlternateName, tagType) VALUES ('"
 							+ current.getTagname()
 							+ "' , '"
@@ -72,7 +72,7 @@ public class TagDataProxy implements ITagData {
 						+ current.getTagname() + "' and tagType = '"
 						+ current.getType() + "'");
 				for (int j = 0; j < current.getAlterName().size(); j++) {
-					TagAltername currentAl = current.getAlterName().get(j);
+					TagAlternate currentAl = current.getAlterName().get(j);
 					if (currentAl.getStatus() == 'n') {
 						st.executeUpdate("INSERT INTO tagAlternate (tagName, tagAlternateName, tagType) VALUES ('"
 								+ current.getTagname()
@@ -98,9 +98,9 @@ public class TagDataProxy implements ITagData {
 		ResultSet rs1 = st
 				.executeQuery("SELECT tagAlternateName FROM tagAlternate WHERE tagName = '"
 						+ tagname + "' and tagType = '" + typename + "'");
-		List<TagAltername> ta = new ArrayList<TagAltername>();
+		List<TagAlternate> ta = new ArrayList<TagAlternate>();
 		while (rs1.next()) {
-			ta.add(new TagAltername(rs1.getString("tagAlternateName"), 'u'));
+			ta.add(new TagAlternate(rs1.getString("tagAlternateName"), 'u'));
 		}
 		ResultSet rs2 = st
 				.executeQuery("SELECT tagIntro FROM tag WHERE tagName = '"

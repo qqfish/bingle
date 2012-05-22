@@ -23,7 +23,7 @@ public class ForumDataProxy implements IForumData{
 	public ForumDataProxy() throws SQLException{
 		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 		con = DriverManager
-				.getConnection("jdbc:mysql://localhost/bingle?user=root&password=123");
+				.getConnection("jdbc:mysql://localhost/bingleme?user=root&password=zy102428");
 	}
 	
 	public void deleteReply(int[] replyId) throws SQLException{
@@ -183,4 +183,5 @@ public class ForumDataProxy implements IForumData{
 		ps.executeUpdate();
 		ps.close();
 	}	
+
 }

@@ -1,6 +1,5 @@
 package baseUse.wikiData;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TagDataList {
@@ -11,10 +10,6 @@ public class TagDataList {
 	 *             type=Composition
 	 */
 	public List<TagData> tag;
-	
-	public TagDataList(){
-		tag = new ArrayList<TagData>();
-	}
 	
 	
 	public TagDataList(List<TagData> t){

@@ -21,15 +21,14 @@
             xhr.onreadystatechange = function() {  
                 if(xhr.readyState === 4) {  
                     if(xhr.status === 200) {
-                    	var json = eval("("+xhr.responseText+")")
+                    	alert(xhr.respnseText);
+                    	var json = eval("("+xhr.responseText+")");
                         document.getElementById('data')  
                                   .innerHTML = json.messages;
-                        alert(xhr.respnseText);
                     }  
                 }  
             };  
-            xhr.open('GET', 'BTalkControlServlet?timestamp='  
-                                  + new Date().getTime());  
+            xhr.open("GET", "BTalkControlServlet?get=message",true);  
             xhr.send(null);
         }
         function getFriendList() {  
@@ -46,7 +45,7 @@
                         document.getElementById("data")  
                                   .innerHTML = xhr.responseText;
                         alert(xhr.responseText);
-                    }  
+                    }
                 }  
             };  
             xhr.open("GET", "BTalkControlServlet?get=friend",true);  

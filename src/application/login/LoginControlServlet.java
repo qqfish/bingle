@@ -84,7 +84,7 @@ public class LoginControlServlet extends HttpServlet {
 				//body = udi.getBodyStatus();
 				//disease = udi.getUserDiseaseInfo().get(udi.getUserDiseaseInfo().size()-1).getDiseaseName();
 				
-				request.setAttribute("username", userName);
+				session.setAttribute("username", userName);
 				//request.setAttribute("groupname", groupName);
 				//request.setAttribute("age", age);
 				//request.setAttribute("address", address);
@@ -94,8 +94,8 @@ public class LoginControlServlet extends HttpServlet {
 				//request.setAttribute("mind", mind);
 				//request.setAttribute("body", body);
 				//session.setAttribute("udi", udi);
-				session.setAttribute("login", 1);
-				request.getRequestDispatcher("/UpdateInfoControlServlet").forward(request, response);
+				session.setAttribute("login", "1");
+				request.getRequestDispatcher("/UpdateInfoControlServlet?func=login").forward(request, response);
 			}
 			else
 				response.sendRedirect("error404.jsp");

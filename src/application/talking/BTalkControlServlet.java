@@ -3,7 +3,14 @@ package application.talking;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.ThreadPoolExecutor;
 
+import javax.servlet.AsyncContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,14 +18,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 import baseUse.IBTalkSystem;
 import baseUse.bTalkData.FriendList;
+import baseUse.bTalkData.Message;
 import baseUse.bTalkData.MessageList;
 import businessServices.bTalkSystem.BTalkProxy;
+import businessServices.datamanager.userdata.UserDataProxy;
 
-@WebServlet("/BTalkControlServlet")
+@WebServlet(urlPatterns={"/BTalkControlServlet"}, asyncSupported=true)
 public class BTalkControlServlet extends HttpServlet {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	//private List<AsyncContext>  asyncs;
 	/**
 	 * Constructor of the object.
 	 */
@@ -46,7 +63,42 @@ public class BTalkControlServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doPost(request,response);
+		String get = request.getParameter("get");
+		if(get.equals("message")){
+			//AsyncContext aCtx = request.startAsync(request, response);
+			final AsyncContext ctx = request.startAsync();
+			//IBTalkSystem ibs = new BTalkProxy();
+			new Thread(new Runnable() {  
+			        @Override  
+			        public void run() {
+			                try {
+			                	UserDataProxy udp = new UserDataProxy();
+			                    JSONArray jsonArray1 = new JSONArray();
+			                	JSONArray jsonArray2 = new JSONArray();
+			                    JSONObject json = new JSONObject();
+			                    List<Message> m = udp.getMessage("zy").getNewMessage();
+			                    for(int i=0;i<m.size();i++){
+			                		jsonArray1.add(m.get(i).getContent());
+			                		//jsonArray1.add(m.get(i).getTime());
+			                		jsonArray1.add(m.get(i).getFrom());
+			                		jsonArray2.add(jsonArray1);
+			                		jsonArray1.clear();
+			                	}
+			                    json.put("messages", jsonArray2);
+			                    System.out.println(json.toString());
+			                    synchronized (ctx) {
+			                           ctx.getResponse().getWriter().println(json.toString());  
+			                           ctx.complete();  
+			                        }
+			                } catch (Exception e) {  
+			                    throw new RuntimeException(e);  
+			                }
+			}
+			    }).start();
+	    }
+		else if(get.equals("friend")){
+			requestFriendList(/*(String) request.getSession().getAttribute("username"),*/"zy",request,response);
+		}
 	}
 
 	/**
@@ -63,7 +115,6 @@ public class BTalkControlServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
-		requestFriendList(username);
 		sendMessage(username,request.getParameter("name"),request.getParameter("content"));
 		getMessage(username);
 		deleteFriend(username,request.getParameter("name"));
@@ -93,13 +144,22 @@ public class BTalkControlServlet extends HttpServlet {
 	 */
 	public void init() throws ServletException {
 		// Put your code here
+		 //asyncs = (List<AsyncContext>) getServletContext().getAttribute("asyncs");
 	}
 
-	public void requestFriendList(String username){
+	public void requestFriendList(String username,HttpServletRequest request, HttpServletResponse response){
 		IBTalkSystem ibs = new BTalkProxy();
+		System.out.print(username);
 		try {
+			String s = "<ul>";
 			FriendList fl = ibs.getFriendList(username);
-		} catch (SQLException e) {
+			//UserDataProxy usp = new UserDataProxy();
+			//FriendList fl = usp.getFriendList(username);
+			for(int i=0;i<fl.getFriendList().size();i++)
+				s += "<li>"+ fl.getFriendList().get(i) + "</li>";
+			s+="</ul>";
+			response.getWriter().print(s.trim());
+		} catch (SQLException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

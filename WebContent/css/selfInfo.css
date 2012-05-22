@@ -44,12 +44,11 @@
 }
 
 #container {
-	background: #fff;
+	background: #EAE1E1;
 	margin-bottom: 2em;
 	overflow: hidden;
 	padding: 10px 10px;
 	width: 1024px;
-	height: 800px;
 	border-radius: 10px;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
@@ -81,40 +80,4 @@
 	border-width: 1px;
 	border-style: solid;
 	border-radius:5px;
-}
-
-/* dock2 - bottom */
-#dock2 {
-	width: 100%;
-	bottom: 0px;
-	border:0px;
-	margin-bottom:0px;
-	padding-bottom:0px;
-	position: absolute;
-	left: 0px;
-}
-.dock-container2 {
-	position: absolute;
-	height: 50px;
-	padding-left: 20px;
-	bottom:0px;
-}
-a.dock-item2 {
-	display: block; 
-	font: bold 12px Arial, Helvetica, sans-serif;
-	width: 40px; 
-	color: #000; 
-	bottom: 0px; 
-	position: absolute;
-	text-align: center;
-	text-decoration: none;
-}
-.dock-item2 span {
-	display: none;
-	padding-left: 20px;
-}
-.dock-item2 img {
-	border: none; 
-	margin: 5px 10px 0px; 
-	width: 100%; 
 }

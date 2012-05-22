@@ -12,19 +12,39 @@ public class TagData {
 	 * n for normal tag; d for drug;
 	 */
 	private char type;
-	private List<TagAltername> alterName;
+	private List<TagAlternate> alterName;
 
 	/**
 	 * u for unchanged; c for changed; n for new; d for delete;
 	 */
 	private char status;
 
-	public TagData(String tn, String ti, List<TagAltername> a, char s, char t) {
+	public TagData(String tn, String ti, List<TagAlternate> a, char s, char t) {
 		tagname = tn;
 		tagIntro = ti;
 		alterName = a;
 		status = s;
 		type = t;
+	}
+
+	public void setTagname(String tagname) {
+		this.tagname = tagname;
+	}
+
+	public void setTagIntro(String tagIntro) {
+		this.tagIntro = tagIntro;
+	}
+
+	public void setType(char type) {
+		this.type = type;
+	}
+
+	public void setAlterName(List<TagAlternate> alterName) {
+		this.alterName = alterName;
+	}
+
+	public void setStatus(char status) {
+		this.status = status;
 	}
 
 	public String getTagname() {
@@ -35,7 +55,7 @@ public class TagData {
 		return tagIntro;
 	}
 
-	public List<TagAltername> getAlterName() {
+	public List<TagAlternate> getAlterName() {
 		return alterName;
 	}
 	
