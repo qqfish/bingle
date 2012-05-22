@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=gb2312">
+	<title>tags</title>
+
+	<link rel="stylesheet" href="css/tags.css" type="text/css" />
+	<script type="text/javascript" src="script/table.js"></script>
+	<script type="text/javascript" src="script/inNav.js"></script>
+	
+	<!--[if IE]>
+	 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<!--[if lte IE 7]>
+	 <script src="../js/IE8.js" type="text/javascript"></script><![endif]-->
+
+	<!--[if lt IE 7]>
+	 <link rel="stylesheet" type="text/css" media="all" href="../css/ie6.css"/><![endif]-->
+	</head>
+
+	<body id="index" class="home" onload="init();">
+		<header id="banner" class="body">
+			<h1><img src="img/logo.jpg"/></h1>			
+			<nav>
+				<ul>
+					<li><a href="/bingle/SearchControlServlet?searchType=patients">病友</a></li>
+					<li><a href="/bingle/SearchControlServlet?searchType=diseases">病症</a></li>
+					<li><a href="ForumControlServlet?func=ini">交流区</a></li>
+					<li class="active"><a href="#">控制面板</a></li>
+				</ul>
+				<form action="/bingle/SearchControlServlet" id="search" method="get">
+				<input type="search" name="keyword" placeholder="Search this site">
+				<input type="submit" value="patients" class="search-btn" name="searchType">
+				<input type="submit" value="diseases" class="search-btn" name="searchType">
+				</form>
+			</nav>
+		</header>
+		
+		<nav id="infoNav" class="body" onmouseover='nowMouse="on";move();' onmouseout='nowMouse="off";move();' >
+			<ul>
+				<li><a href="#">基本资料</a></li>
+				<li><a href="jsp/info/status.jsp">个人状态</a></li>
+				<li><a href="#">疾病情况</a></li>
+				<li><a href="#" class="active">管理标签</a></li>
+			</ul>
+		</nav>
+		
+		<section id="container" class="body">
+			<br/>
+			<form method="post" name="addform">
+				<table id="table">
+					<th>现有标签</th>
+					<th></th>
+					<th>标签列表</th>
+					<tr>
+						<td class="left">
+							<select multiple name="list1" size="12" ondblclick="moveOption(document.addform.list1, document.addform.list2)">
+								<option value="感冒"><a href="#">感冒</a></option>
+								<option value="发烧"><a href="#">发烧</a></option>
+								<option value="头痛"><a href="#">头痛</a></option>
+								<option value="胃病"><a href="#">胃病</a></option>
+							</select>
+						</td>
+						<td class="middle">
+							<input type="button" value=">>" onClick="moveOption(document.addform.list1, document.addform.list2)"><br><br>
+							<input type="button" value="<<" onClick="moveOption(document.addform.list2, document.addform.list1)">
+						</td>
+						<td class="right">
+							<select multiple name="list2" size="12" ondblclick="moveOption(document.addform.list2, document.addform.list1)">
+							</select>
+						</td>
+					</tr>
+				</table>
+			</form>
+			<p id="alter">找不到想要的标签?<a href="#">点击</a>添加新标签</p>
+		</section>
+		
+		<footer id="about" class="body">
+			<p>blablabla</p>
+		</footer>
+		
+	</body>
+</html>
+		

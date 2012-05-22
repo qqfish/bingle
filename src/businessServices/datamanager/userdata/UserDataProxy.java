@@ -20,7 +20,7 @@ public class UserDataProxy implements IUserData {
 	public UserDataProxy() throws SQLException {
 		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 		con = DriverManager
-				.getConnection("jdbc:mysql://localhost/bingle?user=root&password=123");
+				.getConnection("jdbc:mysql://localhost/bingle?unicode=true&characterEncoding=UTF-8&user=root&password=123");
 
 	}
 
@@ -182,11 +182,14 @@ public class UserDataProxy implements IUserData {
 								+ "%')) as tmp natural left outer join user ORDER BY userName");
 		List<UserShortInfo> usi = new ArrayList<UserShortInfo>();
 		while (rs.next()) {
-			if(usi.isEmpty() || !usi.get(usi.size() - 1).getUsername().equals(rs.getString("userName"))){
-				usi.add(new UserShortInfo(rs.getString("userName"), rs.getString("currentDisease"), rs.getShort("age"), rs.getBoolean("gender")));
+			if (usi.isEmpty()
+					|| !usi.get(usi.size() - 1).getUsername()
+							.equals(rs.getString("userName"))) {
+				usi.add(new UserShortInfo(rs.getString("userName"), rs
+						.getString("currentDisease"), rs.getShort("age"), rs
+						.getBoolean("gender")));
 				usi.get(usi.size() - 1).addTagname(rs.getString("tagName"));
-			}
-			else{
+			} else {
 				usi.get(usi.size() - 1).addTagname(rs.getString("tagName"));
 			}
 		}
@@ -221,13 +224,12 @@ public class UserDataProxy implements IUserData {
 	 * @pdOid abda513f-a418-4860-b76f-3ad80ac354dc
 	 */
 	public void createUser(UserBaseInfo userinfo) throws SQLException {
-		int i = (userinfo.getGender())?1:0;
+		int i = (userinfo.getGender()) ? 1 : 0;
 		con.createStatement().executeUpdate(
 				"INSERT INTO user (userName,password,email,age,gender) VALUES ('"
 						+ userinfo.getUsername() + "','"
 						+ userinfo.getPassword() + "','" + userinfo.getEmail()
-						+ "','" + userinfo.getAge() + "','"
-						+ i + "')");
+						+ "','" + userinfo.getAge() + "','" + i + "')");
 	}
 
 	/**
@@ -256,22 +258,25 @@ public class UserDataProxy implements IUserData {
 		List<UserDiseaseInfo> userDisease = new ArrayList<UserDiseaseInfo>();
 		while (rsDisease.next()) {
 			List<String> drug = new ArrayList<String>();
-			if (!rsDrug.isBeforeFirst()) {
-				if (rsDrug.getString("diseaseName") != rsDisease
-						.getString("diseaseName")) {
-					userDisease.add(new UserDiseaseInfo(rsDisease
-							.getString("diseaseName"), rsDisease
-							.getString("treatmentIntro"), rsDisease
-							.getString("reason"), rsDisease.getString("tips"),
-							drug));
-					continue;
-				} else {
-					drug.add(rsDrug.getString("tagName"));
+			if(rsDrug.next()){
+				rsDrug.previous();
+				if (!rsDrug.isBeforeFirst()) {
+					if (rsDrug.getString("diseaseName") != rsDisease
+							.getString("diseaseName")) {
+						userDisease.add(new UserDiseaseInfo(rsDisease
+								.getString("diseaseName"), rsDisease
+								.getString("treatmentIntro"), rsDisease
+								.getString("reason"), rsDisease.getString("tips"),
+								drug));
+						continue;
+					} else {
+						drug.add(rsDrug.getString("tagName"));
+					}
 				}
 			}
 			while (rsDrug.next()
-					&& rsDrug.getString("diseaseName").equals(rsDisease
-							.getString("diseaseName"))) {
+					&& rsDrug.getString("diseaseName").equals(
+							rsDisease.getString("diseaseName"))) {
 				drug.add(rsDrug.getString("tagName"));
 			}
 			userDisease.add(new UserDiseaseInfo(rsDisease
@@ -290,16 +295,16 @@ public class UserDataProxy implements IUserData {
 		stTag.close();
 		stDisease.close();
 		stDrug.close();
-		if(rsUser.next()){
-			UserDetailInfo result = new UserDetailInfo(username,rsUser.getString("groupName"),
-				rsUser.getShort("age"), rsUser.getBoolean("gender"),rsUser.getString("address"),
-				rsUser.getString("email"), rsUser.getInt("mindStatus"),
-				rsUser.getInt("bodyStatus"), tags, userDisease);
+		if (rsUser.next()) {
+			UserDetailInfo result = new UserDetailInfo(username,
+					rsUser.getString("groupName"), rsUser.getShort("age"),
+					rsUser.getBoolean("gender"), rsUser.getString("address"),
+					rsUser.getString("email"), rsUser.getInt("mindStatus"),
+					rsUser.getInt("bodyStatus"), tags, userDisease);
 			rsUser.close();
 			stUser.close();
 			return result;
-		}
-		else{
+		} else {
 			rsUser.close();
 			stUser.close();
 			return null;
@@ -313,12 +318,11 @@ public class UserDataProxy implements IUserData {
 	 * @pdOid 95a6e4a8-ceed-467e-930a-7a6b3c210df8
 	 */
 	public void updateUserInfo(String username, Short age, String address,
-			String email, int mindStatus, int bodyStatus) throws SQLException {
+			String email) throws SQLException {
 		Statement st = con.createStatement();
 		st.executeUpdate("UPDATE user SET age = '" + age + "', address = '"
-				+ address + "', email = '" + email + "', mindStatus = '"
-				+ mindStatus + "' ,bodyStatus = '" + bodyStatus
-				+ "' WHERE userName = '" + username + "'");
+				+ address + "', email = '" + email + "' WHERE userName = '"
+				+ username + "'");
 		st.close();
 	}
 
@@ -360,8 +364,7 @@ public class UserDataProxy implements IUserData {
 								+ "','"
 								+ reason
 								+ "','"
-								+ tips
-								+ "')");
+								+ tips + "')");
 
 	}
 
@@ -420,12 +423,12 @@ public class UserDataProxy implements IUserData {
 	@Override
 	public void updateAllUserStatus() throws SQLException {
 		String sql = "UPDATE user SET mindStatus=10*mindStatus, bodyStatus=10*bodyStatus";
-		con.createStatement().executeUpdate(sql);		
+		con.createStatement().executeUpdate(sql);
 	}
 
 	@Override
 	public void updateBodyStatus(String username, int sta) throws SQLException {
-		if(sta > 0 && sta < 6){
+		if (sta > 0 && sta < 6) {
 			String sql = "UPDATE user SET bodyStatus=bodyStatus+";
 			sql = sql + String.valueOf(sta);
 			sql = sql + " WHERE userName='" + username + "'";
@@ -435,11 +438,11 @@ public class UserDataProxy implements IUserData {
 
 	@Override
 	public void updateMindStatus(String username, int sta) throws SQLException {
-		if(sta > 0 && sta < 6){
+		if (sta > 0 && sta < 6) {
 			String sql = "UPDATE user SET mindStatus=mindStatus+";
 			sql = sql + String.valueOf(sta);
 			sql = sql + " WHERE userName='" + username + "'";
 			con.createStatement().executeUpdate(sql);
-		}		
+		}
 	}
 }

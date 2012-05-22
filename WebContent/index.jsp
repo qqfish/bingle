@@ -53,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<legend>登陆：</legend>
 					<ol>
 						<li>
-							<label>用户名：<input type="text" name="userName"/></label>
+							<label>用户名：<input type="text" name="username"/></label>
 						</li>
 						<li>
 							<label>密码：<input type="password" name="password"/></label>

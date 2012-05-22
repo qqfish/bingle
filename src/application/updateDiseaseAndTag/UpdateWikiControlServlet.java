@@ -1,57 +1,155 @@
 package application.updateDiseaseAndTag;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class UpdateWikiControlServlet
- */
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
+import baseUse.Global;
+import baseUse.IWikiSystem;
+import baseUse.wikiData.DiseaseDataList;
+import baseUse.wikiData.TagData;
+import baseUse.wikiData.TagDataList;
+import businessServices.wikiSystem.WikiProxy;
+
 @WebServlet("/UpdateWikiControlServlet")
 public class UpdateWikiControlServlet extends HttpServlet {
+
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see HttpServlet#HttpServlet()
+	 * Constructor of the object.
 	 */
 	public UpdateWikiControlServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * Destruction of the servlet. <br>
 	 */
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	public void destroy() {
+		super.destroy(); // Just puts "destroy" string in log
+		// Put your code here
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * The doGet method of the servlet. <br>
+	 *
+	 * This method is called when a form has its tag value method equals to get.
+	 * 
+	 * @param request the request send by the client to the server
+	 * @param response the response send by the server to the client
+	 * @throws ServletException if an error occurred
+	 * @throws IOException if an error occurred
 	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		System.out.println(request.getParameter("tagname"));
+		try {
+			getTag(request.getParameter("tagname"),request,response);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	public void submitEditDisease() {
-		// TODO: implement
+	/**
+	 * The doPost method of the servlet. <br>
+	 *
+	 * This method is called when a form has its tag value method equals to post.
+	 * 
+	 * @param request the request send by the client to the server
+	 * @param response the response send by the server to the client
+	 * @throws ServletException if an error occurred
+	 * @throws IOException if an error occurred
+	 */
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		submitEditDisease();
+		try {
+			getTag(request.getParameter("tagname"),request,response);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		submitEditTag();
 	}
 
-	/** @pdOid b90e5581-3c85-47f9-ab5e-857587445e0c */
-	public void getTag() {
-		// TODO: implement
+	/**
+	 * The doPut method of the servlet. <br>
+	 *
+	 * This method is called when a HTTP put request is received.
+	 * 
+	 * @param request the request send by the client to the server
+	 * @param response the response send by the server to the client
+	 * @throws ServletException if an error occurred
+	 * @throws IOException if an error occurred
+	 */
+	public void doPut(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		// Put your code here
 	}
 
-	/** @pdOid 64101577-97b3-400f-b234-c6d25d2877aa */
-	public void submitEditTag() {
-		// TODO: implement
+	/**
+	 * Initialization of the servlet. <br>
+	 *
+	 * @throws ServletException if an error occurs
+	 */
+	public void init() throws ServletException {
+		// Put your code here
 	}
 
+	public void submitEditDisease(){
+		IWikiSystem iws = new WikiProxy();
+		DiseaseDataList ddl = null;
+		try {
+			iws.submitDisease(ddl);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void getTag(String tagname,HttpServletRequest request, HttpServletResponse response) throws SQLException{
+		IWikiSystem iws = new WikiProxy();
+		TagData td = iws.getTagData(tagname,'N');		
+		try {
+			PrintWriter out = response.getWriter();
+			JSONObject json = new JSONObject();
+			JSONArray jsonArray = new JSONArray();
+			json.put("intro", td.getTagIntro());
+			json.put("type", td.getType());
+			for(int i=0;i<td.getAlterName().size();i++){
+				jsonArray.add(td.getAlterName().get(i).getAlternateName());
+			}
+			json.element("altername", jsonArray);
+			out.print(json.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void submitEditTag(){
+		IWikiSystem iws = new WikiProxy();
+		TagDataList td = null;
+		try {
+			iws.submitTag(td);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

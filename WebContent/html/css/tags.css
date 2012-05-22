@@ -1,0 +1,88 @@
+@import url("reset.css");
+@import url("global-forms.css");
+
+#infoNav{
+	background: #000305;
+	color: #fff;
+	font-size: 1.3em;
+	line-height: 35px;
+	padding: 0;
+	text-align: left;
+	position:absolute;
+	left:-10px;
+	width: 130px;
+	float:left;
+	border:2px solid #000304;
+	border-radius: 0 30px 30px 0;
+	-moz-border-radius: 0 30px 30px 0;
+	-webkit-border-radius: 0 30px 30px 0;	
+}
+#infoNav ul{
+	list-style: none;
+	padding: 0px;
+}
+
+#infoNav a{
+	text-decoration: none;
+	color:#fff;
+}
+
+#infoNav a:link, #infoNav a:visited {
+	color: #fff;
+	display: inline-block;
+	width:100%;
+	height: 40px;
+	padding: 0;
+	text-decoration: none;
+}
+#infoNav a:hover, #infoNav a:active,
+#infoNav .active:link, #infoNav .active:visited {
+	background:none;
+	color: #C74451;
+	font-weight:bold;
+	text-shadow: none !important;
+}
+#container {
+	background: #fff;
+	margin-bottom: 2em;
+	overflow: hidden;
+	padding: 10px 10px 70px;
+	width: 75%;
+	font-family: "Î¢ÈíÑÅºÚ","ºÚÌå";
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+#table{
+	width: 60%;
+	text-align: center;
+	font-size: 16px;
+}
+.left,.right{
+	width: 30%;
+}
+.left option,.right option{
+	text-align: center;
+}
+.left select,.right select{
+	width: 100%;
+}
+.middle{
+	width: 20%;
+	text-align: center;
+}
+.left select,.right select{
+	min-width: 40px;
+	text-align: center;
+	margin: 2px 10px 2px 10px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	box-shadow: 2px 2px 5px #333333;
+	-moz-box-shadow: 2px 2px 5px #333333;
+	-webkit-box-shadow: 2px 2px 5px #333333;
+}
+#alter{
+	text-align: right;
+	margin-right: 100px;
+}

@@ -5,7 +5,10 @@
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <title>查找病友</title>
 
-<link rel="stylesheet" href="/bingle/css/search.css" type="text/css" />
+<script type="text/javascript" src="script/jquery.js"></script>
+<script type="text/javascript" src="script/thickbox.js"></script>
+<link rel="stylesheet" href="css/thickbox.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="css/search.css" type="text/css" />
 
 <!--[if IE]>
 	 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -48,7 +51,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				${table }
+				${table}
 			</tbody>
 			<tfoot>
 				<tr>

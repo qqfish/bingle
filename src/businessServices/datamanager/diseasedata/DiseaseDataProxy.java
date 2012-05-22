@@ -26,7 +26,7 @@ public class DiseaseDataProxy implements IDiseaseData {
 	public DiseaseDataProxy() throws SQLException {
 		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 		con = DriverManager
-				.getConnection("jdbc:mysql://localhost/bingle?user=root&password=123");
+				.getConnection("jdbc:mysql://localhost/bingle?unicode=true&characterEncoding=UTF-8&user=root&password=123");
 
 	}
 

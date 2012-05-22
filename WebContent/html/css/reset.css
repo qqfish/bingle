@@ -1,0 +1,87 @@
+*{
+	margin:0;
+	padding: 0;
+} 
+body {
+	background: #EAE1E1;
+	color: #000305;
+	font-size: 87.5%;
+	font-family: 'Trebuchet MS', Trebuchet, 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	line-height: 1.429;
+	margin: 0;
+	padding: 0;
+	text-align: left;
+	overflow: scroll;
+ }
+h2 {font-size: 1.571em} 
+h3 {font-size: 1.429em} 
+h4 {font-size: 1.286em} 
+h5 {font-size: 1.143em} 
+h6 {font-size: 1em} 
+h2, h3, h4, h5, h6 {
+	font-weight: 400;
+	line-height: 1.1;
+	margin-bottom: .8em;
+}
+
+a {outline: 0;}
+a img {border: 0px; text-decoration: none;}
+a:link, a:visited {
+	color: #C74350;
+	padding: 0 1px;
+	text-decoration: underline;
+}
+a:hover, a:active {
+	background-color: #C74350;
+	color: #fff;
+	text-decoration: none;
+	text-shadow: 1px 1px 1px #333;
+}
+
+p {margin-bottom: 1.143em;}
+* p:last-child {margin-bottom: 0;}
+
+strong, b {font-weight: bold;}
+em, i {font-style: italic;}
+
+::-moz-selection {background: #F6CF74; color: #fff;}
+::selection {background: #F6CF74; color: #fff;}
+ul {
+	list-style: outside disc;
+	margin: 1em 0 1.5em 1.5em;
+}
+table{
+	border-collapse:collapse;
+	margin: .5em auto 1.5em auto; width: 98%;
+}
+dl {margin: 0 0 1.5em 0;}
+dt {font-weight: bold;}
+dd {margin-left: 1.5em;}
+blockquote {font-style: italic;}
+cite {}
+q {}
+thead th {padding: .5em .4em; text-align: left;}
+thead td {}
+tbody td {padding: .5em .4em;}
+tbody th {}
+tbody .alt td {}
+tbody .alt th {}
+tfoot th {}
+tfoot td {padding: .5em .4em;}
+
+header, section, footer,
+aside, nav, article, figure {
+	display: block;
+}
+
+.body{
+	clear: both; 
+	margin: 0 auto; 
+	width: 100%;
+}
+
+input,fieldset,legend{
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}

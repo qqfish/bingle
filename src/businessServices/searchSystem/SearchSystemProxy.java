@@ -21,45 +21,29 @@ public class SearchSystemProxy implements ISearchSystem {
 	@Override
 	public UserDetailInfo getDetailUserInfo(String username)
 			throws ClassNotFoundException, SQLException {
-		UserDetailInfo result = (UserDetailInfo) Global.cache().getCache(
-				"UserDetailInfo", username);
-		if (result == null) {
-			IUserData itf = new UserDataProxy();
-			result = itf.getDetailUserInfo(username);
-			if (result != null) {
-				Global.cache().insert("UserDetailInfo", username, result);
-			}
-		}
+		
+		IUserData itf = new UserDataProxy();
+		UserDetailInfo result = itf.getDetailUserInfo(username);
+			
 		return result;
 	}
 
 	@Override
 	public DiseaseDetailInfo getDiseaseDetail(String diseasename)
 			throws SQLException, ClassNotFoundException {
-		DiseaseDetailInfo result = (DiseaseDetailInfo) Global.cache().getCache(
-				"DiseaseDetailInfo", diseasename);
-		if (result == null) {
-			IDiseaseData itf = new DiseaseDataProxy();
-			result = itf.getDiseaseDetail(diseasename);
-			if (result != null) {
-				Global.cache().insert("DiseaseDetailInfo", diseasename, result);
-			}
-		}
+		DiseaseDetailInfo result;
+		IDiseaseData itf = new DiseaseDataProxy();
+		result = itf.getDiseaseDetail(diseasename);
 		return result;
 	}
 
 	@Override
 	public UserShortInfoList searchUser(String keyword, int page, int perPage)
 			throws ClassNotFoundException, SQLException {
-		UserShortInfoList resultlist = (UserShortInfoList) Global.cache()
-				.getCache("UserShortInfoList", keyword);
-		if (resultlist == null) {
-			IUserData itf = new UserDataProxy();
-			resultlist = itf.searchUser(keyword);
-			if (resultlist != null) {
-				Global.cache().insert("UserShortInfoList", keyword, resultlist);
-			}
-		}
+		UserShortInfoList resultlist;
+		IUserData itf = new UserDataProxy();
+		resultlist = itf.searchUser(keyword);
+			
 		List<UserShortInfo> currentList = resultlist.getUserResultPage(page, perPage);
 		UserShortInfoList result = new UserShortInfoList(currentList);
 		result.setNum(resultlist.getNum());
@@ -69,16 +53,10 @@ public class SearchSystemProxy implements ISearchSystem {
 	@Override
 	public DiseaseShortInfoList searchDisease(String keyword, int page,
 			int perPage) throws ClassNotFoundException, SQLException {
-		DiseaseShortInfoList resultlist = (DiseaseShortInfoList) Global.cache()
-				.getCache("DiseaseShortInfoList", keyword);
-		if (resultlist == null) {
-			IDiseaseData itf = new DiseaseDataProxy();
-			resultlist = itf.searchDisease(keyword);
-			if (resultlist != null) {
-				Global.cache().insert("DiseaseShortInfoList", keyword,
-						resultlist);
-			}
-		}
+		DiseaseShortInfoList resultlist;
+		IDiseaseData itf = new DiseaseDataProxy();
+		resultlist = itf.searchDisease(keyword);
+			
 		List<DiseaseShortInfo> currentList = resultlist.getDiseaseResultPage(page, perPage);
 		DiseaseShortInfoList result = new DiseaseShortInfoList(currentList);
 		result.setNum(resultlist.getNum());

@@ -49,7 +49,7 @@ public interface IUserData {
 	FriendList getFriendList(String username) throws SQLException;
 
 	/**
-	 * 閻劍鍩涙稉锟芥闂勫棙妞傞崐锟� * 
+	 * 閻劍鍩涙稉锟芥闂勫棙妞傞崐锟� *
 	 * 
 	 * @param username
 	 * @throws SQLException
@@ -101,26 +101,33 @@ public interface IUserData {
 	 * @throws SQLException
 	 * @pdOid 20e830a9-8b1d-4937-87af-e4859ace90b6
 	 */
-	void updateUserInfo(String username, Short age, String address,
-			String email, int mindStatus, int bodyStatus) throws SQLException;
-	
+	void updateUserInfo(String username, Short age, String address, String email)
+			throws SQLException;
+
 	void deleteTag(String username, List<String> tagname) throws SQLException;
-	
+
 	void addTag(String username, List<String> tagname) throws SQLException;
-	
-	void addUserDisease(String username, String diseasename, String treatmentIntro, String reason, String tips) throws SQLException;
-	
-	void editUserDisease(String username , String diseasename, String treatmentIntro, String reason, String tips) throws SQLException;
-	
-	void deleteUserDisease(String username, String diseasename) throws SQLException;
-	
-	void addUserDiseaseDrug(String username, String diseasename,List<String> drugname) throws SQLException;
-	
-	void deleteUserDiseaseDrug(String username, String diseasename, List<String> drugname) throws SQLException;
+
+	void addUserDisease(String username, String diseasename,
+			String treatmentIntro, String reason, String tips)
+			throws SQLException;
+
+	void editUserDisease(String username, String diseasename,
+			String treatmentIntro, String reason, String tips)
+			throws SQLException;
+
+	void deleteUserDisease(String username, String diseasename)
+			throws SQLException;
+
+	void addUserDiseaseDrug(String username, String diseasename,
+			List<String> drugname) throws SQLException;
+
+	void deleteUserDiseaseDrug(String username, String diseasename,
+			List<String> drugname) throws SQLException;
 
 	void updateAllUserStatus() throws SQLException;
-	
+
 	void updateBodyStatus(String username, int sta) throws SQLException;
-	
+
 	void updateMindStatus(String username, int sta) throws SQLException;
 }

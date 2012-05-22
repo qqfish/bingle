@@ -183,5 +183,4 @@ public class ForumDataProxy implements IForumData{
 		ps.executeUpdate();
 		ps.close();
 	}	
-
 }

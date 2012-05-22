@@ -9,8 +9,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="Content-Type" content="text/html;charset=gb2312">
 	<title>个人资料</title>
 
-	<link rel="stylesheet" href="css/selfInfo.css" type="text/css" />
-	<script type="text/javascript" src="script/inNav.js"></script>
+	<link rel="stylesheet" href="/bingle/css/selfInfo.css" type="text/css" />
+	<script type="text/javascript" src="/bingle/script/inNav.js"></script>
+	
 	<!--[if IE]>
 	 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<!--[if lte IE 7]>
@@ -41,9 +42,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		<nav id="infoNav" class="body" onmouseover='nowMouse="on";move();' onmouseout='nowMouse="off";move();' >
 			<ul>
-				<li><a href="#" class="active">基本资料</a></li>
+				<li><a href="/bingle/UpdateInfoControlServlet?type=mainPage" class="active">基本资料</a></li>
 				<li><a href="#">个人状态</a></li>
-				<li><a href="#">疾病情况</a></li>
+				<li><a href="/bingle/UpdateInfoControlServlet?type=disease">疾病情况</a></li>
 				<li><a href="#">治疗过程</a></li>
 				<li><a href="#">管理标签</a></li>
 			</ul>
@@ -86,9 +87,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</tr>
 			</table>
 		</section>
-		
+
 		<footer id="about" class="body">
 			<p>blablabla</p>
+
 		</footer>
 		
 	</body>
