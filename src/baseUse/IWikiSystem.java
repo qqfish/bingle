@@ -43,7 +43,8 @@ public interface IWikiSystem {
 
 	/**
 	 * @param tagname
+	 * @throws SQLException 
 	 * @pdOid 4355c7c6-27d8-4c44-bd97-77a26a96fbca
 	 */
-	TagData getTagData(String tagname);
+	TagData getTagData(String tagname, char typename) throws SQLException;
 }

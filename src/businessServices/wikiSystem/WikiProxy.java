@@ -75,9 +75,8 @@ public class WikiProxy implements IWikiSystem {
 	}
 
 	@Override
-	public TagData getTagData(String tagname) {
-		TagDataList result = (TagDataList) Global.cache().getCache(wikiCache,
-				tagCache);
-		return result.getOneTag(tagname);
+	public TagData getTagData(String tagname, char typename) throws SQLException {
+		ITagData itf = new TagDataProxy();
+		return itf.getTagData(tagname, typename);
 	}
 }

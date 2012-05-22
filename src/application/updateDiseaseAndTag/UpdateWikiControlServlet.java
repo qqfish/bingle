@@ -60,7 +60,17 @@ public class UpdateWikiControlServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+<<<<<<< HEAD
 		getTag(request.getParameter("tagname"),request,response);
+=======
+		System.out.println(request.getParameter("tagname"));
+		try {
+			getTag(request.getParameter("tagname"),request,response);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+>>>>>>> tmp
 	}
 
 	/**
@@ -124,7 +134,7 @@ public class UpdateWikiControlServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void getTag(String tagname,HttpServletRequest request, HttpServletResponse response){
 		try {
 			PrintWriter out = response.getWriter();

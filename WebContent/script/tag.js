@@ -25,6 +25,7 @@ function sendRequest(url) {
 }
 
 function processResponse() {
+	//alert(XMLHttpReq.readyState + " " + XMLHttpReq.status);
 	if (XMLHttpReq.readyState == 4) {
 		if (XMLHttpReq.status == 200) {
 			var json = eval("("+XMLHttpReq.responseText+")");

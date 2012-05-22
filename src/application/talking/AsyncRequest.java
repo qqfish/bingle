@@ -22,7 +22,7 @@ public class AsyncRequest implements Runnable{
     	try{
     	IBTalkSystem ibs = new BTalkProxy();
     	JSONArray jsonArray1 = new JSONArray();
-    	JSONArray jsonArray2 = new JSONArray();
+    	JSONArray jsonArray2 = new JSONArray(); 
     	JSONObject json = new JSONObject();
     	UserDataProxy udp = new UserDataProxy();
     	List<Message> m = udp.getMessage("zy").getNewMessage();

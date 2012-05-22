@@ -1,3 +1,4 @@
+
 package application.search;
 
 import java.io.IOException;
@@ -240,7 +241,11 @@ public class SearchControlServlet extends HttpServlet {
 				//tag
 				table = table + "<td>";
 				for(int j = 0 ; j < current.getTagname().size(); j++){
-					table = table + "<div class='tag'><a href='jsp/search/tag.jsp?KeepThis=true&TB_iframe=trueA&tagname=" +current.getTagname().get(i) +"'class='thickbox'>"+ current.getTagname().get(j) + "</a></div>";
+					table = table
+							+ "<div class='tag'><a href='jsp/search/tag.jsp?KeepThis=true&TB_iframe=trueA&tagname="
+							+ current.getTagname().get(j)
+							+ "'class='thickbox'>"
+							+ current.getTagname().get(j) + "</a></div>";
 				}
 				table = table + "</td>";
 			}

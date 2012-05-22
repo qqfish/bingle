@@ -29,6 +29,7 @@ public class DiseaseDetailInfo {
 		diseaseIntro = di;
 		editTime = et; 
 		drugs = new ArrayList<DrugInfo>();
+		userOfThis = new ArrayList<UserShortInfo>();
 	}
 	
 	public void addDrug(DrugInfo d){
