@@ -12,10 +12,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="/bingle/css/selfInfo.css" type="text/css" />
 	<link rel="stylesheet" href="/bingle/css/star.css" type="text/css" />
 	<link rel="stylesheet" href="/bingle/css/talk.css" type="text/css" />
+	<link rel="stylesheet" href="/bingle/css/index.css" type="text/css" />
 	<script type="text/javascript" src="/bingle/script/jquery.js"></script>
 	<script type="text/javascript" src="/bingle/script/inNav.js"></script>
 	<script type="text/javascript" src="/bingle/script/star.js"></script>
 	<script type="text/javascript" src="/bingle/script/talk.js"></script>
+	<script type="text/javascript" src="/bingle/script/prototype.js"></script>
+	<script type="text/javascript" src="/bingle/script/effects.js"></script>
+	<script type="text/javascript" src="/bingle/script/side-bar.js"></script>
+	<script type="text/javascript" src="/bingle/script/chat.js"></script>
 	
 	<!--[if IE]>
 	 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -47,7 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		<nav id="infoNav" class="body" onmouseover='nowMouse="on";move();' onmouseout='nowMouse="off";move();' >
 			<ul>
-				<li><a href="#" class="active">基本资料</a></li>
+				<li><a href="/bingle/jsp/info/selfInfo.jsp" class="active">基本资料</a></li>
 				<li><a href="/bingle/jsp/info/status.jsp">个人状态</a></li>
 				<li><a href="/bingle/jsp/info/disease.jsp">疾病情况</a></li>
 				<li><a href="#">管理标签</a></li>
@@ -133,26 +138,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</table>
 		</section>
 		
-		<% if(request.getSession().getAttribute("login").equals("1")){
-				out.println("<div id='panel' class='panel'>");
-				out.println("<article id='window' class='window' style='display: none;'>");
-				out.println("<header>");
-				out.println("	<span class='title'>好友</span>");
-				out.println("	<span id='bts'>");
-	            out.println("		<label class='bu' id='tomin' title='最小化' onclick='show();'>-</label>");
-				out.println("	</span>");
-				out.println("</header>");
-				out.println("<section>");
-				out.println("	<article class='online-users'>");
-				out.println("		<section>");
-				out.println("			<ul class='user'></ul>");
-				out.println("		</section>");
-				out.println("	</article>");
-				out.println("</section>");
-				out.println("</article>");
-				out.println("<a class='button' onclick='show();''>好友列表	</a></div>");
-			}
-		%>
+		<div id="main" class="dragclass" style="display:none;">
+		<div id="ChatHead">
+			<span>LinkOne</span>
+			<a onclick="ChatClose();" ><img src="/bingle/img/close.gif" alt="关闭"/></a>
+		</div>
+		<div id="ChatBody">
+			<div id="ChatContent"></div>
+			<div id="ChatBtn">
+				<form action="" name="chat" method="post">
+					<textarea name="ChatValue" rows="4" style="width:335px"></textarea>
+					<input type="image" src="/bingle/img/chat.gif" value="Chat" onclick=""/>
+					<input type="hidden" id=>
+				</form>
+			</div>
+		</div>
+	</div>
+		<div id="sideBar">
+		<a id="sideBarTab"><img src="/bingle/img/slide-button.gif" alt="sideBar" title="friends" /></a>
+		<div id="sideBarContents" style="display:none;">
+			<div id="sideBarContentsInner">
+				<h2>Friends</h2>
+			</div>
+		</div>
+		</div>
 
 		<footer id="about" class="body">
 			<p>blablabla</p>

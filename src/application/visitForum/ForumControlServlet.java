@@ -153,8 +153,8 @@ public class ForumControlServlet extends HttpServlet {
 				table += "<article class='group'><ul class='group'><li class='date'>" + tld.getTopicInfo().get(i).getFirstEditTime()
 						+ "</li><li class='posttitle'><header><a href='ForumControlServlet?func=topic&id=" +
 						+ tld.getTopicInfo().get(i).getTopicId() + "'>" + tld.getTopicInfo().get(i).getTopicName()
-						+ "</a></header></li><li class='comments'><a href='#'>" + (tld.getTopicInfo().get(i).getReplyNum()-1)
-						+ "Comments</a></li></ul></article>";
+						+ "</a></header></li><li class='comments'><a href='ForumControlServlet?func=topic&id=" + tld.getTopicInfo().get(i).getTopicId()
+						+ "'>"+ (tld.getTopicInfo().get(i).getReplyNum()-1) + "Comments</a></li></ul></article>";
 			}
 			session.setAttribute("table", table);
 			session.setAttribute("tld",tld);
@@ -231,9 +231,26 @@ public class ForumControlServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			IForumSystem fp = new ForumProxy( );
 			ForumList fl = fp.getForumList();
+			String table ="";
+			for(int i =0;i<fl.getForumList().size();i++){
+				if(i%2 == 0)
+					table += "<tr>";
+				table += "<td class='list'><img src='/bingle/img/list.jpg'/></td><td class='textList'>"
+						+ "<a href='ForumControlServlet?func=topicList&topic=" + fl.getForumList().get(i).getTopicListName()
+						+ "'>" + fl.getForumList().get(i).getTopicListName() + "</a><br/>"
+						+ fl.getForumList().get(i).getTopicListName() + "</td>";
+				for(int j=0;j<fl.getForumList().get(i).getTagName().size();j++){
+					table += "<td class='tags'><a href='#'>" + fl.getForumList().get(i).getTagName().get(i) + "</a>";
+					if(j!=fl.getForumList().get(i).getTagName().size() -1)
+						table += ",";
+				}
+				table += "</td>";
+				if(i%2 == 0)
+					table += "</tr>";
+			}
 			//request.setAttribute("disease", fl.getForumList().get(0).getTopicListName());
 			//request.setAttribute("tag0", fl.getForumList().get(0).getTagName().get(0));
-			session.setAttribute("fl", fl);
+			request.setAttribute("table", table);
 			request.getRequestDispatcher("/jsp/forum/forumList.jsp").forward(request, response);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -66,14 +66,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<%
 				for(int i =0;i < udi.getUserDiseaseInfo().size();i++){
 					out.println("<div id='test" + (i+1) +"-content'><div class='accordion_child'>");
-					out.println("<h4>病症介绍<span class='alter'><a href='#'>编辑</a></span><h4/><br/>");
-					out.println(udi.getUserDiseaseInfo().get(i).getDiseaseName() + "<br/><br/><hr/>");
-					out.println("<h4>个人治疗情况<span class='alter'><a href='#'>编辑</a></span><h4/><br/>");
-					out.println(udi.getUserDiseaseInfo().get(i).getTreatmentIntro()+"<br/></div></div>");
+					out.println("<h4>病症介绍</h4><br/><span id='name'>");
+					out.println(udi.getUserDiseaseInfo().get(i).getDiseaseName() + "</span><br/><br/><hr/>");
+					out.println("<h4>个人治疗情况<span class='alter'><a onclick='update();'>编辑提交</a></span></h4><br/>");
+					out.println("<span id='text' contenteditable='true'>" + udi.getUserDiseaseInfo().get(i).getTreatmentIntro()+"</span><br/></div></div>");
 				}
 				%>
 				</div>
 			</div>
+			<form id="form" action="/bingle/UpdateWikiControlServlet?func=disease" method="post">
+			<input type="hidden" id="diseasename" name="diseasename">
+			<input type="hidden" id="content" name="content">
+			</form>
 		</section>
 		
 		

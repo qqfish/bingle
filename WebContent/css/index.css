@@ -1,0 +1,155 @@
+a{
+	outline: none;
+}
+
+a:active{
+	outline: none;
+}
+
+#sideBar{
+	text-align:left;
+	font-family: "Î¢ÈíÑÅºÚ","ºÚÌå";
+	font-size: 13px;
+}
+
+#sideBar h2{
+	color:#FFFFFF;
+	font-size:110%;
+	font-family:arial;
+	margin:10px 10px 10px 10px;
+	font-weight:bold !important;
+}
+
+#sideBar h2 span{
+	font-size:125%;
+	font-weight:normal !important;
+}
+
+#sideBar ul{
+	margin:0px 0px 0px 0px;
+	padding:0px 0px 0px 0px;
+}
+
+#sideBar li{
+	margin:0px 10px 3px 10px;
+	padding:2px;
+	list-style-type:none;
+	display:block;
+	background-color:#DA1074;
+	width:177px;
+	color:#FFFFFF;
+}
+
+#sideBar li a{
+	width:100%;
+}
+
+#sideBar li a:link,
+#sideBar li a:visited{
+	color:#FFFFFF;
+	font-family:verdana;
+	font-size:100%;
+	text-decoration:none;
+	display:block;
+	margin:0px 0px 0px 0px;
+	padding:0px;
+	width:100%;
+}
+
+#sideBar li a:hover{
+	color:#FFFFFF;
+	text-decoration:underline;
+}
+
+#sideBar{
+	position: fixed;
+	width: auto;
+	height: auto;
+	bottom: 0px;
+	right: 0px;
+	background-image:url(/bingle/img/background.gif);
+	background-position:top left;
+	background-repeat:repeat-y;
+}
+
+#sideBarTab{
+	float:left;
+	height:137px;
+	width:28px;
+}
+
+#sideBarTab img{
+	border:0px solid #FFFFFF;
+}
+
+#sideBarContents{
+	float:left;
+	width:200px;
+	height:320px;
+	overflow:auto;
+}
+
+#sideBarContentsInner{
+	width:200px;
+}
+form {
+    margin:0;
+	font:normal 12px Verdana, Arial;
+}
+table,input {
+    font:normal 12px Verdana, Arial;
+}
+a:link,a:visited{
+    text-decoration:none;
+    color:#333333;
+}
+a:hover{
+    text-decoration:none;
+    color:#FF6600
+}
+#main {
+	font-family: "Î¢ÈíÑÅºÚ","ºÚÌå";
+	font-size: 13px;
+    width:350px;
+    position:fixed;
+    right: 250px;
+	height: 316px;
+    bottom: 0;
+    text-align:left;
+	border-left: solid #272727;
+	border-right: solid #272727;
+	border-bottom: solid #272727;
+    filter:Alpha(opacity=90)
+}
+#ChatHead {
+	background-color:#272727;
+    text-align:right;
+    padding:3px;
+    font-size:11px;
+    color:#3366FF;
+}
+#ChatHead span{
+	font-weight: bold;
+	font-size: 13px;
+	float:left;
+	color: #fff;
+}
+#ChatHead a:link,#ChatHead a:visited{
+    font-size:14px;
+    font-weight:bold;
+    padding:0 3px;
+}
+#ChatBody {
+    padding:2px;
+}
+#ChatContent {
+    height:178px;
+    padding:6px;
+    overflow-y:scroll;
+    word-break: break-all;
+}
+#ChatBtn {
+	border-top: solid #DA1074;
+    padding:2px;
+	text-align:right;
+}

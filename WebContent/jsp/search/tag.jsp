@@ -20,7 +20,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	%>
     <section class="container">
 		<h3 id="title"></h3>
-		<span id="alter"><a  onclick="updateTag();">编辑提交</a></span>
+		<span id="alter"><a href="javascript:void(0)" onclick="updateTag();">编辑提交</a></span>
 		<hr class="line">
 		<p id="text" contenteditable="true"></p>
 		<hr class="line">

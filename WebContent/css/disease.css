@@ -1,3 +1,4 @@
+@CHARSET "UTF-8";
 @import url("reset.css");
 @import url("global-forms.css");
 
@@ -47,7 +48,7 @@
 	overflow: hidden;
 	padding: 20px 20px 50px;
 	width: 75%;
-	font-family: "Î¢ÈíÑÅºÚ","ºÚÌå";
+	font-family: "å¾®è½¯é›…é»‘","é»‘ä½“";
 	border-radius: 10px;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
@@ -58,7 +59,7 @@
 	list-style:none;
 }
 body {
-	font-family: "Î¢ÈíÑÅºÚ","ºÚÌå";
+	font-family: "å¾®è½¯é›…é»‘","é»‘ä½“";
 	font-size: 12px;
 	margin: 10px;
 }

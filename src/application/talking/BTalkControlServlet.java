@@ -115,10 +115,18 @@ public class BTalkControlServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
+		String func = request.getParameter("func");
+		if(func.equals("send")){
 		sendMessage(username,request.getParameter("name"),request.getParameter("content"));
-		getMessage(username);
-		deleteFriend(username,request.getParameter("name"));
-		addFriend(username,request.getParameter("name"));
+		}
+		else if(func.equals("add")){
+			addFriend(username,request.getParameter("name"));
+		}
+		else if(func.equals("delete")){
+			deleteFriend(username,request.getParameter("name"));
+		}
+		else
+			request.getRequestDispatcher("error404.jsp").forward(request, response);
 	}
 
 	/**
@@ -156,7 +164,9 @@ public class BTalkControlServlet extends HttpServlet {
 			//UserDataProxy usp = new UserDataProxy();
 			//FriendList fl = usp.getFriendList(username);
 			for(int i=0;i<fl.getFriendList().size();i++)
-				s += "<li>"+ fl.getFriendList().get(i) + "</li>";
+				s += "<li><a onclick='ChatShow()'>"+ fl.getFriendList().get(i) + "</a></li>";
+			if(fl.getFriendList().size()==0)
+				s += "<li><a>нч</a></li>";
 			s+="</ul>";
 			response.getWriter().print(s.trim());
 		} catch (SQLException | IOException e) {

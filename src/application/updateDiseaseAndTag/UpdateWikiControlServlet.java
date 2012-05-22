@@ -3,6 +3,7 @@ package application.updateDiseaseAndTag;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,10 +16,12 @@ import net.sf.json.JSONObject;
 
 import baseUse.Global;
 import baseUse.IWikiSystem;
+import baseUse.searchData.DiseaseDetailInfo;
 import baseUse.wikiData.DiseaseData;
 import baseUse.wikiData.DiseaseDataList;
 import baseUse.wikiData.TagData;
 import baseUse.wikiData.TagDataList;
+import businessServices.datamanager.diseasedata.DiseaseDataProxy;
 import businessServices.datamanager.tagdata.TagDataProxy;
 import businessServices.wikiSystem.WikiProxy;
 
@@ -77,7 +80,7 @@ public class UpdateWikiControlServlet extends HttpServlet {
 			sendEditTag(request.getParameter("tagname"), request.getParameter("content"));
 		}
 		else if(func.equals("disease")){
-			sendEditDisease();
+			sendEditDisease(request.getParameter("diseasename"),request.getParameter("content"));
 		}
 		else
 			response.sendRedirect("error404.jsp");
@@ -108,10 +111,18 @@ public class UpdateWikiControlServlet extends HttpServlet {
 		// Put your code here
 	}
 
-	public void sendEditDisease(){
+	public void sendEditDisease(String diseasename, String content){
 		IWikiSystem iws = new WikiProxy();
-		DiseaseData ddl = null;
-		iws.sendEditDisease(ddl);
+		DiseaseDataProxy ddp;
+		try {
+			ddp = new DiseaseDataProxy();
+			DiseaseDetailInfo ddl = ddp.getDiseaseDetail(diseasename);
+			if(!ddl.getDiseaseIntro().equals(content))
+				iws.sendEditDisease(new DiseaseData(diseasename, content, new Date(), 'c'));
+		} catch (SQLException | ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void getTag(String tagname,HttpServletRequest request, HttpServletResponse response){
@@ -141,13 +152,12 @@ public class UpdateWikiControlServlet extends HttpServlet {
 		try {
 			System.out.println(tagname);
 			TagDataProxy tdp = new TagDataProxy();
-			//td = tdp.getTagData(tagname, 'n');
-			td = iws.getTagData(tagname);
+			td = tdp.getTagData(tagname, 'n');
+			//td = iws.getTagData(tagname);
 			if(td.getTagIntro()!=content){
 				td.setTagIntro(content);
 				td.setStatus('c');
 			}
-			System.out.println(td.getTagIntro());
 			iws.sendEditTag(td);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
