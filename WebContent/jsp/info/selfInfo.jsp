@@ -12,7 +12,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="/bingle/css/selfInfo.css" type="text/css" />
 	<link rel="stylesheet" href="/bingle/css/star.css" type="text/css" />
 	<link rel="stylesheet" href="/bingle/css/talk.css" type="text/css" />
-	<link rel="stylesheet" href="/bingle/css/index.css" type="text/css" />
 	<script type="text/javascript" src="/bingle/script/jquery.js"></script>
 	<script type="text/javascript" src="/bingle/script/inNav.js"></script>
 	<script type="text/javascript" src="/bingle/script/star.js"></script>
@@ -124,7 +123,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td  id="address" contenteditable="true">${udi.address}</td>
 				</tr>
 				<tr>
-					<td colspan=2><a href="#" onclick="update();"><span>提交</span></a></td>
+					<td colspan=2><a onclick="update();"><span>提交</span></a></td>
 				</tr>
 			</table>
 			<table>
@@ -140,17 +139,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		<div id="main" class="dragclass" style="display:none;">
 		<div id="ChatHead">
-			<span>LinkOne</span>
+			<span id="name"></span>
 			<a onclick="ChatClose();" ><img src="/bingle/img/close.gif" alt="关闭"/></a>
 		</div>
 		<div id="ChatBody">
 			<div id="ChatContent"></div>
 			<div id="ChatBtn">
-				<form action="" name="chat" method="post">
-					<textarea name="ChatValue" rows="4" style="width:335px"></textarea>
-					<input type="image" src="/bingle/img/chat.gif" value="Chat" onclick=""/>
-					<input type="hidden" id=>
-				</form>
+				<textarea id="ChatValue" rows="4" style="width:335px"></textarea>
+				<input type="image" src="/bingle/img/chat.gif" value="Chat" onclick="ChatSend();"/>
 			</div>
 		</div>
 	</div>

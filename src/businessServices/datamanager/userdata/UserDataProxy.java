@@ -20,7 +20,7 @@ public class UserDataProxy implements IUserData {
 	public UserDataProxy() throws SQLException {
 		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 		con = DriverManager
-				.getConnection("jdbc:mysql://localhost/bingle?unicode=true&characterEncoding=UTF-8&user=root&password=123");
+				.getConnection("jdbc:mysql://localhost/bingleme?unicode=true&characterEncoding=UTF-8&user=root&password=zy102428");
 
 	}
 
@@ -132,7 +132,7 @@ public class UserDataProxy implements IUserData {
 		MessageList result = new MessageList();
 		while (rs.next()) {
 			result.addMessage(rs.getString("friendName"),
-					rs.getString("messageContent"), rs.getDate("messageTime"));
+					rs.getString("messageContent"), rs.getTimestamp("messageTime"));
 		}
 		rs.close();
 		return result;
@@ -152,6 +152,14 @@ public class UserDataProxy implements IUserData {
 			throws SQLException {
 		Date now = new Date();
 		Timestamp st = new Timestamp(now.getTime());
+		System.out.println("INSERT INTO message (friendName, userName, messageContent, messageTime) VALUES ('"
+								+ from
+								+ "', '"
+								+ to
+								+ "','"
+								+ content
+								+ "','"
+								+ st + "')");
 		con.createStatement()
 				.executeUpdate(
 						"INSERT INTO message (friendName, userName, messageContent, messageTime) VALUES ('"
@@ -419,9 +427,6 @@ public class UserDataProxy implements IUserData {
 		con.createStatement().executeUpdate(sql);
 
 	}
-<<<<<<< HEAD
-	
-=======
 
 	@Override
 	public void updateAllUserStatus() throws SQLException {
@@ -448,5 +453,4 @@ public class UserDataProxy implements IUserData {
 			con.createStatement().executeUpdate(sql);
 		}
 	}
->>>>>>> tmp
 }

@@ -9,17 +9,10 @@
     return curVal;
   }
   function ChatHidden(){gs("ChatBody").display = "none";}
-  function ChatShow(){gs("ChatBody").display = "";}
+  function ChatShow(){gs("main").display = "";}
   function ChatClose(){gs("main").display = "none";}
-  function ChatSend(obj){
-    var o = obj.ChatValue;
-    if (o.value.length>0){
-      document.getElementById("ChatContent").innerHTML += "<strong>AkonËµ£º</strong>"+o.value+"<br/>";
-      o.value='';
-    }
-  }
 
-  if  (document.getElementById){
+  /*if  (document.getElementById){
     (
       function(){
         if (window.opera){ document.write("<input type='hidden' id='Q' value=' '>"); }
@@ -74,4 +67,4 @@
       
       }
     )();
-  }
+  }*/

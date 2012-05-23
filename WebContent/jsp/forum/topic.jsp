@@ -58,9 +58,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<span class="disabled">=></a>
 				</nav>
 				<input type="button" id="reply" value="回复主题" onclick="window.location.href='ForumControlServlet?func=reply&user=${udi.username}&id=${td.topicId}&listname=${tld.topicListName}&name=${td.topicName }'"/>
-				<%if(request.getSession().getAttribute("login").equals("0"))
+				<%--if(request.getSession().getAttribute("login").equals("0"))
 					out.println("<script>document.getElementById('reply').disabled='disabled';</script>");
-				%>
+				--%>
 			</header>
 			<article>
 				<table class="content">

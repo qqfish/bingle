@@ -16,6 +16,10 @@ public class TagDataList {
 		tag = t;
 	}
 	
+	public TagDataList() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public void addTagData(TagData tag){
 		this.tag.add(tag);
 	}

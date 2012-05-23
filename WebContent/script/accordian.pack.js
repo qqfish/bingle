@@ -4,6 +4,5 @@ eval((function(){a=" {3document5ByIdOgvv=8E!&&E!K32}o=E;E;v=parseIn
 function update(){
 	document.getElementById("diseasename").value = document.getElementById("name").innerHTML;
 	document.getElementById("content").value = document.getElementById("text").innerHTML;
-	alert(document.getElementById("content").value);
 	document.getElementById("form").submit();
 }

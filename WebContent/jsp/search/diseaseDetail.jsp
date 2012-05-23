@@ -20,7 +20,7 @@
 
 	<body id="index" class="home">
 		<header id="banner" class="body">
-			<h1><a href="index.jsp"><img src="img/logo.jpg"/></a></h1>
+			<h1><a href="index.jsp"><img src="/bingle/img/logo.jpg"/></a></h1>
 						
 			<nav>
 				<ul>

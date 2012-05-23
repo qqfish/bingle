@@ -63,10 +63,10 @@ public class BTalkControlServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String get = request.getParameter("get");
-		if(get.equals("message")){
+		final String username = (String) request.getSession().getAttribute("username");
 			//AsyncContext aCtx = request.startAsync(request, response);
 			final AsyncContext ctx = request.startAsync();
+			ctx.setTimeout(2*60*10000);
 			//IBTalkSystem ibs = new BTalkProxy();
 			new Thread(new Runnable() {  
 			        @Override  
@@ -76,29 +76,26 @@ public class BTalkControlServlet extends HttpServlet {
 			                    JSONArray jsonArray1 = new JSONArray();
 			                	JSONArray jsonArray2 = new JSONArray();
 			                    JSONObject json = new JSONObject();
-			                    List<Message> m = udp.getMessage("zy").getNewMessage();
-			                    for(int i=0;i<m.size();i++){
-			                		jsonArray1.add(m.get(i).getContent());
-			                		//jsonArray1.add(m.get(i).getTime());
-			                		jsonArray1.add(m.get(i).getFrom());
-			                		jsonArray2.add(jsonArray1);
-			                		jsonArray1.clear();
-			                	}
-			                    json.put("messages", jsonArray2);
-			                    System.out.println(json.toString());
-			                    synchronized (ctx) {
-			                           ctx.getResponse().getWriter().println(json.toString());  
-			                           ctx.complete();  
-			                        }
+			                    List<Message> m = udp.getMessage(username).getNewMessage();
+			                    if(m != null){
+			                    	for(int i=0;i<m.size();i++){
+				                		jsonArray1.add(m.get(i).getContent());
+				                		jsonArray1.add(m.get(i).getTime().toString());
+				                		jsonArray1.add(m.get(i).getFrom());
+				                		jsonArray2.add(jsonArray1);
+				                		jsonArray1.clear();
+				                	}
+				                    json.put("messages", jsonArray2);
+				                    synchronized (ctx) {
+				                           ctx.getResponse().getWriter().println(json.toString());  
+				                           ctx.complete();  
+				                        }
+			                    }
 			                } catch (Exception e) {  
 			                    throw new RuntimeException(e);  
 			                }
 			}
 			    }).start();
-	    }
-		else if(get.equals("friend")){
-			requestFriendList(/*(String) request.getSession().getAttribute("username"),*/"zy",request,response);
-		}
 	}
 
 	/**
@@ -116,8 +113,11 @@ public class BTalkControlServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
 		String func = request.getParameter("func");
-		if(func.equals("send")){
-		sendMessage(username,request.getParameter("name"),request.getParameter("content"));
+		if(func.equals("friend")){
+			requestFriendList(username,request,response);
+		}
+		else if(func.equals("send")){
+			sendMessage(username,request.getParameter("name"),request.getParameter("content"));
 		}
 		else if(func.equals("add")){
 			addFriend(username,request.getParameter("name"));
@@ -157,16 +157,15 @@ public class BTalkControlServlet extends HttpServlet {
 
 	public void requestFriendList(String username,HttpServletRequest request, HttpServletResponse response){
 		IBTalkSystem ibs = new BTalkProxy();
-		System.out.print(username);
 		try {
 			String s = "<ul>";
 			FriendList fl = ibs.getFriendList(username);
 			//UserDataProxy usp = new UserDataProxy();
 			//FriendList fl = usp.getFriendList(username);
 			for(int i=0;i<fl.getFriendList().size();i++)
-				s += "<li><a onclick='ChatShow()'>"+ fl.getFriendList().get(i) + "</a></li>";
+				s += "<li><a onclick='show();'>"+ fl.getFriendList().get(i) + "</a></li>";
 			if(fl.getFriendList().size()==0)
-				s += "<li><a>нч</a></li>";
+				s += "<li><a>none</a></li>";
 			s+="</ul>";
 			response.getWriter().print(s.trim());
 		} catch (SQLException | IOException e) {

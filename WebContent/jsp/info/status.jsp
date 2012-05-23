@@ -48,7 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<li><a href="/bingle/jsp/info/selfInfo.jsp">基本资料</a></li>
 				<li><a href="#" class="active">个人状态</a></li>
 				<li><a href="/bingle/jsp/info/disease.jsp">疾病情况</a></li>
-				<li><a href="#">管理标签</a></li>
+				<li><a href="/bingle/jsp/info/tag.jsp">管理标签</a></li>
 			</ul>
 		</nav>
 		

@@ -76,8 +76,7 @@ public class SearchControlServlet extends HttpServlet {
 		}
 		DiseaseShortInfoList result;
 
-		String website = "http://localhost:8080/bingle";
-		String currentWeb = website + "/SearchControlServlet?searchType=" + request.getParameter("searchType") + "&keyword=" + keyword;
+		String currentWeb = "SearchControlServlet?searchType=" + request.getParameter("searchType") + "&keyword=" + keyword;
 		int perPage = 25;
 		int page;
 
@@ -100,13 +99,17 @@ public class SearchControlServlet extends HttpServlet {
 			String table = "";
 			for (int i = 0; i < result.getDiseaseResult().size(); i++) {
 				table = table + "<tr class='search-result'>";
-				table = table + "<td><a href='" + website
-						+ "/SearchControlServlet?diseasename="
+				table = table + "<td><a href='SearchControlServlet?diseasename="
 						+ result.getDiseaseResult().get(i).getDiseasename() + "'>"
 						+ result.getDiseaseResult().get(i).getDiseasename() + "</a></td>";
 				table = table + "<td>";
 				for(int j = 0 ; j < result.getDiseaseResult().get(i).getTagname().size(); j++){
-					table = table +"<div class='tag'><a href='#'>" + result.getDiseaseResult().get(i).getTagname().get(j) + "</a></div>";
+					table = table
+							+ "<div class='tag'><a href='jsp/search/tag.jsp?KeepThis=true&TB_iframe=trueA&tagname="
+							+ result.getDiseaseResult().get(i).getTagname().get(j)
+							+ "'class='thickbox'>"
+							+ result.getDiseaseResult().get(i).getTagname().get(j) + "</a></div>";
+					//table = table +"<div class='tag'><a href='#'>" + result.getDiseaseResult().get(i).getTagname().get(j) + "</a></div>";
 				}
 				table = table + "</td>";
 			}
@@ -198,8 +201,7 @@ public class SearchControlServlet extends HttpServlet {
 		}
 		UserShortInfoList result;
 
-		String website = "http://localhost:8080/bingle";
-		String currentWeb = website + "/SearchControlServlet?searchType=" + request.getParameter("searchType") + "&keyword=" + keyword;
+		String currentWeb = "SearchControlServlet?searchType=" + request.getParameter("searchType") + "&keyword=" + keyword;
 		int perPage = 25;
 		int page;
 
@@ -224,8 +226,7 @@ public class SearchControlServlet extends HttpServlet {
 				UserShortInfo current = result.getUserResult().get(i); 
 				//username
 				table = table + "<tr class='search-result'>";
-				table = table + "<td><a href='" + website
-						+ "/SearchControlServlet?username="
+				table = table + "<td><a href='SearchControlServlet?username="
 						+ current.getUsername() + "'>"
 						+ current.getUsername() + "</a></td>";
 				//gender

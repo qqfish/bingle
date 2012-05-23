@@ -76,7 +76,8 @@ public class RegisterControlServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		request.getRequestDispatcher("/UpdateInfoControlServlet").forward(request, response);
+		request.getSession().setAttribute("username", request.getParameter("username"));
+		request.getRequestDispatcher("/UpdateInfoControlServlet?type=mainPage").forward(request, response);
 	}
 
 	/**

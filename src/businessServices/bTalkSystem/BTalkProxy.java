@@ -29,6 +29,8 @@ public class BTalkProxy implements IBTalkSystem{
 		MessageList ml = (MessageList) Global.cache().getCache(talkCache, to);
 		if(ml == null){
 			IUserData itf = new UserDataProxy();
+			System.out.println(from);
+			System.out.println(to);
 			itf.saveMessage(from, to, content);
 		} else{
 			ml.addMessage(from, content);

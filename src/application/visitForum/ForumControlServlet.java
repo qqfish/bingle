@@ -238,9 +238,9 @@ public class ForumControlServlet extends HttpServlet {
 				table += "<td class='list'><img src='/bingle/img/list.jpg'/></td><td class='textList'>"
 						+ "<a href='ForumControlServlet?func=topicList&topic=" + fl.getForumList().get(i).getTopicListName()
 						+ "'>" + fl.getForumList().get(i).getTopicListName() + "</a><br/>"
-						+ fl.getForumList().get(i).getTopicListName() + "</td>";
+						+ fl.getForumList().get(i).getTopicListName() + "</td><td class='tags'>";
 				for(int j=0;j<fl.getForumList().get(i).getTagName().size();j++){
-					table += "<td class='tags'><a href='#'>" + fl.getForumList().get(i).getTagName().get(i) + "</a>";
+					table += "<a href='#'>" + fl.getForumList().get(i).getTagName().get(i) + "</a>";
 					if(j!=fl.getForumList().get(i).getTagName().size() -1)
 						table += ",";
 				}

@@ -115,7 +115,7 @@ function checkEmail(){
 		document.getElementById("emailMsg").innerHTML="<font color='red'>× 请输入邮箱</font>";
 		return false;
 	}
-	else if(valid.test(document.getElementById("email")).value){
+	else if(valid.test(document.getElementById("email").value)){
 		emailFlag=true;
 		document.getElementById("emailMsg").innerHTML="<font color='green'>√</font>";
 		return true;
