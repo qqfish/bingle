@@ -26,7 +26,7 @@ public class DiseaseDataProxy implements IDiseaseData {
 	public DiseaseDataProxy() throws SQLException {
 		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 		con = DriverManager
-				.getConnection("jdbc:mysql://localhost/bingle?unicode=true&characterEncoding=UTF-8&user=root&password=123");
+				.getConnection("jdbc:mysql://localhost/bingleme?unicode=true&characterEncoding=UTF-8&user=root&password=zy102428");
 
 	}
 
@@ -87,8 +87,8 @@ public class DiseaseDataProxy implements IDiseaseData {
 		List<DiseaseShortInfo> ds = new ArrayList<DiseaseShortInfo>();
 		while (rs.next()) {
 			if (rs.isFirst()
-					|| ds.get(ds.size() - 1).getDiseasename() != rs
-							.getString("diseaseName")) {
+					|| !ds.get(ds.size() - 1).getDiseasename().equals(rs
+							.getString("diseaseName"))) {
 				ds.add(new DiseaseShortInfo(rs.getString("diseaseName")));
 			}
 			ds.get(ds.size() - 1).addTagname(rs.getString("tagName"));

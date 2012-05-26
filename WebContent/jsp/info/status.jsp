@@ -31,9 +31,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<nav>
 				<ul>
 					<li><a href="/bingle/SearchControlServlet?searchType=patients">病友</a></li>
-				<li><a href="/bingle/SearchControlServlet?searchType=diseases">病症</a></li>
+					<li><a href="/bingle/SearchControlServlet?searchType=diseases">病症</a></li>
 					<li><a href="ForumControlServlet?func=ini">交流区</a></li>
-					<li class="active"><a href="#">控制面板</a></li>
+					<% if(request.getSession().getAttribute("login").equals("1"))
+						out.println("<li class='active'><a href='jsp/info/selfInfo.jsp'>控制面板</a></li>");
+					%>
 				</ul>
 				<form action="/bingle/SearchControlServlet" id="search" method="get">
 				<input type="search" name="keyword" placeholder="Search this site">
@@ -45,10 +47,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		<nav id="infoNav" class="body" onmouseover='nowMouse="on";move();' onmouseout='nowMouse="off";move();' >
 			<ul>
-				<li><a href="selfInfo.jsp">基本资料</a></li>
-				<li><a href="status.jsp" class="active">个人状态</a></li>
-				<li><a href="#">疾病情况</a></li>
-				<li><a href="#">管理标签</a></li>
+				<li><a href="/bingle/jsp/info/selfInfo.jsp">基本资料</a></li>
+				<li><a href="/bingle/jsp/info/status.jsp" class="active">个人状态</a></li>
+				<li><a href="/bingle/UpdateInfoControlServlet?type=disease">疾病情况</a></li>
+				<li><a href="/bingle/UpdateInfoControlServlet?type=normalTag">管理标签</a></li>
 			</ul>
 		</nav>
 		

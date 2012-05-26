@@ -1,6 +1,7 @@
 package businessServices.wikiSystem;
 
 import java.sql.SQLException;
+
 import baseUse.Global;
 import baseUse.IDiseaseData;
 import baseUse.ITagData;
@@ -78,7 +79,4 @@ public class WikiProxy implements IWikiSystem {
 		ITagData itf = new TagDataProxy();
 		return itf.getTagData(tagname, typename);
 	}
-	
-
-
 }

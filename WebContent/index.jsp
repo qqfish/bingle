@@ -29,6 +29,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 <script src="script/check.js" charset="utf-8"></script>
   </head>
   
+  <%request.getSession().setAttribute("login", "0"); %>
+  
   <body id="index" class="home">
   	<header id="banner" class="body">
 		<h1><img src="img/logo.jpg"/></h1>

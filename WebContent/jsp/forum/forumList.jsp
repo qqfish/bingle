@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="GBK"%>
+<%@ page language="java" import="java.util.*,baseUse.forumData.ForumList" pageEncoding="GBK"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -29,8 +29,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<nav>
 				<ul>
 					<li><a href="/bingle/SearchControlServlet?searchType=patients">病友</a></li>
-				<li><a href="/bingle/SearchControlServlet?searchType=diseases">病症</a></li>
+					<li><a href="/bingle/SearchControlServlet?searchType=diseases">病症</a></li>
 					<li class="active"><a href="ForumControlServlet?func=ini">交流区</a></li>
+					<% if(request.getSession().getAttribute("login").equals("1"))
+						out.println("<li><a href='jsp/info/selfInfo.jsp'>控制面板</a></li>");
+					%>
 				</ul>
 				<form action="/bingle/SearchControlServlet" id="search" method="get">
 				<input type="search" name="keyword" placeholder="Search this site">
@@ -39,6 +42,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</form>
 			</nav>
 		</header>
+		<%
+		ForumList fl = (ForumList) request.getSession().getAttribute("fl");
+		
+		 %>
 		<section id="container" class="body">
 			<header class="forumHead">
 				<div class="forumTitle">
@@ -52,39 +59,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div id="selection">
 				<table>
 					<th>论坛列表</th>
-					<tr>
-						<td class="list"><img src="/bingle/img/list.jpg"/></td>
-						<td class="textList"><a href="ForumControlServlet?func=topicList&topic=${fl.forumList[0].topicListName}">${fl.forumList[0].topicListName}</a>
-						<br/>${fl.forumList[0].topicListName}</td>
-						<td class="tags">
-							<a href="#">${fl.forumList[0].tagName[0]}</a>,
-							<a href="#">标签</a>,
-							<a href="#">标签</a>
-						</td>
-						<td class="list"><img src="/bingle/img/list.jpg"/></td>
-						<td class="textList"><a href="#">感冒</a><br/>感冒了</td>
-						<td class="tags">
-							<a href="#">标签</a>,
-							<a href="#">标签</a>,
-							<a href="#">标签</a>
-						</td>
-					</tr>
-					<tr>
-						<td class="list"><img src="/bingle/img/list.jpg"/></td>
-						<td class="textList"><a href="ForumControlServlet">感冒</a><br/>感冒了</td>
-						<td class="tags">
-							<a href="#">标签</a>,
-							<a href="#">标签</a>,
-							<a href="#">标签</a>
-						</td>
-						<td class="list"><img src="/bingle/img/list.jpg"/></td>
-						<td class="textList"><a href="#">感冒了</a><br/>感冒了</td>
-						<td class="tags">
-							<a href="#">标签</a>,
-							<a href="#">标签</a>,
-							<a href="#">标签</a>
-						</td>
-					</tr>
+					${table}
 				</table>
 			</div>
 		</section>

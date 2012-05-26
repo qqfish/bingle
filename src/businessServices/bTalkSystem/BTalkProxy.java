@@ -39,12 +39,13 @@ public class BTalkProxy implements IBTalkSystem{
 
 	@Override
 	public MessageList getMessage(String username) {
+		
 		return (MessageList) Global.cache().getCache(talkCache, username);
 	}
 
 	@Override
 	public void logoutTalk(String username) {
-		// leave blank now to save the message for a while
+		// leave blank now save the message for a while
 		
 	}
 
@@ -60,6 +61,11 @@ public class BTalkProxy implements IBTalkSystem{
 		IUserData itf = new UserDataProxy();
 		itf.deleteFriend(username, friendname);
 		
+	}
+	
+	public static void main(String[] args) throws SQLException{
+		BTalkProxy a = new BTalkProxy();
+		a.sendMessage("aa", "yx", "aaaa");
 	}
 
 }

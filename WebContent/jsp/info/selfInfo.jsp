@@ -10,7 +10,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<title>个人资料</title>
 
 	<link rel="stylesheet" href="/bingle/css/selfInfo.css" type="text/css" />
+	<link rel="stylesheet" href="/bingle/css/star.css" type="text/css" />
+	<link rel="stylesheet" href="/bingle/css/talk.css" type="text/css" />
+	<link rel="stylesheet" href="/bingle/css/index.css" type="text/css" />
+	<script type="text/javascript" src="/bingle/script/jquery.js"></script>
 	<script type="text/javascript" src="/bingle/script/inNav.js"></script>
+	<script type="text/javascript" src="/bingle/script/star.js"></script>
+	<script type="text/javascript" src="/bingle/script/talk.js"></script>
+	<script type="text/javascript" src="/bingle/script/prototype.js"></script>
+	<script type="text/javascript" src="/bingle/script/effects.js"></script>
+	<script type="text/javascript" src="/bingle/script/side-bar.js"></script>
+	<script type="text/javascript" src="/bingle/script/chat.js"></script>
 	
 	<!--[if IE]>
 	 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -28,9 +38,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<nav>
 				<ul>
 					<li><a href="/bingle/SearchControlServlet?searchType=patients">病友</a></li>
-				<li><a href="/bingle/SearchControlServlet?searchType=diseases">病症</a></li>
-					<li><a href="ForumControlServlet?func=ini">交流区</a></li>
-					<li class="active"><a href="#">控制面板</a></li>
+					<li><a href="/bingle/SearchControlServlet?searchType=diseases">病症</a></li>
+					<li><a href="/bingle/ForumControlServlet?func=ini">交流区</a></li>
+					<% if(request.getSession().getAttribute("login").equals("1"))
+						out.println("<li class='active'><a href='jsp/info/selfInfo.jsp'>控制面板</a></li>");
+					%>
 				</ul>
 				<form action="/bingle/SearchControlServlet" id="search" method="get">
 				<input type="search" name="keyword" placeholder="Search this site">
@@ -43,15 +55,51 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<nav id="infoNav" class="body" onmouseover='nowMouse="on";move();' onmouseout='nowMouse="off";move();' >
 			<ul>
 				<li><a href="/bingle/UpdateInfoControlServlet?type=mainPage" class="active">基本资料</a></li>
-				<li><a href="#">个人状态</a></li>
+				<li><a href="/bingle/jsp/info/status.jsp">个人状态</a></li>
 				<li><a href="/bingle/UpdateInfoControlServlet?type=disease">疾病情况</a></li>
-				<li><a href="#">治疗过程</a></li>
-				<li><a href="#">管理标签</a></li>
+				<li><a href="/bingle/UpdateInfoControlServlet?type=normalTag" >管理标签</a></li>
 			</ul>
 		</nav>
 		
 		<section id="container" class="body">
-			<h3>基本资料</h3>
+			<h3>欢迎，${udi.username }!&nbsp&nbsp&nbsp记录您的状态吧!</h3>
+			<table>
+			<tr><th>身体状况</th>
+			<td><div class="dengji1">
+						<div class="xing1">
+						<ul>
+						<li rate="1">1</li>
+						<li rate="2">2</li>
+						<li rate="3">3</li>
+						<li rate="4">4</li>
+						<li rate="5">5</li>
+						</ul>
+						<div class="xing_chen1"></div>
+						</div>
+						</div>
+				</td>
+				<td><div class="xing_show1" rate=""><span>暂无</span></div>
+				</td>
+			</tr>
+			<tr><th>心理状况</th>
+			<td><div class="dengji">
+						<div class="xing">
+						<ul>
+						<li rate="1">1</li>
+						<li rate="2">2</li>
+						<li rate="3">3</li>
+						<li rate="4">4</li>
+						<li rate="5">5</li>
+						</ul>
+						<div class="xing_chen"></div>
+						</div>
+						</div>
+				</td>
+				<td><div class="xing_show" rate=""><span>暂无</span></div>
+				</td>
+			</tr>
+			</table>
+			
 			<table>
 				<tr>
 					<th>用户名</th>
@@ -63,30 +111,56 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</tr>
 				<tr>
 					<th>年龄</th>
-					<td>${udi.age}</td>
+					<td  id="age" contenteditable="true">${udi.age}</td>
 				</tr>
 				<tr>
 					<th>性别</th>
-					<td>${udi.gender?"女":"男"}</td>
+					<td  id="gender" contenteditable="true">${udi.gender?"女":"男"}</td>
 				</tr>
 				<tr>
 					<th>email</th>
-					<td>${udi.email}</td>
+					<td  id="email" contenteditable="true">${udi.email}</td>
 				</tr>
+				<tr>
+					<th>address</th>
+					<td  id="address" contenteditable="true">${udi.address}</td>
+				</tr>
+				<tr>
+					<td colspan=2><a href="#" onclick="baseUpdate();"><span>提交</span></a></td>
+				</tr>
+			</table>
+			<table>
 				<tr>
 					<th>现有疾病</th>
 					<td>${udi.userDiseaseInfo[0].diseaseName }</td>
-				</tr>	
-				<tr>
-					<th>身体状况</th>
-					<td><canvas></canvas></td>
 				</tr>
 				<tr>
-					<th>心理状况</th>
-					<td><canvas></canvas></td>
+					<td colspan=2>${udi.userDiseaseInfo[0].treatmentIntro }</td>
 				</tr>
 			</table>
 		</section>
+		
+	<div id="main" class="dragclass" style="display:none;">
+		<div id="ChatHead">
+			<span id="name"></span>
+			<a onclick="ChatClose();" ><img src="/bingle/img/close.gif" alt="关闭"/></a>
+		</div>
+		<div id="ChatBody">
+			<div id="ChatContent"></div>
+			<div id="ChatBtn">
+				<textarea id="ChatValue" rows="4" style="width:335px"></textarea>
+				<input type="image" src="/bingle/img/chat.gif" value="Chat" onclick="ChatAndSend();"/>
+			</div>
+		</div>
+	</div>
+		<div id="sideBar">
+		<a id="sideBarTab"><img src="/bingle/img/slide-button.gif" alt="sideBar" title="friends" /></a>
+		<div id="sideBarContents" style="display:none;">
+			<div id="sideBarContentsInner">
+				<h2>Friends</h2>
+			</div>
+		</div>
+		</div>
 
 		<footer id="about" class="body">
 			<p>blablabla</p>

@@ -109,13 +109,13 @@ function checkPassword(){
 }
 
 function checkEmail(){
-	var valid = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+	var valid = /^(\w)+@(\w)+(\.(\w)+){1,2}$/;
 	if(document.getElementById("email").value == ""){
 		emailFlag=false;
 		document.getElementById("emailMsg").innerHTML="<font color='red'>× 请输入邮箱</font>";
 		return false;
 	}
-	else if(valid.test(document.getElementById("email"))){
+	else if(valid.test(document.getElementById("email").value)){
 		emailFlag=true;
 		document.getElementById("emailMsg").innerHTML="<font color='green'>√</font>";
 		return true;

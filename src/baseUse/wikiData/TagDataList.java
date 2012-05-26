@@ -12,15 +12,15 @@ public class TagDataList {
 	 */
 	public List<TagData> tag;
 	
-	public TagDataList(){
-		tag = new ArrayList<TagData>();
-	}
-	
 	
 	public TagDataList(List<TagData> t){
 		tag = t;
 	}
 	
+	public TagDataList() {
+		tag = new ArrayList<TagData>();
+	}
+
 	public void addTagData(TagData tag){
 		this.tag.add(tag);
 	}

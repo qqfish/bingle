@@ -76,7 +76,7 @@ public class SearchControlServlet extends HttpServlet {
 		}
 		DiseaseShortInfoList result;
 
-		String website = "http://localhost:8080/bingle";
+		String website = "http://localhost:9090/bingle";
 		String currentWeb = website + "/SearchControlServlet?searchType=" + request.getParameter("searchType") + "&keyword=" + keyword;
 		int perPage = 25;
 		int page;
@@ -106,7 +106,12 @@ public class SearchControlServlet extends HttpServlet {
 						+ result.getDiseaseResult().get(i).getDiseasename() + "</a></td>";
 				table = table + "<td>";
 				for(int j = 0 ; j < result.getDiseaseResult().get(i).getTagname().size(); j++){
-					table = table +"<div class='tag'><a href='#'>" + result.getDiseaseResult().get(i).getTagname().get(j) + "</a></div>";
+					table = table
+							+ "<div class='tag'><a href='jsp/search/tag.jsp?KeepThis=true&TB_iframe=trueA&tagname="
+							+ result.getDiseaseResult().get(i).getTagname().get(j)
+							+ "'class='thickbox'>"
+							+ result.getDiseaseResult().get(i).getTagname().get(j) + "</a></div>";
+					//table = table +"<div class='tag'><a href='#'>" + result.getDiseaseResult().get(i).getTagname().get(j) + "</a></div>";
 				}
 				table = table + "</td>";
 			}
@@ -183,7 +188,7 @@ public class SearchControlServlet extends HttpServlet {
 		DiseaseDetailInfo result = itf.getDiseaseDetail(diseasename);
 		request.setAttribute("result", result);
 
-		String address = "jsp/search/diseaseDetail.jsp";
+		String address = "jsp/search/diseaseDetailResult.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(address);
 		dispatcher.forward(request, response);
 	}
@@ -198,7 +203,7 @@ public class SearchControlServlet extends HttpServlet {
 		}
 		UserShortInfoList result;
 
-		String website = "http://localhost:8080/bingle";
+		String website = "http://localhost:9090/bingle";
 		String currentWeb = website + "/SearchControlServlet?searchType=" + request.getParameter("searchType") + "&keyword=" + keyword;
 		int perPage = 25;
 		int page;

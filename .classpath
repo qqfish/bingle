@@ -12,28 +12,14 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/usr/share/jdbc-mysql/lib/jdbc-mysql.jar">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="/usr/share/jakarta-jstl/lib/jstl.jar">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="/usr/share/jakarta-jstl/lib/standard.jar">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="/home/fish/work/java/bingle/WebContent/WEB-INF/lib/commons-beanutils-1.8.0.jar"/>
-	<classpathentry kind="lib" path="/home/fish/work/java/bingle/WebContent/WEB-INF/lib/commons-collections-3.1.jar"/>
-	<classpathentry kind="lib" path="/home/fish/work/java/bingle/WebContent/WEB-INF/lib/commons-lang-2.5.jar"/>
-	<classpathentry kind="lib" path="/home/fish/work/java/bingle/WebContent/WEB-INF/lib/commons-logging-1.1.1.jar"/>
-	<classpathentry kind="lib" path="/home/fish/work/java/bingle/WebContent/WEB-INF/lib/ezmorph-1.0.6.jar"/>
-	<classpathentry kind="lib" path="/home/fish/work/java/bingle/WebContent/WEB-INF/lib/json-lib-2.4-jdk15.jar"/>
-	<classpathentry kind="lib" path="/home/fish/work/java/bingle/WebContent/WEB-INF/lib/json-lib-2.4-jdk15-javadoc.jar"/>
-	<classpathentry kind="lib" path="/home/fish/work/java/bingle/WebContent/WEB-INF/lib/json-lib-2.4-jdk15-sources.jar"/>
+	<classpathentry kind="lib" path="D:/mysql-connector-java-5.1.19/mysql-connector-java-5.1.19-bin.jar"/>
+	<classpathentry kind="lib" path="D:/json-lib-2.4-jdk15及其依赖jar包/commons-beanutils-1.8.0.jar"/>
+	<classpathentry kind="lib" path="D:/json-lib-2.4-jdk15及其依赖jar包/commons-collections-3.1.jar"/>
+	<classpathentry kind="lib" path="D:/json-lib-2.4-jdk15及其依赖jar包/commons-lang-2.5.jar"/>
+	<classpathentry kind="lib" path="D:/json-lib-2.4-jdk15及其依赖jar包/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="D:/json-lib-2.4-jdk15及其依赖jar包/ezmorph-1.0.6.jar"/>
+	<classpathentry kind="lib" path="D:/json-lib-2.4-jdk15及其依赖jar包/json-lib-2.4-jdk15.jar"/>
+	<classpathentry kind="lib" path="D:/json-lib-2.4-jdk15及其依赖jar包/json-lib-2.4-jdk15-javadoc.jar"/>
+	<classpathentry kind="lib" path="D:/json-lib-2.4-jdk15及其依赖jar包/json-lib-2.4-jdk15-sources.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

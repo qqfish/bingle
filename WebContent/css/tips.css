@@ -1,0 +1,55 @@
+@CHARSET "UTF-8";
+.container{
+	padding-left: 20px;
+	padding-right: 20px;
+	font-family: "微软雅黑","黑体";
+}
+.line{
+	border-style: double;
+	border-color: #CEF6CE;
+	margin-right: 15px;
+}
+#title{
+	display: inline;
+}
+#alter{
+	display: inline;
+	float: right;
+	margin-right: 15px;
+	margin-top: 2px;
+}
+.itemBox{
+	text-align: right;
+	margin-right: 15px;
+}
+.tip{
+	display: inline;
+	min-width: 40px;
+	text-align: center;
+	margin:2px;
+	background: #C64350;
+	color: #fff; 
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	box-shadow: 2px 2px 5px #333333;
+	-moz-box-shadow: 2px 2px 5px #333333;
+	-webkit-box-shadow: 2px 2px 5px #333333;
+}
+.item{
+	display: inline;
+	min-width: 40px;
+	text-align: center;
+	margin:2px;
+	background: #C64350;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	box-shadow: 2px 2px 5px #333333;
+	-moz-box-shadow: 2px 2px 5px #333333;
+	-webkit-box-shadow: 2px 2px 5px #333333;
+}
+.item a{
+	color: #fff;
+	text-decoration: none;
+}

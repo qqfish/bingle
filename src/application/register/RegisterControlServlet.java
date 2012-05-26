@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import baseUse.IUserData;
 import baseUse.UserBaseInfo;
@@ -76,6 +77,30 @@ public class RegisterControlServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		HttpSession session = request.getSession();
+		//groupName = udi.getGroupname();
+		//age = udi.getAge();
+		//address = udi.getAddress();
+		//email = udi.getEmail();
+		//gender = udi.getGender()?"Å®":"ÄÐ";
+		//mind = udi.getMindStatus();
+		//body = udi.getBodyStatus();
+		//disease = udi.getUserDiseaseInfo().get(udi.getUserDiseaseInfo().size()-1).getDiseaseName();
+		
+		session.setAttribute("username", request.getParameter("username"));
+		String type = "login";
+		request.setAttribute("type", type);
+		session.setAttribute("login", "1");
+		//request.setAttribute("groupname", groupName);
+		//request.setAttribute("age", age);
+		//request.setAttribute("address", address);
+		//request.setAttribute("email", email);
+		//request.setAttribute("gender", gender);
+		//request.setAttribute("disease", disease);
+		//request.setAttribute("mind", mind);
+		//request.setAttribute("body", body);
+		//session.setAttribute("udi", udi);
+		session.setAttribute("pageType", 1);
 		request.getRequestDispatcher("/UpdateInfoControlServlet").forward(request, response);
 	}
 

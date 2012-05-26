@@ -20,7 +20,7 @@ public class UserDataProxy implements IUserData {
 	public UserDataProxy() throws SQLException {
 		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 		con = DriverManager
-				.getConnection("jdbc:mysql://localhost/bingle?unicode=true&characterEncoding=UTF-8&user=root&password=123");
+				.getConnection("jdbc:mysql://localhost/bingleme?unicode=true&characterEncoding=UTF-8&user=root&password=zy102428");
 
 	}
 
@@ -134,6 +134,7 @@ public class UserDataProxy implements IUserData {
 			result.addMessage(rs.getString("friendName"),
 					rs.getString("messageContent"), rs.getDate("messageTime"));
 		}
+		con.createStatement().executeUpdate("DELETE FROM message WHERE userName = '" + username + "'");
 		rs.close();
 		return result;
 	}
@@ -419,6 +420,7 @@ public class UserDataProxy implements IUserData {
 		con.createStatement().executeUpdate(sql);
 
 	}
+
 
 	@Override
 	public void updateAllUserStatus() throws SQLException {

@@ -27,6 +27,9 @@
 				<li class="active"><a href="/bingle/SearchControlServlet?searchType=patients">病友</a></li>
 				<li><a href="/bingle/SearchControlServlet?searchType=diseases">病症</a></li>
 				<li><a href="ForumControlServlet?func=ini">交流区</a></li>
+				<% if(request.getSession().getAttribute("login").equals("1"))
+						out.println("<li><a href='jsp/info/selfInfo.jsp'>控制面板</a></li>");
+					%>
 			</ul>
 			<form action="/bingle/SearchControlServlet" id="search" method="get">
 				<input type="search" name="keyword" placeholder="Search this site">

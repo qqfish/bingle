@@ -87,6 +87,7 @@ public class LoginControlServlet extends HttpServlet {
 				session.setAttribute("username", userName);
 				String type = "login";
 				request.setAttribute("type", type);
+				session.setAttribute("login", "1");
 				//request.setAttribute("groupname", groupName);
 				//request.setAttribute("age", age);
 				//request.setAttribute("address", address);

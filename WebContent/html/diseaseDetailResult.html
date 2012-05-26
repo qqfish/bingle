@@ -6,6 +6,30 @@
 
 	<link rel="stylesheet" href="css/diseaseDetailResult.css" type="text/css" />
 	<script type="text/javascript" src="script/accordian.pack.js"></script>
+	<script src="script/libraries/RGraph.common.core.js" ></script>
+    <script src="script/libraries/RGraph.common.dynamic.js" ></script>
+    <script src="script/libraries/RGraph.common.tooltips.js" ></script>
+    <script src="script/libraries/RGraph.pie.js" ></script>
+    <script src="script/libraries/RGraph.common.key.js" ></script>
+    <script src="script/libraries/RGraph.common.effects.js" ></script>
+	<script>
+	function circle ()
+    {
+        // The data to be shown on the Pie chart
+        var data = [564,155,499,611,322];
+    
+        // Create the Pie chart. The arguments are the canvas ID and the data to be shown.
+        var pie = new RGraph.Pie('myPie', data);
+
+        // Configure the chart to look as you want.
+        pie.Set('chart.labels', ['Abc', 'Def', 'Ghi', 'Jkl', 'Mno']);
+        pie.Set('chart.linewidth', 5);
+        pie.Set('chart.stroke', 'white');
+        
+        // Call the .Draw() chart to draw the Pie chart.
+        pie.Draw();
+    }
+	</script>
 
 	<!--[if IE]>
 	 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -16,7 +40,7 @@
 	 <link rel="stylesheet" type="text/css" media="all" href="../css/ie6.css"/><![endif]-->
 	</head>
 
-	<body id="index" class="home" onload="new Accordian('basic-accordian',5,'header_highlight');">
+	<body id="index" class="home" onload="new Accordian('basic-accordian',5,'header_highlight');circle();">
 		<header id="banner" class="body">
 			<h1><img src="img/logo.jpg"/></h1>
 			<nav>
@@ -42,7 +66,7 @@
 				<br/>
 				<h3 class="title">相关药物</h3>
 				<hr class="line">
-				<p class="text">HTML色彩代码网站提供一件有关于色彩方面的免费工具，来帮助您查找贵站中的 HTML色彩 。功能卓越的 HTML色彩表格工具和 HTML色彩提取利器让这个过程易如反掌。要想在您的网站上快速使用 HTML色彩 ，请查阅 “如何使用HTML色彩代码？” 。如果您愿意学习 HTML色彩代码中字符组合的真实意思，请查阅 “HTML色彩代码理论”部分。网络安全色彩指的是通用于任何操作系统中的颜色清单。如果您患有色盲症疾病，可以阅读 HTML色彩名称来克服由看不清颜色所带来的困扰。</p>
+				<canvas id="myPie" width="400" height="300">[No canvas support]</canvas>
 			</div>
 			<div class="right">
 				<div id="basic-accordian" >
