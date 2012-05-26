@@ -50,8 +50,9 @@ jq(function(){
 			})
 		})
 		
-function update(){
-	window.location.href="UpdateInfoControlServlet?func=update&age=" + document.getElementById("age").value
-		+ "&gender=" + document.getElementById("gender").value + "&email=" + document.getElementById("email").value
-		+ "&address=" + document.getElementById("address").value;
+function baseUpdate(){
+	alert(document.getElementById("age").innerHTML);
+	//window.location.href="/bingle/UpdateInfoControlServlet?type=baseInfo&age=" + document.getElementById("age").value
+		//+ "&email=" + document.getElementById("email").value
+		//+ "&address=" + document.getElementById("address").value;
 }

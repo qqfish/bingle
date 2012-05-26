@@ -76,7 +76,8 @@ public class SearchControlServlet extends HttpServlet {
 		}
 		DiseaseShortInfoList result;
 
-		String currentWeb = "SearchControlServlet?searchType=" + request.getParameter("searchType") + "&keyword=" + keyword;
+		String website = "http://localhost:9090/bingle";
+		String currentWeb = website + "/SearchControlServlet?searchType=" + request.getParameter("searchType") + "&keyword=" + keyword;
 		int perPage = 25;
 		int page;
 
@@ -99,7 +100,8 @@ public class SearchControlServlet extends HttpServlet {
 			String table = "";
 			for (int i = 0; i < result.getDiseaseResult().size(); i++) {
 				table = table + "<tr class='search-result'>";
-				table = table + "<td><a href='SearchControlServlet?diseasename="
+				table = table + "<td><a href='" + website
+						+ "/SearchControlServlet?diseasename="
 						+ result.getDiseaseResult().get(i).getDiseasename() + "'>"
 						+ result.getDiseaseResult().get(i).getDiseasename() + "</a></td>";
 				table = table + "<td>";
@@ -186,7 +188,7 @@ public class SearchControlServlet extends HttpServlet {
 		DiseaseDetailInfo result = itf.getDiseaseDetail(diseasename);
 		request.setAttribute("result", result);
 
-		String address = "jsp/search/diseaseDetail.jsp";
+		String address = "jsp/search/diseaseDetailResult.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(address);
 		dispatcher.forward(request, response);
 	}
@@ -201,7 +203,8 @@ public class SearchControlServlet extends HttpServlet {
 		}
 		UserShortInfoList result;
 
-		String currentWeb = "SearchControlServlet?searchType=" + request.getParameter("searchType") + "&keyword=" + keyword;
+		String website = "http://localhost:9090/bingle";
+		String currentWeb = website + "/SearchControlServlet?searchType=" + request.getParameter("searchType") + "&keyword=" + keyword;
 		int perPage = 25;
 		int page;
 
@@ -226,7 +229,8 @@ public class SearchControlServlet extends HttpServlet {
 				UserShortInfo current = result.getUserResult().get(i); 
 				//username
 				table = table + "<tr class='search-result'>";
-				table = table + "<td><a href='SearchControlServlet?username="
+				table = table + "<td><a href='" + website
+						+ "/SearchControlServlet?username="
 						+ current.getUsername() + "'>"
 						+ current.getUsername() + "</a></td>";
 				//gender

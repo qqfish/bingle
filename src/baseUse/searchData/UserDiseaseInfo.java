@@ -17,7 +17,7 @@ public class UserDiseaseInfo {
 	public UserDiseaseInfo(String d, String t, String r, String tip,
 			List<String> drug) {
 		diseaseName = d;
-		treatmentIntro = r;
+		treatmentIntro = t;
 		reason = r;
 		tips = tip;
 		drugName = drug;

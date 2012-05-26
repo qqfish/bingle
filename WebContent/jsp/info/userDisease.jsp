@@ -32,7 +32,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<li><a href="/bingle/SearchControlServlet?searchType=patients">病友</a></li>
 					<li><a href="/bingle/SearchControlServlet?searchType=diseases">病症</a></li>
 					<li><a href="ForumControlServlet?func=ini">交流区</a></li>
-					<li class="active"><a href="#">控制面板</a></li>
+					<% if(request.getSession().getAttribute("login").equals("1"))
+						out.println("<li class='active'><a href='jsp/info/selfInfo.jsp'>控制面板</a></li>");
+					%>
 				</ul>
 				<form action="/bingle/SearchControlServlet" id="search" method="get">
 					<input type="search" name="keyword" placeholder="Search this site">
@@ -45,9 +47,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<nav id="infoNav" class="body" onmouseover='nowMouse="on";move();' onmouseout='nowMouse="off";move();' >
 			<ul>
 				<li><a href="/bingle/UpdateInfoControlServlet?type=mainPage">基本资料</a></li>
-				<li><a href="jsp/info/status.jsp">个人状态</a></li>
+				<li><a href="/bingle/jsp/info/status.jsp">个人状态</a></li>
 				<li><a href="/bingle/UpdateInfoControlServlet?type=disease" class="active">疾病情况</a></li>
-				<li><a href="#">管理标签</a></li>
+				<li><a href="/bingle/UpdateInfoControlServlet?type=normalTag" >管理标签</a></li>
 			</ul>
 		</nav>
 		
@@ -72,9 +74,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					%>
 					<div id="<%=result.getUserDiseaseInfo().get(i).getDiseaseName() %>-content">
 						<div class="accordion_child">
-							<h4>病症原因<span class="alter"><a href="#">编辑</a></span><h4/><br /><%=result.getUserDiseaseInfo().get(i).getReason() %><br/><br/>
-							<h4>个人治疗情况<span class="alter"><a href="#">编辑</a></span><h4/><br /><%=result.getUserDiseaseInfo().get(i).getTreatmentIntro() %><br/>
-							<h4>个人建议<span class="alter"><a href="#">编辑</a></span><h4/><br /><%=result.getUserDiseaseInfo().get(i).getTips() %><br/>
+							<form id="form" action="/bingle/UpdateInfoControlServlet?type=updateDisease" method="post">
+							<input type="hidden" name="diseasename" value="<%=result.getUserDiseaseInfo().get(i).getDiseaseName() %>">
+							<h4>病症原因<span class="alter"><input type="submit" value="编辑"></span></h4><br /><textarea rows="4" cols="117" name="reason"><%=result.getUserDiseaseInfo().get(i).getReason() %></textarea>
+							<h4>个人治疗情况<span class="alter"><input type="submit" value="编辑"></span></h4><br /><textarea rows="4" cols="117" name="treatment"><%=result.getUserDiseaseInfo().get(i).getTreatmentIntro() %></textarea>
+							<h4>个人建议<span class="alter"><input type="submit" value="编辑"></span></h4><br /><textarea rows="4" cols="117" name="tips"><%=result.getUserDiseaseInfo().get(i).getTips() %></textarea>
+							</form>
 						</div>
 					</div>
 					<%} %>

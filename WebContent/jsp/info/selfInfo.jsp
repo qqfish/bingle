@@ -12,6 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="/bingle/css/selfInfo.css" type="text/css" />
 	<link rel="stylesheet" href="/bingle/css/star.css" type="text/css" />
 	<link rel="stylesheet" href="/bingle/css/talk.css" type="text/css" />
+	<link rel="stylesheet" href="/bingle/css/index.css" type="text/css" />
 	<script type="text/javascript" src="/bingle/script/jquery.js"></script>
 	<script type="text/javascript" src="/bingle/script/inNav.js"></script>
 	<script type="text/javascript" src="/bingle/script/star.js"></script>
@@ -38,8 +39,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<ul>
 					<li><a href="/bingle/SearchControlServlet?searchType=patients">病友</a></li>
 					<li><a href="/bingle/SearchControlServlet?searchType=diseases">病症</a></li>
-					<li><a href="ForumControlServlet?func=ini">交流区</a></li>
-					<li class="active"><a href="#">控制面板</a></li>
+					<li><a href="/bingle/ForumControlServlet?func=ini">交流区</a></li>
+					<% if(request.getSession().getAttribute("login").equals("1"))
+						out.println("<li class='active'><a href='jsp/info/selfInfo.jsp'>控制面板</a></li>");
+					%>
 				</ul>
 				<form action="/bingle/SearchControlServlet" id="search" method="get">
 				<input type="search" name="keyword" placeholder="Search this site">
@@ -51,10 +54,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		<nav id="infoNav" class="body" onmouseover='nowMouse="on";move();' onmouseout='nowMouse="off";move();' >
 			<ul>
-				<li><a href="/bingle/jsp/info/selfInfo.jsp" class="active">基本资料</a></li>
+				<li><a href="/bingle/UpdateInfoControlServlet?type=mainPage" class="active">基本资料</a></li>
 				<li><a href="/bingle/jsp/info/status.jsp">个人状态</a></li>
-				<li><a href="/bingle/jsp/info/disease.jsp">疾病情况</a></li>
-				<li><a href="#">管理标签</a></li>
+				<li><a href="/bingle/UpdateInfoControlServlet?type=disease">疾病情况</a></li>
+				<li><a href="/bingle/UpdateInfoControlServlet?type=normalTag" >管理标签</a></li>
 			</ul>
 		</nav>
 		
@@ -123,7 +126,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td  id="address" contenteditable="true">${udi.address}</td>
 				</tr>
 				<tr>
-					<td colspan=2><a onclick="update();"><span>提交</span></a></td>
+					<td colspan=2><a href="#" onclick="baseUpdate();"><span>提交</span></a></td>
 				</tr>
 			</table>
 			<table>
@@ -137,7 +140,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</table>
 		</section>
 		
-		<div id="main" class="dragclass" style="display:none;">
+	<div id="main" class="dragclass" style="display:none;">
 		<div id="ChatHead">
 			<span id="name"></span>
 			<a onclick="ChatClose();" ><img src="/bingle/img/close.gif" alt="关闭"/></a>
@@ -146,7 +149,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div id="ChatContent"></div>
 			<div id="ChatBtn">
 				<textarea id="ChatValue" rows="4" style="width:335px"></textarea>
-				<input type="image" src="/bingle/img/chat.gif" value="Chat" onclick="ChatSend();"/>
+				<input type="image" src="/bingle/img/chat.gif" value="Chat" onclick="ChatAndSend();"/>
 			</div>
 		</div>
 	</div>

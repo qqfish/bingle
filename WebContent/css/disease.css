@@ -69,6 +69,7 @@ body {
 	width:90%;
 	z-index:2;
 	margin: auto;
+	
 }
 
 #title{
@@ -112,4 +113,15 @@ body {
 }
 .alter a:hover{
 	color: #FFF
+}
+
+#container h3{
+	text-align:center;
+	background:#C74451;
+	color: #fff;
+	font-size: 2em;
+	height: 40px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
 }

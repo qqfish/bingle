@@ -60,8 +60,9 @@ public class UpdateWikiControlServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		getTag(request.getParameter("tagname"),request,response);
 
+		System.out.println(request.getParameter("tagname"));
+		getTag(request.getParameter("tagname"),request,response);
 	}
 
 	/**
@@ -130,9 +131,7 @@ public class UpdateWikiControlServlet extends HttpServlet {
 		try {
 			PrintWriter out = response.getWriter();
 			TagDataProxy tdp = new TagDataProxy();		
-			//TagData td = tdp.getTagData(tagname,'n');
-			IWikiSystem iws = new WikiProxy();
-			TagData td = iws.getTagData(tagname, 'n');
+			TagData td = tdp.getTagData(tagname,'n');
 			JSONObject json = new JSONObject();
 			JSONArray jsonArray = new JSONArray();
 			json.put("tagname", tagname);

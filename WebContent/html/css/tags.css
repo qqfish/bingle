@@ -46,35 +46,41 @@
 	background: #fff;
 	margin-bottom: 2em;
 	overflow: hidden;
-	padding: 10px 10px 70px;
+	padding: 10px 10px 50px;
 	width: 75%;
 	font-family: "Î¢ÈíÑÅºÚ","ºÚÌå";
 	border-radius: 10px;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 }
-#table{
-	width: 60%;
-	text-align: center;
-	font-size: 16px;
-}
 .left,.right{
-	width: 30%;
-}
-.left option,.right option{
+	float: left;
+	width: 45%;
 	text-align: center;
+	height: 400px;
+	overflow: auto;
 }
-.left select,.right select{
-	width: 100%;
+.left{
+	margin-left: -10px;
+	padding-right: 60px;
+	border-right: 2px solid #ddd;
 }
-.middle{
-	width: 20%;
+.left ul,.right ul{
+	float: left;
+	width: 45%;
 	text-align: center;
+	list-style-type:none;
 }
-.left select,.right select{
+.delete{
+	position: relative;
+	top: 4px;
+	left: 50px;
+}
+.item{
 	min-width: 40px;
 	text-align: center;
-	margin: 2px 10px 2px 10px;
+	margin:2px;
+	background: #C64350;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
@@ -82,7 +88,11 @@
 	-moz-box-shadow: 2px 2px 5px #333333;
 	-webkit-box-shadow: 2px 2px 5px #333333;
 }
-#alter{
-	text-align: right;
-	margin-right: 100px;
+#container ul a{
+	font-size: 16px;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+#container li{
+	margin-bottom: 5px;
 }

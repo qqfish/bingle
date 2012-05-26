@@ -1,5 +1,6 @@
 package baseUse.wikiData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TagDataList {
@@ -17,7 +18,7 @@ public class TagDataList {
 	}
 	
 	public TagDataList() {
-		// TODO Auto-generated constructor stub
+		tag = new ArrayList<TagData>();
 	}
 
 	public void addTagData(TagData tag){

@@ -46,9 +46,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="forumTitle">
 					<a href="index.jsp">病了么</a>
 					 - 
-					<a href="#">病友论坛</a>
+					<a href="ForumControlServlet?func=ini">病友论坛</a>
 					 -
-					<a href="#">${tld.topicListName}</a>
+					<a href="/bingle/ForumControlServlet?func=topicList&topic=${tld.topicListName}">${tld.topicListName}</a>
 					 -
 					<a href="#">${td.topicName}</a>
 				</div>
@@ -58,9 +58,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<span class="disabled">=></a>
 				</nav>
 				<input type="button" id="reply" value="回复主题" onclick="window.location.href='ForumControlServlet?func=reply&user=${udi.username}&id=${td.topicId}&listname=${tld.topicListName}&name=${td.topicName }'"/>
-				<%--if(request.getSession().getAttribute("login").equals("0"))
+				<%if(request.getSession().getAttribute("login").equals("0"))
 					out.println("<script>document.getElementById('reply').disabled='disabled';</script>");
-				--%>
+				%>
 			</header>
 			<article>
 				<table class="content">

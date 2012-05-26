@@ -85,9 +85,9 @@ public class LoginControlServlet extends HttpServlet {
 				//disease = udi.getUserDiseaseInfo().get(udi.getUserDiseaseInfo().size()-1).getDiseaseName();
 				
 				session.setAttribute("username", userName);
-				session.setAttribute("login", "1");
 				String type = "login";
 				request.setAttribute("type", type);
+				session.setAttribute("login", "1");
 				//request.setAttribute("groupname", groupName);
 				//request.setAttribute("age", age);
 				//request.setAttribute("address", address);

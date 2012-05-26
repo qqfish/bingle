@@ -6,6 +6,9 @@
 	<title>查找病症</title>
 
 	<link rel="stylesheet" href="/bingle/css/search.css" type="text/css" />
+	<script type="text/javascript" src="script/jquery.js"></script>
+	<script type="text/javascript" src="script/thickbox.js"></script>
+<link rel="stylesheet" href="css/thickbox.css" type="text/css" media="screen" />
 
 	<!--[if IE]>
 	 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -25,6 +28,9 @@
 					<li><a href="/bingle/SearchControlServlet?searchType=patients">病友</a></li>
 					<li class="active"><a href="/bingle/SearchControlServlet?searchType=diseases">病症</a></li>
 					<li><a href="ForumControlServlet?func=ini">交流区</a></li>
+					<% if(request.getSession().getAttribute("login").equals("1"))
+						out.println("<li><a href='jsp/info/selfInfo.jsp'>控制面板</a></li>");
+					%>
 				</ul>
 				<form action="/bingle/SearchControlServlet" id="search" method="get">
 				<input type="search" name="keyword" placeholder="Search this site">

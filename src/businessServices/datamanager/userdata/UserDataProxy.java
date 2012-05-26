@@ -132,8 +132,9 @@ public class UserDataProxy implements IUserData {
 		MessageList result = new MessageList();
 		while (rs.next()) {
 			result.addMessage(rs.getString("friendName"),
-					rs.getString("messageContent"), rs.getTimestamp("messageTime"));
+					rs.getString("messageContent"), rs.getDate("messageTime"));
 		}
+		con.createStatement().executeUpdate("DELETE FROM message WHERE userName = '" + username + "'");
 		rs.close();
 		return result;
 	}
@@ -152,14 +153,6 @@ public class UserDataProxy implements IUserData {
 			throws SQLException {
 		Date now = new Date();
 		Timestamp st = new Timestamp(now.getTime());
-		System.out.println("INSERT INTO message (friendName, userName, messageContent, messageTime) VALUES ('"
-								+ from
-								+ "', '"
-								+ to
-								+ "','"
-								+ content
-								+ "','"
-								+ st + "')");
 		con.createStatement()
 				.executeUpdate(
 						"INSERT INTO message (friendName, userName, messageContent, messageTime) VALUES ('"
@@ -427,6 +420,7 @@ public class UserDataProxy implements IUserData {
 		con.createStatement().executeUpdate(sql);
 
 	}
+
 
 	@Override
 	public void updateAllUserStatus() throws SQLException {

@@ -163,7 +163,7 @@ public class BTalkControlServlet extends HttpServlet {
 			//UserDataProxy usp = new UserDataProxy();
 			//FriendList fl = usp.getFriendList(username);
 			for(int i=0;i<fl.getFriendList().size();i++)
-				s += "<li><a onclick='show();'>"+ fl.getFriendList().get(i) + "</a></li>";
+				s += "<li><a onclick='ddd(this.innerHTML);' >"+ fl.getFriendList().get(i) + "</a></li>";
 			if(fl.getFriendList().size()==0)
 				s += "<li><a>none</a></li>";
 			s+="</ul>";

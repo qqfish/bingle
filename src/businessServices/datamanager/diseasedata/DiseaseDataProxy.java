@@ -87,8 +87,8 @@ public class DiseaseDataProxy implements IDiseaseData {
 		List<DiseaseShortInfo> ds = new ArrayList<DiseaseShortInfo>();
 		while (rs.next()) {
 			if (rs.isFirst()
-					|| ds.get(ds.size() - 1).getDiseasename() != rs
-							.getString("diseaseName")) {
+					|| !ds.get(ds.size() - 1).getDiseasename().equals(rs
+							.getString("diseaseName"))) {
 				ds.add(new DiseaseShortInfo(rs.getString("diseaseName")));
 			}
 			ds.get(ds.size() - 1).addTagname(rs.getString("tagName"));
