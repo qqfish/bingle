@@ -103,6 +103,27 @@ public class UpdateInfoControlServlet extends HttpServlet {
 				else if(type.equals("addNormalTag")){
 					addUserTag(request, response);
 				}
+				else if(type.equals("addFriend")){
+					addFriend(request, response);
+				}
+				else if(type.equals("deleteFriend")){
+					deleteFriend(request, response);
+				}
+				else if(type.equals("addUserDisease")){
+					addUserDisease(request, response);
+				}
+				else if(type.equals("deleteUserDisease")){
+					deleteUserDisease(request, response);
+				}
+				else if(type.equals("updateDiseaseDrug")){
+					updateDiseaseDrug(request, response);
+				}
+				else if(type.equals("deleteDiseaseDrug")){
+					deleteDiseaseDrug(request, response);
+				}
+				else if(type.equals("addDiseaseDrug")){
+					addDiseaseDrug(request, response);
+				}
 				else{
 					response.sendRedirect("error404.jsp");
 				}
@@ -186,23 +207,32 @@ public class UpdateInfoControlServlet extends HttpServlet {
 		diseasePage(request, response);
 	}
 	
-	private void deleteUserDisease(HttpServletRequest request, HttpServletResponse response) throws SQLException{
+	private void deleteUserDisease(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException{
 		IUserData itf = new UserDataProxy();
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
 		String diseasename = request.getParameter("diseasename");
 		itf.deleteUserDisease(username, diseasename);
+		
+		getInfo(request, response);
+		
+		diseasePage(request, response);
 	}
 	
-	private void addUserDisease(HttpServletRequest request, HttpServletResponse response) throws SQLException{
+	private void addUserDisease(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException{
 		IUserData itf = new UserDataProxy();
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
 		String diseasename = request.getParameter("diseasename");
-		String treatmentIntro = request.getParameter("treatmentIntro");
-		String reason = request.getParameter("reason");
-		String tips = request.getParameter("tips");
-		itf.addUserDisease(username, diseasename, treatmentIntro, reason, tips);
+		itf.addUserDisease(username, diseasename, "", "", "");
+		
+		getInfo(request, response);
+		
+		String url ="/SearchControlServlet?diseasename=" + diseasename;
+		System.out.println(url);
+		
+		request.getRequestDispatcher(url).forward(request, response);		
+		
 	}
 	
 	private void addUserTag(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException{
@@ -261,5 +291,70 @@ public class UpdateInfoControlServlet extends HttpServlet {
 		drug.add(drugname);
 		itf.deleteUserDiseaseDrug(username, diseasename, drug);
 	}
-
+	
+	private void addFriend(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException{
+		IUserData itf = new UserDataProxy();
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("username");
+		String friendname = request.getParameter("friendname");
+		
+		itf.addFriend(username, friendname);
+		String url = request.getParameter("url");
+		request.getRequestDispatcher(url).forward(request, response);
+	}
+	
+	private void deleteFriend(HttpServletRequest request, HttpServletResponse response) throws SQLException{
+		IUserData itf = new UserDataProxy();
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("username");
+		String friendname = request.getParameter("friendname");
+		
+		itf.deleteFriend(username, friendname);
+	}
+	
+	private void updateDiseaseDrug(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
+		String diseasenum = request.getParameter("diseasenum");
+		request.setAttribute("diseasenum", diseasenum);
+		
+		ITagData itf = new TagDataProxy();
+		List<String> drug = itf.searchTagName("",'D');
+		request.setAttribute("drug", drug);
+		UserDetailInfo udi = (UserDetailInfo) request.getSession().getAttribute("udi");
+		System.out.println(udi.getUserDiseaseInfo().get(Integer.valueOf(diseasenum)).getDrugName());
+		//System.out.println(drug);
+		request.getRequestDispatcher("/jsp/info/diseaseTag.jsp").forward(request, response);
+	}
+	
+	private void deleteDiseaseDrug(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException{
+		IUserData itf = new UserDataProxy();
+		String username = (String) request.getSession().getAttribute("username");
+		UserDetailInfo udi = (UserDetailInfo) request.getSession().getAttribute("udi");
+		int diseasenum = Integer.valueOf(request.getParameter("diseasenum"));
+		String diseasename = udi.getUserDiseaseInfo().get(diseasenum).getDiseaseName();
+		String drug = request.getParameter("drugname");
+		List<String> drugname = new ArrayList();
+		drugname.add(drug);
+		itf.deleteUserDiseaseDrug(username, diseasename, drugname);
+		
+		getInfo(request, response);
+		
+		updateDiseaseDrug(request, response);
+		
+	}
+	
+	private void addDiseaseDrug(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException{
+		IUserData itf = new UserDataProxy();
+		String username = (String) request.getSession().getAttribute("username");
+		UserDetailInfo udi = (UserDetailInfo) request.getSession().getAttribute("udi");
+		int diseasenum = Integer.valueOf(request.getParameter("diseasenum"));
+		String diseasename = udi.getUserDiseaseInfo().get(diseasenum).getDiseaseName();
+		String drug = request.getParameter("drugname");
+		List<String> drugname = new ArrayList();
+		drugname.add(drug);
+		itf.addUserDiseaseDrug(username, diseasename, drugname);
+		
+		getInfo(request, response);
+		
+		updateDiseaseDrug(request, response);	
+	}
 }

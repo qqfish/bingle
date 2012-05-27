@@ -23,7 +23,7 @@ public class ForumDataProxy implements IForumData{
 	public ForumDataProxy() throws SQLException{
 		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 		con = DriverManager
-				.getConnection("jdbc:mysql://localhost/bingleme?user=root&password=zy102428");
+				.getConnection("jdbc:mysql://localhost/bingle?user=root&password=123");
 	}
 	
 	public void deleteReply(int[] replyId) throws SQLException{
@@ -123,15 +123,15 @@ public class ForumDataProxy implements IForumData{
 		
 	}
 	public ForumList getForumList() throws SQLException{
-		ForumList fl = new ForumList();
-		List<String> tagName = new ArrayList<String>();
+		ForumList fl = new ForumList();		
 		
 		sql = "select listName from topicList";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 		while(rs.next()){
+			List<String> tagName = new ArrayList<String>();
 			String ln = rs.getString("listName");
-			
+			System.out.println(ln);
 			String sql2 = "select tagName from forumTag where listName=?";
 			PreparedStatement ps2 = con.prepareStatement(sql2);
 			ps2.setString(1, ln);
@@ -183,5 +183,9 @@ public class ForumDataProxy implements IForumData{
 		ps.executeUpdate();
 		ps.close();
 	}	
-
+	public void visitTopic(int topicId) throws SQLException{
+		String sql2 = "UPDATE topic SET numView=numView+1 WHERE topicId=" + topicId;
+		con.createStatement().executeUpdate(sql2);
+	}
+	
 }

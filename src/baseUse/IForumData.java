@@ -15,4 +15,5 @@ public interface IForumData {
 	void newTopic(String topicName,String userName,String content,String topicListName) throws SQLException;
 	void newReply(String content,int topicId,String userName) throws SQLException;
 	void editReply(int replyId,String content) throws SQLException;
+	void visitTopic(int topicId) throws SQLException;
 }

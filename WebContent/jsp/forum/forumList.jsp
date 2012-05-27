@@ -24,15 +24,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	<body id="index" class="home">
 		<header id="banner" class="body">
-			<h1><a href="index.jsp"><img src="/bingle/img/logo.jpg"/></a></h1>
+			<h1><img src="/bingle/img/logo.jpg"/></h1>
 						
 			<nav>
 				<ul>
+					<%
+						if(!request.getSession().getAttribute("login").equals("1")){
+							out.println("<li><a href='/bingle/'>首页</a></li>");
+						}
+					%>
 					<li><a href="/bingle/SearchControlServlet?searchType=patients">病友</a></li>
 					<li><a href="/bingle/SearchControlServlet?searchType=diseases">病症</a></li>
-					<li class="active"><a href="ForumControlServlet?func=ini">交流区</a></li>
-					<% if(request.getSession().getAttribute("login").equals("1"))
+					<li class="active"><a href="/bingle/ForumControlServlet?func=ini">交流区</a></li>
+					<% if(request.getSession().getAttribute("login").equals("1")){
 						out.println("<li><a href='jsp/info/selfInfo.jsp'>控制面板</a></li>");
+						out.println("<li><a href='/bingle/LogoutControlServlet'>注销登录</a></li>");
+					}
 					%>
 				</ul>
 				<form action="/bingle/SearchControlServlet" id="search" method="get">

@@ -34,6 +34,7 @@ public class ForumProxy implements IForumSystem {
 		//if(result == null){
 			IForumData itf = new ForumDataProxy();
 			TopicDetail result = itf.getTopic(topicId);
+			itf.visitTopic(topicId);
 			//if(result != null){
 			//	Global.cache().insert("CurrentTopic", String.valueOf(topicId), result);
 			//}
@@ -87,7 +88,6 @@ public class ForumProxy implements IForumSystem {
 		IForumData itf = new ForumDataProxy();
 		itf.editReply(replyId, content);
 		//Global.cache().deleteCache("CurrentTopic", String.valueOf(topicId));
-	}
-	
+	}	
 
 }

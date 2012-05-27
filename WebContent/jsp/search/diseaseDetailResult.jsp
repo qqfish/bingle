@@ -7,7 +7,7 @@
 	<meta http-equiv="Content-Type" content="text/html;charset=gb2312">
 	<title>Disease Detail Result</title>
 
-	<link rel="stylesheet" href="css/diseaseDetailResult.css" type="text/css" />
+	<link rel="stylesheet" href="/bingle/css/diseaseDetailResult.css" type="text/css" />
 	<script type="text/javascript" src="script/accordian.pack.js"></script>
 	<script src="script/libraries/RGraph.common.core.js" ></script>
     <script src="script/libraries/RGraph.common.dynamic.js" ></script>
@@ -73,14 +73,21 @@
 
 	<body id="index" class="home" onload="new Accordian('basic-accordian',5,'header_highlight');circle();">
 		<header id="banner" class="body">
-			<h1><img src="img/logo.jpg"/></h1>
+			<h1><img src="/bingle/img/logo.jpg"/></h1>
 			<nav>
 				<ul>
+					<%
+						if(!request.getSession().getAttribute("login").equals("1")){
+							out.println("<li><a href='/bingle/'>首页</a></li>");
+						}
+					%>
 					<li><a href="/bingle/SearchControlServlet?searchType=patients">病友</a></li>
-					<li class="active"><a href="/bingle/SearchControlServlet?searchType=diseases">病症</a></li>
-					<li><a href="ForumControlServlet?func=ini">交流区</a></li>
-					<% if(request.getSession().getAttribute("login").equals("1"))
+					<li class='active'><a href="/bingle/SearchControlServlet?searchType=diseases">病症</a></li>
+					<li><a href="/bingle/ForumControlServlet?func=ini">交流区</a></li>
+					<% if(request.getSession().getAttribute("login").equals("1")){
 						out.println("<li><a href='jsp/info/selfInfo.jsp'>控制面板</a></li>");
+						out.println("<li><a href='/bingle/LogoutControlServlet'>注销登录</a></li>");
+					}
 					%>
 				</ul>
 				<form action="#" id="search" method="get">
@@ -93,6 +100,16 @@
 		<section id="container" class="body">
 			<div class="left">
 				<h3 class="title">${result.diseaseName}</h3>
+				<%
+					if(request.getSession().getAttribute("login").equals("1")){
+						if(request.getAttribute("hasDisease").equals(0)){
+							out.println("<a href='/bingle/UpdateInfoControlServlet?type=addUserDisease&diseasename=" + result.getDiseaseName() + "'>添加疾病</a>");
+						}
+						else{
+							out.println("<a href='/bingle/UpdateInfoControlServlet?type=disease'>查看我的病症</a>");
+						}
+					}
+				%>
 				<span id="alter"><a href="#">编辑</a></span>
 				<hr class="line">
 				<p class="text">${result.diseaseIntro}</p>

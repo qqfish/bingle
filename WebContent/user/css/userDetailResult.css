@@ -1,4 +1,4 @@
-@import url("reset.css");
+﻿@import url("reset.css");
 @import url("global-forms.css");
 
 #container {
@@ -14,6 +14,11 @@
 	margin:0;
 	padding:0;
 	list-style:none;
+}
+body {
+	font-family: "微软雅黑","黑体";
+	font-size: 12px;
+	margin:10px;
 }
 
 #basic-accordian{
@@ -55,19 +60,4 @@
 }
 .disease{
 	width:90%;
-}
-
-.tag{
-	min-width: 40px;
-	color: #fff;
-	float:left;
-	font-size: 15px;
-	margin: 2px;
-	background: #C64350;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-	box-shadow: 2px 2px 5px #333333;
-	-moz-box-shadow: 2px 2px 5px #333333;
-	-webkit-box-shadow: 2px 2px 5px #333333;
 }
