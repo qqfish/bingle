@@ -77,7 +77,6 @@ public class UpdateInfoControlServlet extends HttpServlet {
 			if(session.getAttribute("udi") == null){
 				getInfo(request, response);
 			}
-			System.out.println(type);
 			if(type == null){
 				response.sendRedirect("error404.jsp");
 			}
@@ -102,6 +101,12 @@ public class UpdateInfoControlServlet extends HttpServlet {
 				}
 				else if(type.equals("addNormalTag")){
 					addUserTag(request, response);
+				}
+				else if(type.equals("body")){
+					updateBodyStatus(request,response);
+				}
+				else if(type.equals("mind")){
+					updateMindStatus(request,response);
 				}
 				else{
 					response.sendRedirect("error404.jsp");
@@ -260,6 +265,52 @@ public class UpdateInfoControlServlet extends HttpServlet {
 		List<String> drug = new ArrayList<String>();
 		drug.add(drugname);
 		itf.deleteUserDiseaseDrug(username, diseasename, drug);
+	}
+	
+	private void updateBodyStatus(HttpServletRequest request, HttpServletResponse response){
+		IUserData itf;
+		try {
+			itf = new UserDataProxy();
+			String username = (String) request.getSession().getAttribute("username");
+			int rate = Integer.parseInt(request.getParameter("rate"));
+			if(itf.getDetailUserInfo(username).getBodyStatus()%10 == 0){
+				itf.updateBodyStatus(username, rate);
+			}
+			getInfo(request,response);
+			mainPage(request, response);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void updateMindStatus(HttpServletRequest request, HttpServletResponse response){
+		IUserData itf;
+		try {
+			itf = new UserDataProxy();
+			String username = (String) request.getSession().getAttribute("username");
+			int rate = Integer.parseInt(request.getParameter("rate"));
+			if(itf.getDetailUserInfo(username).getMindStatus() % 10 == 0){
+				itf.updateMindStatus(username, rate);
+			}
+			getInfo(request,response);
+			mainPage(request, response);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

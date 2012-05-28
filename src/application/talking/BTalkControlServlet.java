@@ -12,6 +12,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 import javax.servlet.AsyncContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebListener;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,7 +29,7 @@ import baseUse.bTalkData.MessageList;
 import businessServices.bTalkSystem.BTalkProxy;
 import businessServices.datamanager.userdata.UserDataProxy;
 
-@WebServlet(urlPatterns={"/BTalkControlServlet"}, asyncSupported=true)
+@WebServlet(urlPatterns={"/BTalkControlServlet"})
 public class BTalkControlServlet extends HttpServlet {
 
 	/**
@@ -63,20 +64,20 @@ public class BTalkControlServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		final String username = (String) request.getSession().getAttribute("username");
+		String username = (String) request.getSession().getAttribute("username");
 			//AsyncContext aCtx = request.startAsync(request, response);
-			final AsyncContext ctx = request.startAsync();
+			/*final AsyncContext ctx = request.startAsync();
 			ctx.setTimeout(2*60*10000);
-			//IBTalkSystem ibs = new BTalkProxy();
 			new Thread(new Runnable() {  
 			        @Override  
 			        public void run() {
-			                try {
+			        		try {
+			                	IBTalkSystem ibs = new BTalkProxy();
 			                	UserDataProxy udp = new UserDataProxy();
 			                    JSONArray jsonArray1 = new JSONArray();
 			                	JSONArray jsonArray2 = new JSONArray();
 			                    JSONObject json = new JSONObject();
-			                    List<Message> m = udp.getMessage(username).getNewMessage();
+			                    List<Message> m = ibs.getMessage(username).getNewMessage();
 			                    if(m != null){
 			                    	for(int i=0;i<m.size();i++){
 				                		jsonArray1.add(m.get(i).getContent());
@@ -88,14 +89,32 @@ public class BTalkControlServlet extends HttpServlet {
 				                    json.put("messages", jsonArray2);
 				                    synchronized (ctx) {
 				                           ctx.getResponse().getWriter().println(json.toString());  
-				                           ctx.complete();  
+				                           ctx.complete(); 
 				                        }
 			                    }
 			                } catch (Exception e) {  
 			                    throw new RuntimeException(e);  
 			                }
-			}
-			    }).start();
+			        }
+			    }).start();*/
+			IBTalkSystem ibs = new BTalkProxy();
+	        JSONArray jsonArray1 = new JSONArray();
+	    	JSONArray jsonArray2 = new JSONArray();
+	        JSONObject json = new JSONObject();
+	        List<Message> m = ibs.getMessage(username).getNewMessage();
+	        if(m != null)
+	        	System.out.println(m.get(0).getContent());
+	        if(m != null){
+	        	for(int i=0;i<m.size();i++){
+	        		jsonArray1.add(m.get(i).getContent());
+	        		jsonArray1.add(m.get(i).getTime().toString());
+	        		jsonArray1.add(m.get(i).getFrom());
+	        		jsonArray2.add(jsonArray1);
+	        		jsonArray1.clear();
+	        	}
+	            json.put("messages", jsonArray2);
+	            response.getWriter().println(json.toString());	        
+	        }
 	}
 
 	/**

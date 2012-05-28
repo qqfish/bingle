@@ -21,7 +21,7 @@ jq(function(){
 				}
 			})
 			jq(".xing1 ul li").click(function(){
-				window.location.href = "UpdateInfoControlServlet?func=body&rate=" + jq(".xing_show1").text();
+				window.location.href = "UpdateInfoControlServlet?type=body&rate=" + jq(this).text();
 			})
 		})
 jq(function(){
@@ -46,7 +46,7 @@ jq(function(){
 				}
 			})
 			jq(".xing ul li").click(function(){
-				window.location.href = "UpdateInfoControlServlet?func=mind&rate=" + jq(".xing_show").text();
+				window.location.href = "UpdateInfoControlServlet?type=mind&rate=" + jq(this).text();
 			})
 		})
 		

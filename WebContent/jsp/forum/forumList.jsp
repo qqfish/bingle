@@ -54,10 +54,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<a href="#">病友论坛</a>
 				</div>
 			</header>
-			
-			
 			<div id="selection">
 				<table>
+					<tr></tr>
 					<th>论坛列表</th>
 					${table}
 				</table>

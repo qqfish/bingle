@@ -9,12 +9,12 @@
 
 	<link rel="stylesheet" href="css/diseaseDetailResult.css" type="text/css" />
 	<script type="text/javascript" src="script/accordian.pack.js"></script>
-	<script src="script/libraries/RGraph.common.core.js" ></script>
-    <script src="script/libraries/RGraph.common.dynamic.js" ></script>
-    <script src="script/libraries/RGraph.common.tooltips.js" ></script>
-    <script src="script/libraries/RGraph.pie.js" ></script>
-    <script src="script/libraries/RGraph.common.key.js" ></script>
-    <script src="script/libraries/RGraph.common.effects.js" ></script>
+	<script src="script/RGraph/RGraph.common.core.js" ></script>
+    <script src="script/RGraph/RGraph.common.dynamic.js" ></script>
+    <script src="script/RGraph/RGraph.common.tooltips.js" ></script>
+    <script src="script/RGraph/RGraph.pie.js" ></script>
+    <script src="script/RGraph/RGraph.common.key.js" ></script>
+    <script src="script/RGraph/RGraph.common.effects.js" ></script>
 	<script>
 	function circle ()
     {

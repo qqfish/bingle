@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*,baseUse.searchData.UserDetailInfo" pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -14,13 +14,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="/bingle/css/talk.css" type="text/css" />
 	<link rel="stylesheet" href="/bingle/css/index.css" type="text/css" />
 	<script type="text/javascript" src="/bingle/script/jquery.js"></script>
-	<script type="text/javascript" src="/bingle/script/inNav.js"></script>
 	<script type="text/javascript" src="/bingle/script/star.js"></script>
 	<script type="text/javascript" src="/bingle/script/talk.js"></script>
 	<script type="text/javascript" src="/bingle/script/prototype.js"></script>
 	<script type="text/javascript" src="/bingle/script/effects.js"></script>
 	<script type="text/javascript" src="/bingle/script/side-bar.js"></script>
 	<script type="text/javascript" src="/bingle/script/chat.js"></script>
+	<script type="text/javascript" src="/bingle/script/inNav.js"></script>
 	
 	<!--[if IE]>
 	 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -63,8 +63,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		<section id="container" class="body">
 			<h3>欢迎，${udi.username }!&nbsp&nbsp&nbsp记录您的状态吧!</h3>
-			<table>
-			<tr><th>身体状况</th>
+			<table id="status">
+			<tr id="b"><th>身体状况</th>
 			<td><div class="dengji1">
 						<div class="xing1">
 						<ul>
@@ -81,7 +81,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<td><div class="xing_show1" rate=""><span>暂无</span></div>
 				</td>
 			</tr>
-			<tr><th>心理状况</th>
+			<tr id="m"><th>心理状况</th>
 			<td><div class="dengji">
 						<div class="xing">
 						<ul>
@@ -99,6 +99,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</td>
 			</tr>
 			</table>
+			
+			<%
+		UserDetailInfo udi = (UserDetailInfo) request.getSession().getAttribute("udi");
+		if((udi.getBodyStatus() % 10 != 0) && (udi.getMindStatus() % 10 != 0))
+			out.println("<script>document.getElementById('status').style.display='none';</script>");
+		else if(udi.getBodyStatus() % 10 != 0)
+			out.println("<script>document.getElementById('b').style.display='none';</script>");
+		else if(udi.getMindStatus() % 10 != 0)
+			out.println("<script>document.getElementById('m').style.display='none';</script>");
+		%>
 			
 			<table>
 				<tr>

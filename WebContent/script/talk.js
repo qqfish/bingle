@@ -1,5 +1,5 @@
 ﻿function getMessages() {  
-	var xhr;  
+	var xhr=false;  
     if(window.XMLHttpRequest) {  
         xhr = new XMLHttpRequest();  
     }  
@@ -16,16 +16,16 @@
             		document.getElementById("ChatContent")
             			.innerHTML += "<strong>" + json.messages[i][2] + "&nbsp" + json.messages[i][1] 
             				+ "</strong><br>" + json.messages[i][0] + "<br/>";
-            		getMessages();
             	}
-            }  
+            }
         }  
     };  
-    xhr.open("GET", "BTalkControlServlet?get=message",true);  
+    xhr.open("GET", "BTalkControlServlet",true);  
     xhr.send(null);
 }
+setInterval("getMessages();",5000);
 function getFriendList() {  
-    var xhr;  
+    var xhr = false;  
     if(window.XMLHttpRequest) {  
         xhr = new XMLHttpRequest();  
     }  
@@ -44,7 +44,7 @@ function getFriendList() {
     xhr.send(null);
 }
 function ChatAndSend(){
-	var xhr;  
+	var xhr = false;  
 	var o = document.getElementById("ChatValue");
 	   if (o.value.length>0){
 		   if(window.XMLHttpRequest) {  
@@ -53,9 +53,8 @@ function ChatAndSend(){
 		   else if(window.ActiveXObject) {  
 		      xhr = new ActiveXObject('Microsoft.XMLHTTP');  
 		   }
-		   xhr.open("POST", "BTalkControlServlet?func=send&name=" + document.getElementById("name").innerHTML + "&content=" + o.value,true);  
+		   xhr.open("POST", "BTalkControlServlet?func=send&name=" + encodeURI(document.getElementById("name").innerHTML) + "&content=" + encodeURI(o.value),true);  
 		   xhr.send(null);
-		   //alert(o.value);
 		   document.getElementById("ChatContent").innerHTML += "<strong>我&nbsp"+ (new Date()) +"</strong><br/>"+o.value+"<br/>";
 		   o.value='';
 	   }

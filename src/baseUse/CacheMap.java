@@ -46,7 +46,7 @@ public class CacheMap {
 	
 	public synchronized boolean updateOne(String key, Object element) {
 		if (!cacheMap.containsKey(key)) {
-			return false;
+			return insert(key,element);
 		} else {
 			CacheData cache = new CacheData(element);
 			cache.setHitNum((cacheMap.get(key).getHitNum() + 1));

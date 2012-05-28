@@ -231,14 +231,13 @@ public class ForumControlServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			IForumSystem fp = new ForumProxy( );
 			ForumList fl = fp.getForumList();
-			String table ="";
+			String table = "";
 			for(int i =0;i<fl.getForumList().size();i++){
 				if(i%2 == 0)
 					table += "<tr>";
 				table += "<td class='list'><img src='/bingle/img/list.jpg'/></td><td class='textList'>"
 						+ "<a href='ForumControlServlet?func=topicList&topic=" + fl.getForumList().get(i).getTopicListName()
-						+ "'>" + fl.getForumList().get(i).getTopicListName() + "</a><br/><td class='tags'>"
-						+ fl.getForumList().get(i).getTopicListName() + "</td>";
+						+ "'>" + fl.getForumList().get(i).getTopicListName() + "</a></td><br/><td class='tags'>";
 				for(int j=0;j<fl.getForumList().get(i).getTagName().size();j++){
 					table += "<a href='#'>" + fl.getForumList().get(i).getTagName().get(i) + "</a>";
 					if(j!=fl.getForumList().get(i).getTagName().size() -1)
