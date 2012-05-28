@@ -189,9 +189,11 @@ public class UserDataProxy implements IUserData {
 				usi.add(new UserShortInfo(rs.getString("userName"), rs
 						.getString("currentDisease"), rs.getShort("age"), rs
 						.getBoolean("gender")));
-				usi.get(usi.size() - 1).addTagname(rs.getString("tagName"));
+				if(rs.getString("tagType").equals("N"))
+					usi.get(usi.size() - 1).addTagname(rs.getString("tagName"));
 			} else {
-				usi.get(usi.size() - 1).addTagname(rs.getString("tagName"));
+				if(rs.getString("tagType").equals("N"))
+					usi.get(usi.size() - 1).addTagname(rs.getString("tagName"));
 			}
 		}
 		rs.close();
@@ -231,6 +233,7 @@ public class UserDataProxy implements IUserData {
 						+ userinfo.getUsername() + "','"
 						+ userinfo.getPassword() + "','" + userinfo.getEmail()
 						+ "','" + userinfo.getAge() + "','" + i + "')");
+		con.createStatement().executeUpdate("INSERT INTO userTag (userName,tagName,tagType) Values ('" + userinfo.getUsername() + "','null','A')");
 	}
 
 	/**
@@ -245,7 +248,7 @@ public class UserDataProxy implements IUserData {
 		Statement stDisease = con.createStatement();
 		Statement stDrug = con.createStatement();
 		ResultSet rsTag = stTag
-				.executeQuery("SELECT tagName FROM userTag WHERE userName = '"
+				.executeQuery("SELECT * FROM userTag WHERE userName = '"
 						+ username + "'");
 		ResultSet rsUser = stUser
 				.executeQuery("SELECT * FROM user WHERE userName = '"
@@ -271,13 +274,15 @@ public class UserDataProxy implements IUserData {
 						rsDrug.previous();
 						continue;
 					} else {
-						drug.add(rsDrug.getString("tagName"));
+						if(rsDrug.getString("tagType").equals("D"))
+							drug.add(rsDrug.getString("tagName"));
 					}
 				}			
 				while (rsDrug.next()
 						&& rsDrug.getString("diseaseName").equals(
 								rsDisease.getString("diseaseName"))) {
-					drug.add(rsDrug.getString("tagName"));
+					if(rsDrug.getString("tagType").equals("D"))
+						drug.add(rsDrug.getString("tagName"));
 				}
 			}
 			userDisease.add(new UserDiseaseInfo(rsDisease
@@ -289,7 +294,8 @@ public class UserDataProxy implements IUserData {
 		}
 		List<String> tags = new ArrayList<String>();
 		while (rsTag.next()) {
-			tags.add(rsTag.getString("tagName"));
+			if(rsTag.getString("tagType").equals("N"))
+				tags.add(rsTag.getString("tagName"));
 		}
 		rsTag.close();
 		rsDisease.close();
@@ -346,7 +352,7 @@ public class UserDataProxy implements IUserData {
 		Statement st = con.createStatement();
 		for (int i = 0; i < tagname.size(); i++) {
 			st.executeUpdate("INSERT INTO userTag (userName,tagName,tagType) VALUES ('"
-					+ username + "', '" + tagname.get(i) + "','n')");
+					+ username + "', '" + tagname.get(i) + "','N')");
 		}
 		st.close();
 	}
@@ -367,6 +373,7 @@ public class UserDataProxy implements IUserData {
 								+ reason
 								+ "','"
 								+ tips + "')");
+		con.createStatement().executeUpdate("INSERT INTO userTag (userName,tagName,tagType) VALUES ('" + username + "','" + diseasename + "','B')");
 
 	}
 
@@ -389,6 +396,8 @@ public class UserDataProxy implements IUserData {
 				+ "' and diseaseName = '" + diseasename + "'");
 		st.executeUpdate("DELETE FROM getDisease WHERE userName = '" + username
 				+ "' and diseaseName = '" + diseasename + "'");
+		st.executeUpdate("DELETE FROM userTag WHERE userName='" + username
+				+ "' and tagName='" + diseasename + "'");
 
 	}
 

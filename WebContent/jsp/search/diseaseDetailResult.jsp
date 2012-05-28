@@ -145,49 +145,7 @@
 					</div>
 					<%} %>
 					
-					<div id="test2-header" class="accordion_headings" >Addison</div>
-					<div id="test2-content">
-						<div class="accordion_child">
-						 年龄：１８<br/>
-						 性别：男 <br/>
-						 <a href="#">详细资料</a>
-						</div>
-					</div>
 					
-					<div id="test3-header" class="accordion_headings" >Baird</div>
-					<div id="test3-content">
-						<div class="accordion_child">
-						Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nunc ligula nisl, egestas non, pharetra vel, scelerisque accumsan, lacus. Proin nibh. Aenean dapibus. 
-						</div>
-					</div>
-					
-					<div id="test4-header" class="accordion_headings" >Bird</div>
-					<div id="test4-content">
-						<div class="accordion_child">
-						Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nunc ligula nisl, egestas non, pharetra vel, scelerisque accumsan, lacus. Proin nibh. Aenean dapibus. 
-						</div>
-					</div>
-					
-					<div id="test5-header" class="accordion_headings" >BigFace</div>
-					<div id="test5-content">
-						<div class="accordion_child">
-						Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nunc ligula nisl, egestas non, pharetra vel, scelerisque accumsan, lacus. Proin nibh. Aenean dapibus. 
-						</div>
-					</div>
-					
-					<div id="test6-header" class="accordion_headings" >BigBird</div>
-					<div id="test6-content">
-						<div class="accordion_child">
-						Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nunc ligula nisl, egestas non, pharetra vel, scelerisque accumsan, lacus. Proin nibh. Aenean dapibus. 
-						</div>
-					</div>
-					
-					<div id="test7-header" class="accordion_headings" >Small</div>
-					<div id="test7-content">
-						<div class="accordion_child">
-						Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nunc ligula nisl, egestas non, pharetra vel, scelerisque accumsan, lacus. Proin nibh. Aenean dapibus. 
-						</div>
-					</div>
 				</div>
 			</div>
 		</section>
