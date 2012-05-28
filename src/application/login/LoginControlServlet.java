@@ -88,6 +88,9 @@ public class LoginControlServlet extends HttpServlet {
 				String type = "login";
 				request.setAttribute("type", type);
 				session.setAttribute("login", "1");
+				if(userName.equals("admin")){
+					session.setAttribute("admin", "1");
+				}
 				//request.setAttribute("groupname", groupName);
 				//request.setAttribute("age", age);
 				//request.setAttribute("address", address);
@@ -97,11 +100,10 @@ public class LoginControlServlet extends HttpServlet {
 				//request.setAttribute("mind", mind);
 				//request.setAttribute("body", body);
 				//session.setAttribute("udi", udi);
-				session.setAttribute("pageType", 1);
 				request.getRequestDispatcher("/UpdateInfoControlServlet").forward(request, response);
 			}
 			else
-				response.sendRedirect("error404.jsp");
+				response.sendRedirect("index.jsp");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

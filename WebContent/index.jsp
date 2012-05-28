@@ -33,10 +33,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body id="index" class="home">
   	<header id="banner" class="body">
-		<h1><img src="img/logo.jpg"/></h1>
+		<h1><img src="/bingle/img/logo.jpg"/></h1>
 						
 		<nav>
 			<ul>
+				<li class="active"><a href="/bingle/">首页</a></li>
 				<li><a href="/bingle/SearchControlServlet?searchType=patients">病友</a></li>
 				<li><a href="/bingle/SearchControlServlet?searchType=diseases">病症</a></li>
 				<li><a href="ForumControlServlet?func=ini">交流区</a></li>

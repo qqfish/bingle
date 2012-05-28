@@ -1,83 +1,67 @@
 @import url("reset.css");
 @import url("global-forms.css");
 
-.forumHead{
-	margin-bottom:10px;
-	width:100%;
-}
-.forumTitle,.forumResult{
-	color:#000305;
-	background-color:#fff;
-	margin-bottom: 10px;
-	padding:5px;
-	border-color: #C74350;
-	border-width: 1px;
-	border-style: solid;
-	width:	98%;
-}
-.information td,.information th{
-	padding: 4px;
-	font-family: "Î¢ÈíÑÅºÚ","ºÚÌå";
-}
-.title{
-	font-size: 15px;
-	color: #FFFFFF;
-	background-color: #C74350;
-	text-align: center;
-}
-.alt{
-	background-color: #EAF2D3;
-}
-.left{
-	text-align: center;
-	width: 18%;
-	border-right-style: solid;
-	border-color: #FFFFFF;
-	border-width: 8px;
-}
-.right{
-	text-align: center;
-}
-.selfInfo{
-	width:70%;
-	margin: 15px 0px 0px 285px;
-}
-.diseaseInfo:nth-child(even){
-	width:70%;
-	margin: 0px 0px 0px 15px;
-}
-.diseaseInfo:nth-child(odd){
-	width:70%;
-	margin: 0px 0px 0px 285px;
-}
 #container {
-	background: #fff;
 	margin-bottom: 2em;
 	overflow: hidden;
 	padding: 20px 20px;
-	width: 1024px;
+	width: 75%;
 	border-radius: 10px;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 }
-#resultTitle{
-	background: #000;
-	font-family: "Î¢ÈíÑÅºÚ","ºÚÌå";
-	color: #fff;
-	height: 40px;
-	line-height: 30px;
-	margin: 0 auto 2em auto;
+* {
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+
+#basic-accordian{
+	padding:5px;
+	width:90%;
+	z-index:2;
+	margin:auto;
+}
+
+.accordion_headings{
+	padding:5px;
+	background:#000000;
+	color:#FFFFFF;
+	border:1px solid #FFF;
+	cursor:pointer;
+	font-weight:bold;
+}
+
+.accordion_headings:hover{
+	background:#C74451;
+}
+
+.accordion_child{
+	padding:15px;
+	background:#EEE;
 	text-align: center;
-	padding: 5px 0 0 0;
-	-moz-border-radius: 20px 20px 20px 20px;
-    -webkit-border-radius: 20px 20px 20px 20px;
-    border-radius: 20px 20px 20px 20px;
+}
+
+.header_highlight{
+	background:#C74451;
+}
+
+.tab_container *{
+	float:left;
+	width:100px;
+}
+.info{
+	width: 60%;
+}
+.disease{
+	width:90%;
 }
 
 .tag{
 	min-width: 40px;
 	color: #fff;
 	float:left;
+	font-size: 15px;
 	margin: 2px;
 	background: #C64350;
 	-moz-border-radius: 5px;

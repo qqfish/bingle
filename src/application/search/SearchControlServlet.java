@@ -1,4 +1,3 @@
-
 package application.search;
 
 import java.io.IOException;
@@ -9,12 +8,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import baseUse.*;
+import baseUse.bTalkData.FriendList;
 import baseUse.searchData.DiseaseDetailInfo;
 import baseUse.searchData.DiseaseShortInfoList;
 import baseUse.searchData.UserDetailInfo;
 import baseUse.searchData.UserShortInfo;
 import baseUse.searchData.UserShortInfoList;
+import businessServices.datamanager.userdata.UserDataProxy;
 import businessServices.searchSystem.SearchSystemProxy;
 
 /**
@@ -76,7 +79,7 @@ public class SearchControlServlet extends HttpServlet {
 		}
 		DiseaseShortInfoList result;
 
-		String website = "http://localhost:9090/bingle";
+		String website = "/bingle";
 		String currentWeb = website + "/SearchControlServlet?searchType=" + request.getParameter("searchType") + "&keyword=" + keyword;
 		int perPage = 25;
 		int page;
@@ -164,9 +167,24 @@ public class SearchControlServlet extends HttpServlet {
 			HttpServletResponse response) throws SQLException,
 			ServletException, IOException, ClassNotFoundException {
 		ISearchSystem itf = new SearchSystemProxy();
-		String username = request.getParameter("username");
-		UserDetailInfo result = itf.getDetailUserInfo(username);
+		String resultuser = request.getParameter("username");
+		UserDetailInfo result = itf.getDetailUserInfo(resultuser);
 		request.setAttribute("result", result);
+		
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("username");
+		if(username != null && session.getAttribute("login").equals("1")){
+			IUserData itfUser = new UserDataProxy();
+			FriendList fl = itfUser.getFriendList(username);
+			boolean hasFriend = false;
+			for(int i = 0; i < fl.getFriendList().size(); i++){
+				if(fl.getFriendList().get(i).equals(resultuser)){
+					hasFriend = true;
+					break;
+				}
+			}
+			request.setAttribute("hasFriend", hasFriend);
+		}
 		
 		//tag
 		String tag = "";
@@ -187,6 +205,20 @@ public class SearchControlServlet extends HttpServlet {
 		String diseasename = request.getParameter("diseasename");
 		DiseaseDetailInfo result = itf.getDiseaseDetail(diseasename);
 		request.setAttribute("result", result);
+		
+		HttpSession session = request.getSession();
+		int hasDisease = 0;
+		UserDetailInfo userInfo = (UserDetailInfo) session.getAttribute("udi");
+		if(userInfo != null && session.getAttribute("login").equals("1")){
+			for(int i = 0; i < userInfo.getUserDiseaseInfo().size(); i++){
+				if(userInfo.getUserDiseaseInfo().get(i).getDiseaseName().equals(diseasename)){
+					hasDisease = 1;					
+					break;
+				}
+			}
+		}
+		request.setAttribute("hasDisease", hasDisease);
+		
 
 		String address = "jsp/search/diseaseDetailResult.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(address);
@@ -203,7 +235,7 @@ public class SearchControlServlet extends HttpServlet {
 		}
 		UserShortInfoList result;
 
-		String website = "http://localhost:9090/bingle";
+		String website = "/bingle";
 		String currentWeb = website + "/SearchControlServlet?searchType=" + request.getParameter("searchType") + "&keyword=" + keyword;
 		int perPage = 25;
 		int page;

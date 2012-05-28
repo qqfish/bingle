@@ -52,41 +52,44 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		<nav id="infoNav" class="body" onmouseover='nowMouse="on";move();' onmouseout='nowMouse="off";move();' >
 			<ul>
-				<li><a href="/bingle/UpdateInfoControlServlet?type=mainPage" class="active">基本资料</a></li>
+				<li><a href="/bingle/UpdateInfoControlServlet?type=mainPage">基本资料</a></li>
 				<li><a href="/bingle/jsp/info/status.jsp">个人状态</a></li>
-				<li><a href="/bingle/UpdateInfoControlServlet?type=disease">疾病情况</a></li>
+				<li><a href="/bingle/UpdateInfoControlServlet?type=disease" class="active">疾病情况</a></li>
 			</ul>
 		</nav>
 		
 		<section id="container" class="body">
 			<br/>
 			<div class="left">
-				<h4>现有标签</h4>
+			<%
+			HttpSession sessionR = request.getSession();
+			UserDetailInfo result = (UserDetailInfo)sessionR.getAttribute("udi");
+			int diseasenum = Integer.valueOf((String)request.getAttribute("diseasenum"));
+			%>
+				<h4><%=result.getUserDiseaseInfo().get(diseasenum).getDiseaseName() %>的药物</h4>
 				<ul>
 					<%
-					HttpSession sessionR = request.getSession();
-					UserDetailInfo result = (UserDetailInfo)sessionR.getAttribute("udi");
-					for(int i = 0; i < result.getTags().size(); i++){	
-						if(i == result.getTags().size() / 2){
+					for(int i = 0; i < result.getUserDiseaseInfo().get(diseasenum).getDrugName().size(); i++){	
+						if(i == result.getUserDiseaseInfo().get(diseasenum).getDrugName().size() / 2){
 							out.println("</ul><ul>");
 						}
 					%>
-					<li><a href="#" class="item"><%=result.getTags().get(i) %></a><a href="/bingle/UpdateInfoControlServlet?type=deleteNormalTag&tagname=<%=result.getTags().get(i) %>"><img class="delete" src="/bingle/img/delete.png" alt="删除标签"></a></li>
+					<li><a href="#" class="item"><%=result.getUserDiseaseInfo().get(diseasenum).getDrugName().get(i) %></a><a href="/bingle/UpdateInfoControlServlet?type=deleteDiseaseDrug&diseasenum=<%=diseasenum %>&drugname=<%=result.getUserDiseaseInfo().get(diseasenum).getDrugName().get(i) %>"><img class="delete" src="/bingle/img/delete.png" alt="删除标签"></a></li>
 					<%} %>					
 				</ul>
 				<p>找不到想要的标签?<a href="#">点击</a>添加新标签</p>
 			</div>
 			<div class="right">
-				<h4>标签列表</h4>
+				<h4>药物列表</h4>
 				<ul>
 				<%
-				List<String> result1 = (List<String>) request.getAttribute("normalTag");
+				List<String> result1 = (List<String>) request.getAttribute("drug");
 				for(int i = 0; i < result1.size(); i++){
 					if(i == result1.size() / 2){
 						out.println("</ul><ul>");
 					}
 				%>
-					<li><a href="#" class="item"><%=result1.get(i) %></a><a href="/bingle/UpdateInfoControlServlet?type=addNormalTag&tagname=<%=result1.get(i) %>"><img class="delete" src="/bingle/img/add.png" alt="添加标签"></a></li>
+					<li><a href="#" class="item"><%=result1.get(i) %></a><a href="/bingle/UpdateInfoControlServlet?type=addDiseaseDrug&diseasenum=<%=diseasenum %>&drugname=<%=result1.get(i) %>"><img class="delete" src="/bingle/img/add.png" alt="添加标签"></a></li>
 				<%} %>
 			</div>
 		</section>

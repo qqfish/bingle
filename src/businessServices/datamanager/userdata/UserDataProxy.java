@@ -20,7 +20,7 @@ public class UserDataProxy implements IUserData {
 	public UserDataProxy() throws SQLException {
 		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 		con = DriverManager
-				.getConnection("jdbc:mysql://localhost/bingleme?unicode=true&characterEncoding=UTF-8&user=root&password=zy102428");
+				.getConnection("jdbc:mysql://localhost/bingle?unicode=true&characterEncoding=UTF-8&user=root&password=123");
 
 	}
 
@@ -260,31 +260,32 @@ public class UserDataProxy implements IUserData {
 		while (rsDisease.next()) {
 			List<String> drug = new ArrayList<String>();
 			if(rsDrug.next()){
-				rsDrug.previous();
 				if (!rsDrug.isBeforeFirst()) {
-					if (rsDrug.getString("diseaseName") != rsDisease
-							.getString("diseaseName")) {
+					if (!rsDrug.getString("diseaseName").equals(rsDisease
+							.getString("diseaseName"))) {
 						userDisease.add(new UserDiseaseInfo(rsDisease
 								.getString("diseaseName"), rsDisease
 								.getString("treatmentIntro"), rsDisease
 								.getString("reason"), rsDisease.getString("tips"),
 								drug));
+						rsDrug.previous();
 						continue;
 					} else {
 						drug.add(rsDrug.getString("tagName"));
 					}
+				}			
+				while (rsDrug.next()
+						&& rsDrug.getString("diseaseName").equals(
+								rsDisease.getString("diseaseName"))) {
+					drug.add(rsDrug.getString("tagName"));
 				}
-			}
-			while (rsDrug.next()
-					&& rsDrug.getString("diseaseName").equals(
-							rsDisease.getString("diseaseName"))) {
-				drug.add(rsDrug.getString("tagName"));
 			}
 			userDisease.add(new UserDiseaseInfo(rsDisease
 					.getString("diseaseName"), rsDisease
 					.getString("treatmentIntro"),
 					rsDisease.getString("reason"), rsDisease.getString("tips"),
 					drug));
+			rsDrug.previous();
 		}
 		List<String> tags = new ArrayList<String>();
 		while (rsTag.next()) {
@@ -402,7 +403,7 @@ public class UserDataProxy implements IUserData {
 					+ diseasename
 					+ "', '"
 					+ drugname.get(i)
-					+ "' ,'d')");
+					+ "' ,'D')");
 		}
 		st.close();
 	}

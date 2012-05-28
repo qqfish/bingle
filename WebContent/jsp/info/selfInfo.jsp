@@ -1,3 +1,4 @@
+
 <%@ page language="java" import="java.util.*,baseUse.searchData.UserDetailInfo" pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
@@ -37,11 +38,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						
 			<nav>
 				<ul>
+					<%
+						if(!request.getSession().getAttribute("login").equals("1")){
+							out.println("<li><a href='/bingle/'>首页</a></li>");
+						}
+					%>
 					<li><a href="/bingle/SearchControlServlet?searchType=patients">病友</a></li>
 					<li><a href="/bingle/SearchControlServlet?searchType=diseases">病症</a></li>
 					<li><a href="/bingle/ForumControlServlet?func=ini">交流区</a></li>
-					<% if(request.getSession().getAttribute("login").equals("1"))
+					<% if(request.getSession().getAttribute("login").equals("1")){
 						out.println("<li class='active'><a href='jsp/info/selfInfo.jsp'>控制面板</a></li>");
+						out.println("<li><a href='/bingle/LogoutControlServlet'>注销登录</a></li>");
+					}
 					%>
 				</ul>
 				<form action="/bingle/SearchControlServlet" id="search" method="get">
@@ -57,7 +65,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<li><a href="/bingle/UpdateInfoControlServlet?type=mainPage" class="active">基本资料</a></li>
 				<li><a href="/bingle/jsp/info/status.jsp">个人状态</a></li>
 				<li><a href="/bingle/UpdateInfoControlServlet?type=disease">疾病情况</a></li>
-				<li><a href="/bingle/UpdateInfoControlServlet?type=normalTag" >管理标签</a></li>
 			</ul>
 		</nav>
 		
@@ -101,16 +108,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</table>
 			
 			<%
-		UserDetailInfo udi = (UserDetailInfo) request.getSession().getAttribute("udi");
-		if((udi.getBodyStatus() % 10 != 0) && (udi.getMindStatus() % 10 != 0))
-			out.println("<script>document.getElementById('status').style.display='none';</script>");
-		else if(udi.getBodyStatus() % 10 != 0)
-			out.println("<script>document.getElementById('b').style.display='none';</script>");
-		else if(udi.getMindStatus() % 10 != 0)
-			out.println("<script>document.getElementById('m').style.display='none';</script>");
-		%>
+				UserDetailInfo udi = (UserDetailInfo) request.getSession().getAttribute("udi");
+				if((udi.getBodyStatus() % 10 != 0) && (udi.getMindStatus() % 10 != 0))
+					out.println("<script>document.getElementById('status').style.display='none';</script>");
+				else if(udi.getBodyStatus() % 10 != 0)
+					out.println("<script>document.getElementById('b').style.display='none';</script>");
+				else if(udi.getMindStatus() % 10 != 0)
+					out.println("<script>document.getElementById('m').style.display='none';</script>");
+			%>
 			
-			<table>
+			<table id="showInfo">
 				<tr>
 					<th>用户名</th>
 					<td>${udi.username}</td>
@@ -121,31 +128,49 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</tr>
 				<tr>
 					<th>年龄</th>
-					<td  id="age" contenteditable="true">${udi.age}</td>
+					<td>${udi.age}</td>
 				</tr>
 				<tr>
 					<th>性别</th>
-					<td  id="gender" contenteditable="true">${udi.gender?"女":"男"}</td>
+					<td>${udi.gender?"女":"男"}</td>
 				</tr>
 				<tr>
 					<th>email</th>
-					<td  id="email" contenteditable="true">${udi.email}</td>
+					<td>${udi.email}</td>
 				</tr>
 				<tr>
 					<th>address</th>
-					<td  id="address" contenteditable="true">${udi.address}</td>
+					<td>${udi.address}</td>
 				</tr>
-				<tr>
-					<td colspan=2><a href="#" onclick="baseUpdate();"><span>提交</span></a></td>
+				<tr class="showInfo">
+					<td colspan=2><a href="#" onclick="showBaseUpdate();"><span>修改</span></a></td>
 				</tr>
-			</table>
+				<form action="/bingle/UpdateInfoControlServlet" method="post" id="editInfoForm">
+					<ol>
+						<li>
+						<li>年龄<input type="text" name="age" value="${udi.age }"></li>
+						<li>email<input type="email" name="email" value="${udi.email }"></li>
+						<li>地址<input type="text" name="address" value="${udi.address }"></li>
+						<input type="hidden" name="type" value="baseInfo">
+						<li><input type="submit" value="确认修改"></li>
+					</ol>
+				</form>
+			</table>			
 			<table>
 				<tr>
-					<th>现有疾病</th>
-					<td>${udi.userDiseaseInfo[0].diseaseName }</td>
-				</tr>
-				<tr>
-					<td colspan=2>${udi.userDiseaseInfo[0].treatmentIntro }</td>
+					<th>个人标签</th>
+					<td>
+					<%
+					UserDetailInfo udi = (UserDetailInfo) request.getSession().getAttribute("udi");
+					for(int i = 0; i < udi.getTags().size(); i++){
+					%>
+						<div class="tag"><%=udi.getTags().get(i) %></div>
+					<%
+					}
+					%></td>
+					<td>
+					<a href="/bingle/UpdateInfoControlServlet?type=normalTag">管理标签</a>
+					</td>
 				</tr>
 			</table>
 		</section>
@@ -176,5 +201,4 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<p>blablabla</p>
 
 		</footer>
-		
 	</body>

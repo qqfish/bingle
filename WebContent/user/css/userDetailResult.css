@@ -1,0 +1,63 @@
+﻿@import url("reset.css");
+@import url("global-forms.css");
+
+#container {
+	margin-bottom: 2em;
+	overflow: hidden;
+	padding: 20px 20px;
+	width: 75%;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+* {
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+body {
+	font-family: "微软雅黑","黑体";
+	font-size: 12px;
+	margin:10px;
+}
+
+#basic-accordian{
+	padding:5px;
+	width:90%;
+	z-index:2;
+	margin:auto;
+}
+
+.accordion_headings{
+	padding:5px;
+	background:#000000;
+	color:#FFFFFF;
+	border:1px solid #FFF;
+	cursor:pointer;
+	font-weight:bold;
+}
+
+.accordion_headings:hover{
+	background:#C74451;
+}
+
+.accordion_child{
+	padding:15px;
+	background:#EEE;
+	text-align: center;
+}
+
+.header_highlight{
+	background:#C74451;
+}
+
+.tab_container *{
+	float:left;
+	width:100px;
+}
+.info{
+	width: 60%;
+}
+.disease{
+	width:90%;
+}

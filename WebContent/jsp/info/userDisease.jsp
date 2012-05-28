@@ -26,14 +26,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	<body id="index" class="home" onload="init();new Accordian('basic-accordian',5,'header_highlight');">
 		<header id="banner" class="body">
-			<h1><img src="img/logo.jpg"/></h1>			
+			<h1><img src="/bingle/img/logo.jpg"/></h1>
 			<nav>
 				<ul>
+					<%
+						if(!request.getSession().getAttribute("login").equals("1")){
+							out.println("<li><a href='/bingle/'>首页</a></li>");
+						}
+					%>
 					<li><a href="/bingle/SearchControlServlet?searchType=patients">病友</a></li>
 					<li><a href="/bingle/SearchControlServlet?searchType=diseases">病症</a></li>
 					<li><a href="ForumControlServlet?func=ini">交流区</a></li>
-					<% if(request.getSession().getAttribute("login").equals("1"))
+					<% if(request.getSession().getAttribute("login").equals("1")){
 						out.println("<li class='active'><a href='jsp/info/selfInfo.jsp'>控制面板</a></li>");
+						out.println("<li><a href='/bingle/LogoutControlServlet'>注销登录</a></li>");
+					}
 					%>
 				</ul>
 				<form action="/bingle/SearchControlServlet" id="search" method="get">
@@ -49,7 +56,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<li><a href="/bingle/UpdateInfoControlServlet?type=mainPage">基本资料</a></li>
 				<li><a href="/bingle/jsp/info/status.jsp">个人状态</a></li>
 				<li><a href="/bingle/UpdateInfoControlServlet?type=disease" class="active">疾病情况</a></li>
-				<li><a href="/bingle/UpdateInfoControlServlet?type=normalTag" >管理标签</a></li>
 			</ul>
 		</nav>
 		
@@ -64,9 +70,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				%>
 					<div id="<%=result.getUserDiseaseInfo().get(i).getDiseaseName() %>-header" class="accordion_headings header_highlight" ><%=result.getUserDiseaseInfo().get(i).getDiseaseName() %></div>
 					<%} %>
-					<div id="test2-header" class="accordion_headings" >发烧</div>
-					<div id="test3-header" class="accordion_headings" >头痛</div>
-					<div id="test4-header" class="accordion_headings" >胃病</div>
 				</div>
 				<div id="content">
 					<%
@@ -76,37 +79,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="accordion_child">
 							<form id="form" action="/bingle/UpdateInfoControlServlet?type=updateDisease" method="post">
 							<input type="hidden" name="diseasename" value="<%=result.getUserDiseaseInfo().get(i).getDiseaseName() %>">
+							<h4>药物服用<span class="alter"><a href="/bingle/UpdateInfoControlServlet?type=updateDiseaseDrug&diseasenum=<%=i %>">编辑药物</a></span></h4><br />
+							<%
+								for(int j = 0; j < result.getUserDiseaseInfo().get(i).getDrugName().size(); j++){
+							%>
+								<div class="tag"><%=result.getUserDiseaseInfo().get(i).getDrugName().get(j) %></div>
+							<%
+								}
+							%>
+							<br /><br/>
 							<h4>病症原因<span class="alter"><input type="submit" value="编辑"></span></h4><br /><textarea rows="4" cols="117" name="reason"><%=result.getUserDiseaseInfo().get(i).getReason() %></textarea>
 							<h4>个人治疗情况<span class="alter"><input type="submit" value="编辑"></span></h4><br /><textarea rows="4" cols="117" name="treatment"><%=result.getUserDiseaseInfo().get(i).getTreatmentIntro() %></textarea>
 							<h4>个人建议<span class="alter"><input type="submit" value="编辑"></span></h4><br /><textarea rows="4" cols="117" name="tips"><%=result.getUserDiseaseInfo().get(i).getTips() %></textarea>
 							</form>
+							<a href="/bingle/UpdateInfoControlServlet?type=deleteUserDisease&diseasename=<%=result.getUserDiseaseInfo().get(i).getDiseaseName() %>">删除该病</a>
 						</div>
 					</div>
-					<%} %>
-					<div id="test2-content">
-						<div class="accordion_child">
-							<h4>病症介绍<span class="alter"><a href="#">编辑</a></span><h4/><br />封姓缝匠，病恶寒，遍身无汗，循背脊之筋骨疼痛不能转侧，脉浮紧。余诊之曰：此外邪袭于皮毛，故恶寒无汗，况脉浮紧，证属麻黄，而项背强痛，因邪气已侵及背输经络，比之麻黄证更进一层，宜治以葛根汤。<br/>
-							葛根五钱麻黄三钱桂枝二钱白芍三钱甘草二钱生姜四片红枣四枚方意系借葛根之升提，达水液至皮肤，更佐麻黄之力，推运至毛孔之外。两解肌表，虽与桂枝二麻黄一汤同意，而用却不同。服后顷刻，觉背内微热，再服，背汗遂出，次及周身，安睡一宵，病遂告差。<br/><br/>
-							<h4>个人治疗情况<span class="alter"><a href="#">编辑</a></span><h4/><br />封姓缝匠，病恶寒，遍身无汗，循背脊之筋骨疼痛不能转侧，脉浮紧。余诊之曰：此外邪袭于皮毛，故恶寒无汗，况脉浮紧，证属麻黄，而项背强痛，因邪气已侵及背输经络，比之麻黄证更进一层，宜治以葛根汤。<br/>
-							葛根五钱麻黄三钱桂枝二钱白芍三钱甘草二钱生姜四片红枣四枚方意系借葛根之升提，达水液至皮肤，更佐麻黄之力，推运至毛孔之外。两解肌表，虽与桂枝二麻黄一汤同意，而用却不同。服后顷刻，觉背内微热，再服，背汗遂出，次及周身，安睡一宵，病遂告差。<br/>
-						</div>
-					</div>
-					<div id="test3-content">
-						<div class="accordion_child">
-							<h4>病症介绍<span class="alter"><a href="#">编辑</a></span><h4/><br />封姓缝匠，病恶寒，遍身无汗，循背脊之筋骨疼痛不能转侧，脉浮紧。余诊之曰：此外邪袭于皮毛，故恶寒无汗，况脉浮紧，证属麻黄，而项背强痛，因邪气已侵及背输经络，比之麻黄证更进一层，宜治以葛根汤。<br/>
-							葛根五钱麻黄三钱桂枝二钱白芍三钱甘草二钱生姜四片红枣四枚方意系借葛根之升提，达水液至皮肤，更佐麻黄之力，推运至毛孔之外。两解肌表，虽与桂枝二麻黄一汤同意，而用却不同。服后顷刻，觉背内微热，再服，背汗遂出，次及周身，安睡一宵，病遂告差。<br/><br/>
-							<h4>个人治疗情况<span class="alter"><a href="#">编辑</a></span><h4/><br />封姓缝匠，病恶寒，遍身无汗，循背脊之筋骨疼痛不能转侧，脉浮紧。余诊之曰：此外邪袭于皮毛，故恶寒无汗，况脉浮紧，证属麻黄，而项背强痛，因邪气已侵及背输经络，比之麻黄证更进一层，宜治以葛根汤。<br/>
-							葛根五钱麻黄三钱桂枝二钱白芍三钱甘草二钱生姜四片红枣四枚方意系借葛根之升提，达水液至皮肤，更佐麻黄之力，推运至毛孔之外。两解肌表，虽与桂枝二麻黄一汤同意，而用却不同。服后顷刻，觉背内微热，再服，背汗遂出，次及周身，安睡一宵，病遂告差。<br/>
-						</div>
-					</div>
-					<div id="test4-content">
-						<div class="accordion_child">
-							<h4>病症介绍<span class="alter"><a href="#">编辑</a></span><h4/><br />封姓缝匠，病恶寒，遍身无汗，循背脊之筋骨疼痛不能转侧，脉浮紧。余诊之曰：此外邪袭于皮毛，故恶寒无汗，况脉浮紧，证属麻黄，而项背强痛，因邪气已侵及背输经络，比之麻黄证更进一层，宜治以葛根汤。<br/>
-							葛根五钱麻黄三钱桂枝二钱白芍三钱甘草二钱生姜四片红枣四枚方意系借葛根之升提，达水液至皮肤，更佐麻黄之力，推运至毛孔之外。两解肌表，虽与桂枝二麻黄一汤同意，而用却不同。服后顷刻，觉背内微热，再服，背汗遂出，次及周身，安睡一宵，病遂告差。<br/><br/>
-							<h4>个人治疗情况<span class="alter"><a href="#">编辑</a></span><h4/><br />封姓缝匠，病恶寒，遍身无汗，循背脊之筋骨疼痛不能转侧，脉浮紧。余诊之曰：此外邪袭于皮毛，故恶寒无汗，况脉浮紧，证属麻黄，而项背强痛，因邪气已侵及背输经络，比之麻黄证更进一层，宜治以葛根汤。<br/>
-							葛根五钱麻黄三钱桂枝二钱白芍三钱甘草二钱生姜四片红枣四枚方意系借葛根之升提，达水液至皮肤，更佐麻黄之力，推运至毛孔之外。两解肌表，虽与桂枝二麻黄一汤同意，而用却不同。服后顷刻，觉背内微热，再服，背汗遂出，次及周身，安睡一宵，病遂告差。<br/>
-						</div>
-					</div>
+					<%} %>					
 				</div>
 			</div>
 		</section>
@@ -117,4 +106,3 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 	</body>
 </html>
-			

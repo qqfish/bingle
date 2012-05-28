@@ -1,20 +1,6 @@
 @import url("reset.css");
 @import url("global-forms.css");
 
-.forumHead{
-	margin-bottom:10px;
-	width:100%;
-}
-.forumTitle,.forumResult{
-	color:#000305;
-	background-color:#fff;
-	margin-bottom: 10px;
-	padding:5px;
-	border-color: #C74350;
-	border-width: 1px;
-	border-style: solid;
-	width:	98%;
-}
 #container {
 	font-family: "Î¢ÈíÑÅºÚ","ºÚÌå";
 	background: #fff;
@@ -60,11 +46,7 @@
 	padding:0;
 	list-style:none;
 }
-body {
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 11px;
-	margin:10px;
-}
+
 
 #basic-accordian{
 	padding:5px;

@@ -82,7 +82,7 @@ public class UpdateWikiControlServlet extends HttpServlet {
 			sendEditTag(request.getParameter("tagname"), request.getParameter("content"));
 		}
 		else if(func.equals("disease")){
-			sendEditDisease(request.getParameter("diseasename"),request.getParameter("content"));
+			//sendEditDisease(request,response);
 		}
 		else
 			response.sendRedirect("error404.jsp");
@@ -113,18 +113,15 @@ public class UpdateWikiControlServlet extends HttpServlet {
 		// Put your code here
 	}
 
-	public void sendEditDisease(String diseasename, String content){
+	public void sendEditDisease(HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException{
 		IWikiSystem iws = new WikiProxy();
-		DiseaseDataProxy ddp;
-		try {
-			ddp = new DiseaseDataProxy();
-			DiseaseDetailInfo ddl = ddp.getDiseaseDetail(diseasename);
-			if(!ddl.getDiseaseIntro().equals(content))
-				iws.sendEditDisease(new DiseaseData(diseasename, content, new Date(), 'c'));
-		} catch (SQLException | ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		DiseaseDataProxy ddp = new DiseaseDataProxy();
+		String diseasename = request.getParameter("diseasename");
+		String content = request.getParameter("content");
+		DiseaseDetailInfo ddl = ddp.getDiseaseDetail(diseasename);
+		if(!ddl.getDiseaseIntro().equals(content))
+			iws.sendEditDisease(new DiseaseData(diseasename, content, new Date(), 'c'));
+		
 	}
 
 	public void getTag(String tagname,HttpServletRequest request, HttpServletResponse response){

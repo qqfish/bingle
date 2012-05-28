@@ -57,12 +57,6 @@
 	padding:0;
 	list-style:none;
 }
-body {
-	font-family: "Î¢ÈíÑÅºÚ","ºÚÌå";
-	font-size: 12px;
-	margin: 10px;
-}
-
 #basic-accordian{
 	padding:5px;
 	width:90%;
@@ -111,4 +105,17 @@ body {
 }
 .alter a:hover{
 	color: #FFF
+}
+.tag{
+	min-width: 40px;
+	color: #fff;
+	float:left;
+	margin: 2px;
+	background: #C64350;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	box-shadow: 2px 2px 5px #333333;
+	-moz-box-shadow: 2px 2px 5px #333333;
+	-webkit-box-shadow: 2px 2px 5px #333333;
 }

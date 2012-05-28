@@ -50,9 +50,6 @@ jq(function(){
 			})
 		})
 		
-function baseUpdate(){
-	alert(document.getElementById("age").innerHTML);
-	//window.location.href="/bingle/UpdateInfoControlServlet?type=baseInfo&age=" + document.getElementById("age").value
-		//+ "&email=" + document.getElementById("email").value
-		//+ "&address=" + document.getElementById("address").value;
+function showBaseUpdate(){
+	
 }

@@ -20,7 +20,7 @@
 
 	<body id="index" class="home">
 		<header id="banner" class="body">
-			<h1><img href="#" src="/bingle/img/logo.jpg"></h1>
+			<h1><img src="/bingle/img/logo.jpg"/></h1>
 						
 			<nav>
 				<ul>
