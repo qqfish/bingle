@@ -100,7 +100,7 @@ public class RegisterControlServlet extends HttpServlet {
 		//request.setAttribute("mind", mind);
 		//request.setAttribute("body", body);
 		//session.setAttribute("udi", udi);
-		session.setAttribute("pageType", 1);
+		//session.setAttribute("pageType", 1);
 		request.getRequestDispatcher("/UpdateInfoControlServlet").forward(request, response);
 	}
 
