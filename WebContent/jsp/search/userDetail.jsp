@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <%@ page language="java"%>
 <%@ page import="baseUse.searchData.UserDetailInfo"%>
+<%@ page import="baseUse.bTalkData.FriendList"%>
 <html>
 	<head>
 	<meta http-equiv="Content-Type" content="text/html;charset=gb2312">
@@ -8,6 +9,9 @@
 
 	<link rel="stylesheet" href="/bingle/css/userDetailResult.css" type="text/css" />
 	<script type="text/javascript" src="/bingle/script/accordian.pack.js"></script>
+	<script type="text/javascript" src="/bingle/script/RGraph/RGraph.common.core.js" ></script>
+	<script type="text/javascript" src="/bingle/script/RGraph/RGraph.line.js" ></script>
+	<script type="text/javascript" src="/bingle/script/draw.js"></script>
 
 	<!--[if IE]>
 	 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -18,13 +22,14 @@
 	 <link rel="stylesheet" type="text/css" media="all" href="../css/ie6.css"/><![endif]-->
 	</head>
 
-	<body id="index" class="home" onload="new Accordian('basic-accordian',5,'header_highlight');">
+	<body id="index" class="home" onload="new Accordian('basic-accordian',5,'header_highlight');drawBody(${udi.bodyStatus });drawMind(${udi.mindStatus });">
 		<header id="banner" class="body">
 			<h1><img src="/bingle/img/logo.jpg"/></h1>
 						
 			<nav>
 				<ul>
 					<%
+						UserDetailInfo result = (UserDetailInfo) request.getAttribute("result");
 						if(!request.getSession().getAttribute("login").equals("1")){
 							out.println("<li><a href='/bingle/'>首页</a></li>");
 						}
@@ -61,7 +66,30 @@
 					<table class="info">
 						<tr>
 							<td>用户名:</td>
-							<td>${result.username }</td>
+							<td>${result.username }
+							<%
+							if(request.getSession().getAttribute("login").equals("1") && !request.getSession().getAttribute("username").equals(result.getUsername())){
+								FriendList fl = (FriendList) request.getSession().getAttribute("friendList");
+								int ok = 0;
+								if(fl != null){
+									for(int i = 0; i < fl.getFriendList().size(); i++){
+										if(fl.getFriendList().get(i).equals(result.getUsername())){
+											ok = 1;
+											break;
+										}
+									}
+								}
+								if(ok == 0){
+							%>
+								<form action="/bingle/BTalkControlServlet" method="post">
+								<input type="hidden" name="func" value="addFriend" />
+								<input type="hidden" name="friendname" value="<%=result.getUsername() %>" />
+								<input type="submit" value="addFriend" />
+								</form>
+							<%
+								}
+							}
+							 %></td>
 						</tr>
 						<tr>
 							<td>地址</td>
@@ -94,7 +122,16 @@
 			  
 
 				<div class="accordion_child">
-					<img src="img/list.jpg"/>
+					<table>
+						<tr>
+							<th>身体状况</th>
+							<td><canvas id="body"></canvas></td>
+						</tr>
+						<tr>
+							<th>心理状况</th>
+							<td><canvas id="mind"></canvas></td>
+						</tr>
+					</table>
 				</div>
 				
 			  </div>
@@ -114,7 +151,7 @@
 						<th style="width:40%;">个人建议</th>
 						<th>所用药物</th>
 						<% 
-						UserDetailInfo result = (UserDetailInfo) request.getAttribute("result");
+						
 						for(int i = 0; i < result.getUserDiseaseInfo().size(); i++){ 
 						%>
 						<tr>

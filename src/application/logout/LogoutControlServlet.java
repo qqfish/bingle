@@ -41,6 +41,7 @@ public class LogoutControlServlet extends HttpServlet {
 		session.setAttribute("login", null);
 		session.setAttribute("username", null);
 		session.setAttribute("udi", null);
+		session.setAttribute("admin", null);
 		
 		request.getRequestDispatcher("/").forward(request, response);
 		

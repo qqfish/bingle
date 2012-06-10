@@ -233,6 +233,12 @@ public class ForumControlServlet extends HttpServlet {
 			IForumSystem fp = new ForumProxy();
 			HttpSession session = request.getSession();
 			TopicDetail td = fp.getTopic(topicId);
+			LastPageBean lpb = new LastPageBean();
+			String url = request.getContextPath() + request.getServletPath()
+					+ "?func=topic&id=";
+			url += td.getTopicId();
+			lpb.setUrl(url);
+			session.setAttribute("lpb", lpb);
 			String table = "<th class='number'>²é¿´:" + td.getViewNum() + "| »Ø¸´:"
 					+ (td.getReplyNum() - 1) + "</th><th class='title'>"
 					+ td.getTopicName() + "</th>";
@@ -378,13 +384,20 @@ public class ForumControlServlet extends HttpServlet {
 		try {
 			int replyId = Integer.valueOf(request.getParameter("replyId"));
 			int topicId = Integer.valueOf(request.getParameter("topicId"));
-			
+			LastPageBean lpb = (LastPageBean) request.getSession().getAttribute("lpb");
 			IForumSystem fp = new ForumProxy();
 			fp.deleteReply(replyId, topicId);
+			request.getRequestDispatcher(lpb.getUrl().substring(7)).forward(request, response);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

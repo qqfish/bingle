@@ -22,6 +22,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="/bingle/script/side-bar.js"></script>
 	<script type="text/javascript" src="/bingle/script/chat.js"></script>
 	<script type="text/javascript" src="/bingle/script/inNav.js"></script>
+	<script type="text/javascript">
+	function hideBaseInfo(){
+		document.getElementById("showInfo").style.display="none";
+		document.getElementById("editInfoForm").style.display="inline";
+	}
+	function displayBaseInfo(){
+		document.getElementById("editInfoForm").style.display="none";
+		document.getElementById("showInfo").style.display="block";
+	}
+	</script>
 	
 	<!--[if IE]>
 	 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -116,7 +126,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				else if(udi.getMindStatus() % 10 != 0)
 					out.println("<script>document.getElementById('m').style.display='none';</script>");
 			%>
-			
 			<table id="showInfo">
 				<tr>
 					<th>用户名</th>
@@ -142,26 +151,49 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<th>address</th>
 					<td>${udi.address}</td>
 				</tr>
-				<tr class="showInfo">
-					<td colspan=2><a href="#" onclick="showBaseUpdate();"><span>修改</span></a></td>
+				<tr>
+					<td colspan=2><a href="#" onclick="hideBaseInfo();"><span>修改</span></a></td>
 				</tr>
-				<form action="/bingle/UpdateInfoControlServlet" method="post" id="editInfoForm">
-					<ol>
-						<li>
-						<li>年龄<input type="text" name="age" value="${udi.age }"></li>
-						<li>email<input type="email" name="email" value="${udi.email }"></li>
-						<li>地址<input type="text" name="address" value="${udi.address }"></li>
-						<input type="hidden" name="type" value="baseInfo">
-						<li><input type="submit" value="确认修改"></li>
-					</ol>
+			</table>	
+			<div id="editInfoForm" style="display:none;">
+				<form  action="/bingle/UpdateInfoControlServlet" method="post">
+					<table>
+						<tr>
+							<th>用户名</th>
+							<td>${udi.username }</td>
+						</tr>
+						<tr>
+							<th>用户群</th>
+							<td>${udi.groupname }</td>
+						</tr>
+						<tr>
+							<th>年龄</th>
+							<td><input type="text" name="age" value="${udi.age }"></td>
+						</tr>
+						<tr>
+							<th>性别</th>
+							<td>${udi.gender?"女":"男"}</td>
+						</tr>
+						<tr>
+							<th>email</th>
+							<td><input type="email" name="email" value="${udi.email }"></td>
+						</tr>
+						<tr>
+							<th>地址</th>
+							<td><input type="text" name="address" value="${udi.address }"></td>
+						</tr>
+						<tr>
+							<td colspan=2><input type="submit" value="确认修改" onclick="displayBaseInfo();"></td>
+						</tr>
+					</table>
 				</form>
-			</table>			
+			</div>		
 			<table>
 				<tr>
 					<th>个人标签</th>
 					<td>
 					<%
-					UserDetailInfo udi = (UserDetailInfo) request.getSession().getAttribute("udi");
+					//UserDetailInfo udi = (UserDetailInfo) request.getSession().getAttribute("udi");
 					for(int i = 0; i < udi.getTags().size(); i++){
 					%>
 						<div class="tag"><%=udi.getTags().get(i) %></div>

@@ -67,6 +67,7 @@ public class BTalkProxy implements IBTalkSystem{
 	public void addFriend(String username, String friendname) throws SQLException {
 		IUserData itf = new UserDataProxy();
 		itf.addFriend(username, friendname);
+		itf.addFriend(friendname, username);
 		
 	}
 
@@ -74,6 +75,7 @@ public class BTalkProxy implements IBTalkSystem{
 	public void deleteFriend(String username, String friendname) throws SQLException {
 		IUserData itf = new UserDataProxy();
 		itf.deleteFriend(username, friendname);
+		itf.deleteFriend(friendname, username);
 		
 	}
 	

@@ -71,5 +71,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td><canvas id="mind"></canvas></td>
 				</tr>
 			</table>
+		</section>
   </body>
 </html>

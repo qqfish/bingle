@@ -82,7 +82,11 @@ public class UpdateInfoControlServlet extends HttpServlet {
 				response.sendRedirect("error404.jsp");
 			}
 			else{
-				if(type.equals("login") || type.equals("mainPage")){
+				if(type.equals("login")){
+					getInfo(request,response);
+					mainPage(request, response);
+				}
+				else if(type.equals("mainPage")){
 					mainPage(request, response);
 				}
 				else if(type.equals("baseInfo")){

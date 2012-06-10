@@ -138,8 +138,10 @@ public class BTalkControlServlet extends HttpServlet {
 		else if(func.equals("send")){
 			sendMessage(username,request.getParameter("name"),request.getParameter("content"));
 		}
-		else if(func.equals("add")){
-			addFriend(username,request.getParameter("name"));
+		else if(func.equals("addFriend")){
+			addFriend(username,request.getParameter("friendname"),request);
+			request.getRequestDispatcher("/jsp/info/selfInfo.jsp").forward(request, response);
+			
 		}
 		else if(func.equals("delete")){
 			deleteFriend(username,request.getParameter("name"));
@@ -179,6 +181,7 @@ public class BTalkControlServlet extends HttpServlet {
 		try {
 			String s = "<ul>";
 			FriendList fl = ibs.getFriendList(username);
+			request.getSession().setAttribute("friendList", fl);
 			//UserDataProxy usp = new UserDataProxy();
 			//FriendList fl = usp.getFriendList(username);
 			for(int i=0;i<fl.getFriendList().size();i++)
@@ -218,10 +221,12 @@ public class BTalkControlServlet extends HttpServlet {
 		}
 	}
 	
-	public void addFriend(String username,String friendname){
+	public void addFriend(String username,String friendname,HttpServletRequest request){
 		IBTalkSystem ibs = new BTalkProxy();
 		try {
 			ibs.addFriend(username, friendname);
+			FriendList fl = ibs.getFriendList(username);
+			request.getSession().setAttribute("friendList", fl);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

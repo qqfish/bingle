@@ -20,7 +20,7 @@ public class UserDataProxy implements IUserData {
 	public UserDataProxy() throws SQLException {
 		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 		con = DriverManager
-				.getConnection("jdbc:mysql://localhost/bingle?unicode=true&characterEncoding=UTF-8&user=root&password=123");
+				.getConnection("jdbc:mysql://localhost/bingleme?unicode=true&characterEncoding=UTF-8&user=root&password=zy102428");
 
 	}
 
@@ -190,7 +190,7 @@ public class UserDataProxy implements IUserData {
 						.getString("currentDisease"), rs.getShort("age"), rs
 						.getBoolean("gender")));
 				if(rs.getString("tagType").equals("N"))
-					usi.get(usi.size() - 1).addTagname(rs.getString("tagName"));
+						usi.get(usi.size() - 1).addTagname(rs.getString("tagName"));
 			} else {
 				if(rs.getString("tagType").equals("N"))
 					usi.get(usi.size() - 1).addTagname(rs.getString("tagName"));
@@ -233,7 +233,6 @@ public class UserDataProxy implements IUserData {
 						+ userinfo.getUsername() + "','"
 						+ userinfo.getPassword() + "','" + userinfo.getEmail()
 						+ "','" + userinfo.getAge() + "','" + i + "')");
-		con.createStatement().executeUpdate("INSERT INTO userTag (userName,tagName,tagType) Values ('" + userinfo.getUsername() + "','null','A')");
 	}
 
 	/**
@@ -274,15 +273,13 @@ public class UserDataProxy implements IUserData {
 						rsDrug.previous();
 						continue;
 					} else {
-						if(rsDrug.getString("tagType").equals("D"))
-							drug.add(rsDrug.getString("tagName"));
+						drug.add(rsDrug.getString("tagName"));
 					}
 				}			
 				while (rsDrug.next()
 						&& rsDrug.getString("diseaseName").equals(
 								rsDisease.getString("diseaseName"))) {
-					if(rsDrug.getString("tagType").equals("D"))
-						drug.add(rsDrug.getString("tagName"));
+					drug.add(rsDrug.getString("tagName"));
 				}
 			}
 			userDisease.add(new UserDiseaseInfo(rsDisease
@@ -373,7 +370,8 @@ public class UserDataProxy implements IUserData {
 								+ reason
 								+ "','"
 								+ tips + "')");
-		con.createStatement().executeUpdate("INSERT INTO userTag (userName,tagName,tagType) VALUES ('" + username + "','" + diseasename + "','B')");
+		con.createStatement().executeUpdate("INSERT INTO usertag (userName, tagName, tagType) VALUES ('" + username + "','" + diseasename + "','B')");
+		con.createStatement().executeUpdate("UPDATE user SET currentDisease='" + diseasename + "' WHERE userName='" + username + "'");
 
 	}
 
@@ -396,7 +394,7 @@ public class UserDataProxy implements IUserData {
 				+ "' and diseaseName = '" + diseasename + "'");
 		st.executeUpdate("DELETE FROM getDisease WHERE userName = '" + username
 				+ "' and diseaseName = '" + diseasename + "'");
-		st.executeUpdate("DELETE FROM userTag WHERE userName='" + username
+		st.executeUpdate("DELETE FROM usertag WHERE userName='" + username
 				+ "' and tagName='" + diseasename + "'");
 
 	}
