@@ -13,6 +13,7 @@ import java.util.List;
 import com.mysql.jdbc.Statement;
 
 import baseUse.IForumData;
+import baseUse.ReadSQLXml;
 import baseUse.forumData.ForumList;
 import baseUse.forumData.TopicDetail;
 import baseUse.forumData.TopicListDetail;
@@ -22,8 +23,13 @@ public class ForumDataProxy implements IForumData{
 	private Connection con;
 	public ForumDataProxy() throws SQLException{
 		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+		String url = "jdbc:mysql://";
+		ReadSQLXml r = new ReadSQLXml();
+		r.getInfo();
+		url += r.getHost();
+		url += "?unicode=true&characterEncoding=UTF-8&user=" + r.getUsername() + "&password=" + r.getPassword();
 		con = DriverManager
-				.getConnection("jdbc:mysql://localhost/bingleme?user=root&password=zy102428");
+				.getConnection(url);
 	}
 	
 	public void deleteReply(int[] replyId) throws SQLException{

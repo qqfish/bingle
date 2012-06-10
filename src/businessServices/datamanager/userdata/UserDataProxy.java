@@ -19,8 +19,13 @@ public class UserDataProxy implements IUserData {
 
 	public UserDataProxy() throws SQLException {
 		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+		String url = "jdbc:mysql://";
+		ReadSQLXml r = new ReadSQLXml();
+		r.getInfo();
+		url += r.getHost();
+		url += "?unicode=true&characterEncoding=UTF-8&user=" + r.getUsername() + "&password=" + r.getPassword();
 		con = DriverManager
-				.getConnection("jdbc:mysql://localhost/bingleme?unicode=true&characterEncoding=UTF-8&user=root&password=zy102428");
+				.getConnection(url);
 
 	}
 
