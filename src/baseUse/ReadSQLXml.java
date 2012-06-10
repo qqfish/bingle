@@ -32,7 +32,7 @@ public class ReadSQLXml {
             //通过javax.xml.parsers.DocumentBuilderFactory实例的静态方法newDocumentBuilder()得到DOM解析器
             //（3）把要解析的XML文档转化为输入流，以便DOM解析器解析它
             System.out.println(new File(".").getAbsolutePath());
-            InputStream is=new FileInputStream("sql.xml");            
+            InputStream is=new FileInputStream("webapps/sql.xml");            
             //（4）解析XML文档的输入流，得到一个Document
             Document doc=dombuilder.parse(is);
             //由XML文档的输入流得到一个org.w3c.dom.Document对象，以后的处理都是对Document对象进行的
