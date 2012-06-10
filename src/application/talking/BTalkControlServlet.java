@@ -102,8 +102,6 @@ public class BTalkControlServlet extends HttpServlet {
 	    	JSONArray jsonArray2 = new JSONArray();
 	        JSONObject json = new JSONObject();
 	        List<Message> m = ibs.getMessage(username).getNewMessage();
-	        if(m != null)
-	        	System.out.println(m.get(0).getContent());
 	        if(m != null){
 	        	for(int i=0;i<m.size();i++){
 	        		jsonArray1.add(m.get(i).getContent());

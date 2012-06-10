@@ -77,7 +77,6 @@ public class UpdateInfoControlServlet extends HttpServlet {
 			if(session.getAttribute("udi") == null){
 				getInfo(request, response);
 			}
-			System.out.println(type);
 			if(type == null){
 				response.sendRedirect("error404.jsp");
 			}
@@ -163,11 +162,7 @@ public class UpdateInfoControlServlet extends HttpServlet {
 	private void normalTag(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException{
 		ITagData itf = new TagDataProxy();
 		List<String> normalTag = itf.searchTagName("", 'N');
-		request.setAttribute("normalTag", normalTag);
-		for(int i = 0; i < normalTag.size(); i++){
-			System.out.println(normalTag.get(i));
-		}
-		
+		request.setAttribute("normalTag", normalTag);		
 		request.getRequestDispatcher("/jsp/info/normalTag.jsp").forward(request, response);
 	}
 	
@@ -209,7 +204,6 @@ public class UpdateInfoControlServlet extends HttpServlet {
 		String treatmentIntro = request.getParameter("treatment");
 		String reason = request.getParameter("reason");
 		String tips = request.getParameter("tips");
-		System.out.println(diseasename + " " + treatmentIntro + " " + reason);
 		itf.editUserDisease(username, diseasename, treatmentIntro, reason, tips);
 		
 		getInfo(request,response);
@@ -239,7 +233,6 @@ public class UpdateInfoControlServlet extends HttpServlet {
 		getInfo(request, response);
 		
 		String url ="/SearchControlServlet?diseasename=" + diseasename;
-		System.out.println(url);
 		
 		request.getRequestDispatcher(url).forward(request, response);		
 		
@@ -330,7 +323,6 @@ public class UpdateInfoControlServlet extends HttpServlet {
 		List<String> drug = itf.searchTagName("",'D');
 		request.setAttribute("drug", drug);
 		UserDetailInfo udi = (UserDetailInfo) request.getSession().getAttribute("udi");
-		System.out.println(udi.getUserDiseaseInfo().get(Integer.valueOf(diseasenum)).getDrugName());
 		//System.out.println(drug);
 		request.getRequestDispatcher("/jsp/info/diseaseTag.jsp").forward(request, response);
 	}

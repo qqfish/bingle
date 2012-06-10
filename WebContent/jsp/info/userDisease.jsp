@@ -12,7 +12,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<title>disease</title>
 
 	<link rel="stylesheet" href="/bingle/css/userDisease.css" type="text/css" />
+	<link rel="stylesheet" href="/bingle/css/index.css" type="text/css" />
 	<script type="text/javascript" src="/bingle/script/accordian.pack.js"></script>
+	<script type="text/javascript" src="/bingle/script/talk.js"></script>
+	<script type="text/javascript" src="/bingle/script/prototype.js"></script>
+	<script type="text/javascript" src="/bingle/script/effects.js"></script>
+	<script type="text/javascript" src="/bingle/script/side-bar.js"></script>
+	<script type="text/javascript" src="/bingle/script/chat.js"></script>
 	<script type="text/javascript" src="/bingle/script/inNav.js"></script>
 	
 	<!--[if IE]>
@@ -99,6 +105,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</div>
 		</section>
+		
+		<div id="main" class="dragclass" style="display:none;">
+		<div id="ChatHead">
+			<span id="name"></span>
+			<a onclick="ChatClose();" ><img src="/bingle/img/close.gif" alt="关闭"/></a>
+		</div>
+		<div id="ChatBody">
+			<div id="ChatContent"></div>
+			<div id="ChatBtn">
+				<textarea id="ChatValue" rows="4" style="width:335px"></textarea>
+				<input type="image" src="/bingle/img/chat.gif" value="Chat" onclick="ChatAndSend();"/>
+			</div>
+		</div>
+	</div>
+		<div id="sideBar">
+		<a id="sideBarTab"><img src="/bingle/img/slide-button.gif" alt="sideBar" title="friends" /></a>
+		<div id="sideBarContents" style="display:none;">
+			<div id="sideBarContentsInner">
+				<h2>Friends</h2>
+			</div>
+		</div>
+		</div>
 		
 		<footer id="about" class="body">
 			<p>blablabla</p>
